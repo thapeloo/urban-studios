@@ -1,0 +1,3342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Urban Threads | Cut from Concrete</title>
+  <meta
+    name="description"
+    content="Urban Threads is a Botswana streetwear PWA for community fitpics, product drops, and WhatsApp ordering."
+  >
+  <meta name="theme-color" content="#0d0d0d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Urban Threads">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --bg-soft: #111111;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(255, 255, 255, 0.1);
+      --line: rgba(255, 255, 255, 0.1);
+      --text: #f5f1e8;
+      --muted: #ada79d;
+      --gold: #f5c518;
+      --gold-soft: rgba(245, 197, 24, 0.12);
+      --green: #25d366;
+      --red: #ff6b6b;
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --phone-width: min(100vw, 430px);
+      --font-display: "Space Grotesk", sans-serif;
+      --font-body: "Plus Jakarta Sans", sans-serif;
+      --hero-height: 132px;
+      --nav-height: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top, rgba(245, 197, 24, 0.15), transparent 22%),
+        linear-gradient(180deg, #111111 0%, #090909 100%);
+      color: var(--text);
+      font-family: var(--font-body);
+    }
+
+    body {
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    .app {
+      position: relative;
+      width: var(--phone-width);
+      min-height: 100dvh;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 12%),
+        linear-gradient(180deg, #0d0d0d 0%, #080808 100%);
+      overflow: hidden;
+    }
+
+    .app::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(circle at center, black 22%, transparent 82%);
+      opacity: 0.32;
+    }
+
+    .screen {
+      display: none;
+      min-height: 100dvh;
+      padding: max(18px, env(safe-area-inset-top)) 14px calc(72px + env(safe-area-inset-bottom));
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .feed-screen {
+      padding: 0 0 calc(64px + env(safe-area-inset-bottom));
+    }
+
+    .hero-top {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      padding: max(14px, env(safe-area-inset-top)) 14px 8px;
+      background: linear-gradient(180deg, rgba(8, 8, 8, 0.98), rgba(8, 8, 8, 0.76), transparent);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand-row,
+    .top-tools,
+    .feed-tabs,
+    .category-scroll,
+    .section-row,
+    .filter-row,
+    .shop-categories,
+    .detail-tags,
+    .profile-row,
+    .admin-stats,
+    .admin-actions,
+    .size-row,
+    .profile-actions,
+    .inline-actions,
+    .visual-badge,
+    .helper-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .brand-row,
+    .section-row,
+    .profile-row,
+    .helper-row {
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .wordmark {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .brand-kicker,
+    .tab,
+    .chip,
+    .badge,
+    .stock-pill,
+    .signal-pill,
+    .small-label {
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.63rem;
+      font-weight: 700;
+    }
+
+    .brand-kicker {
+      color: var(--gold);
+    }
+
+    .brand-name,
+    .section-title,
+    .card-title,
+    .detail-name,
+    .stats-value,
+    .modal-title,
+    .empty-title,
+    .product-code {
+      font-family: var(--font-display);
+    }
+
+    .brand-name {
+      font-size: 1.16rem;
+      line-height: 1;
+    }
+
+    .hero-tagline,
+    .muted,
+    .caption,
+    .notification-copy,
+    .field-note,
+    .detail-copy,
+    .toast,
+    .preview-copy,
+    .admin-note {
+      color: var(--muted);
+    }
+
+    .hero-tagline {
+      font-size: 0.8rem;
+    }
+
+    .icon-button,
+    .tab,
+    .chip,
+    .action-button,
+    .category-pill,
+    .nav-button,
+    .metric-card,
+    .type-card,
+    .size-button,
+    .mini-button {
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    .icon-button,
+    .mini-button {
+      min-width: 38px;
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .top-tools,
+    .feed-tabs,
+    .category-scroll,
+    .filter-row,
+    .shop-categories,
+    .admin-actions,
+    .admin-stats {
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .top-tools::-webkit-scrollbar,
+    .feed-tabs::-webkit-scrollbar,
+    .category-scroll::-webkit-scrollbar,
+    .filter-row::-webkit-scrollbar,
+    .shop-categories::-webkit-scrollbar,
+    .admin-actions::-webkit-scrollbar,
+    .admin-stats::-webkit-scrollbar {
+      display: none;
+    }
+
+    .top-tools {
+      margin-top: 10px;
+      gap: 8px;
+    }
+
+    .tab,
+    .chip,
+    .category-pill {
+      white-space: nowrap;
+      padding: 6px 12px;
+    }
+
+    .top-tools .chip {
+      padding: 5px 10px;
+      font-size: 0.58rem;
+      background: rgba(245, 197, 24, 0.08);
+      border-color: rgba(245, 197, 24, 0.18);
+    }
+
+    .tab.active,
+    .chip.active,
+    .category-pill.active,
+    .nav-button.active,
+    .type-card.active,
+    .size-button.active {
+      background: var(--gold);
+      border-color: rgba(245, 197, 24, 0.82);
+      color: #090909;
+    }
+
+    .feed-deck {
+      height: calc(100dvh - var(--hero-height) - var(--nav-height));
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      overscroll-behavior-y: contain;
+    }
+
+    .feed-post {
+      position: relative;
+      min-height: calc(100dvh - var(--hero-height) - var(--nav-height));
+      scroll-snap-align: start;
+      display: flex;
+      align-items: flex-end;
+      padding: 14px 14px calc(16px + env(safe-area-inset-bottom));
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .feed-post::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.16), transparent 18%, transparent 46%, rgba(0, 0, 0, 0.84)),
+        radial-gradient(circle at top right, rgba(245, 197, 24, 0.18), transparent 24%);
+    }
+
+    .feed-post::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background: var(--post-bg, linear-gradient(145deg, #2b2b2b, #111111));
+    }
+
+    .post-media-layer,
+    .visual-media-layer,
+    .preview-media-layer {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+    }
+
+    .post-media,
+    .visual-media,
+    .preview-media,
+    .fit-media {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .post-badges {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      z-index: 1;
+    }
+
+    .badge,
+    .product-pill,
+    .stock-pill,
+    .signal-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      backdrop-filter: blur(14px);
+    }
+
+    .badge,
+    .product-pill {
+      background: rgba(6, 6, 6, 0.44);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text);
+    }
+
+    .product-pill {
+      cursor: pointer;
+    }
+
+    .feed-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      width: 100%;
+      align-items: end;
+      position: relative;
+      z-index: 1;
+    }
+
+    .post-copy {
+      display: grid;
+      gap: 10px;
+      padding-bottom: 84px;
+    }
+
+    .post-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar,
+    .profile-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(245, 197, 24, 0.86), rgba(255, 255, 255, 0.22));
+      border: 1.5px solid #f5c518;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: #090909;
+      flex: 0 0 40px;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+    }
+
+    .post-user strong,
+    .product-name,
+    .notification-title,
+    .comment-name,
+    .admin-card strong,
+    .profile-name {
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .post-user span,
+    .comment-copy,
+    .preview-copy {
+      color: #ded8cf;
+      font-size: 0.8rem;
+    }
+
+    .caption {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      max-width: 30ch;
+    }
+
+    .shop-link {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .post-actions {
+      display: grid;
+      gap: 10px;
+      align-items: end;
+      justify-items: center;
+      margin-bottom: 70px;
+    }
+
+    .action-button {
+      width: 52px;
+      min-height: 52px;
+      display: grid;
+      place-items: center;
+      gap: 4px;
+      padding: 7px 4px;
+      border-radius: 18px;
+      background: rgba(14, 14, 14, 0.5);
+      backdrop-filter: blur(12px);
+    }
+
+    .action-button svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .action-button span {
+      font-size: 0.68rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .post-footer {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      display: grid;
+      gap: 8px;
+      padding-bottom: 4px;
+      z-index: 1;
+    }
+
+    .order-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 52px;
+      padding: 0 15px;
+      background: linear-gradient(135deg, #f5c518, #ffdf73);
+      color: #090909;
+      border-radius: 18px;
+      box-shadow: 0 16px 34px rgba(245, 197, 24, 0.2);
+      font-weight: 800;
+    }
+
+    .screen-card,
+    .shop-card,
+    .notification-card,
+    .admin-card,
+    .comment-card,
+    .profile-card,
+    .login-card,
+    .preview-card,
+    .admin-panel-card,
+    .profile-stat,
+    .admin-list-card,
+    .stats-card,
+    .locked-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.034));
+      box-shadow: var(--shadow);
+    }
+
+    .screen-card,
+    .profile-card,
+    .login-card,
+    .preview-card,
+    .admin-panel-card,
+    .locked-card {
+      padding: 18px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1.42rem;
+      line-height: 1.04;
+    }
+
+    .fits-grid,
+    .shop-grid,
+    .notification-list,
+    .comment-list,
+    .admin-list,
+    .admin-grid,
+    .stats-grid,
+    .profile-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .fits-grid {
+      columns: 2;
+      column-gap: 12px;
+    }
+
+    .fit-card {
+      break-inside: avoid;
+      position: relative;
+      margin-bottom: 12px;
+      min-height: 220px;
+      padding: 14px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.03));
+      box-shadow: var(--shadow);
+    }
+
+    .fit-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.08), transparent 18%, transparent 48%, rgba(0, 0, 0, 0.78)),
+        radial-gradient(circle at top right, rgba(245, 197, 24, 0.14), transparent 22%);
+      z-index: 1;
+    }
+
+    .fit-card-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 8px;
+      align-content: end;
+      min-height: 192px;
+    }
+
+    .fit-card h3,
+    .shop-card h3,
+    .admin-card h3,
+    .profile-card h3,
+    .login-card h3,
+    .preview-card h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .fit-card p,
+    .shop-card p,
+    .admin-card p,
+    .profile-card p,
+    .locked-card p {
+      margin: 8px 0 0;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    .video-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.58);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: grid;
+      place-items: center;
+      z-index: 2;
+      font-weight: 800;
+    }
+
+    .type-grid,
+    .stats-grid,
+    .profile-grid,
+    .admin-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .type-grid {
+      margin: 18px 0;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .type-card {
+      min-height: 100px;
+      padding: 14px 10px;
+      border-radius: 22px;
+      text-align: center;
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+      align-content: center;
+    }
+
+    .field-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .field,
+    .field-select,
+    textarea {
+      width: 100%;
+      padding: 14px 16px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 108px;
+      resize: vertical;
+    }
+
+    .field-group {
+      margin-top: 14px;
+    }
+
+    .cta,
+    .secondary-cta,
+    .danger-ghost {
+      min-height: 50px;
+      border-radius: 18px;
+      font-weight: 800;
+      padding: 0 16px;
+      color: var(--text);
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #f5c518, #ffd95e);
+      color: #090909;
+    }
+
+    .secondary-cta {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line);
+    }
+
+    .danger-ghost {
+      background: rgba(255, 107, 107, 0.12);
+      border: 1px solid rgba(255, 107, 107, 0.24);
+      color: #ffd7d7;
+    }
+
+    .shop-card,
+    .notification-card,
+    .admin-card,
+    .comment-card,
+    .admin-list-card {
+      padding: 16px;
+    }
+
+    .shop-card {
+      display: grid;
+      gap: 14px;
+    }
+
+    .product-visual,
+    .detail-visual,
+    .mini-visual,
+    .preview-visual {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(145deg, #262626, #111111);
+      border-radius: 20px;
+    }
+
+    .product-visual {
+      min-height: 176px;
+    }
+
+    .detail-visual {
+      min-height: 250px;
+      margin-bottom: 16px;
+    }
+
+    .mini-visual {
+      min-height: 74px;
+    }
+
+    .preview-visual {
+      min-height: 180px;
+    }
+
+    .product-visual::after,
+    .detail-visual::after,
+    .mini-visual::after,
+    .preview-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(245, 197, 24, 0.18), transparent 24%),
+        linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.42));
+      pointer-events: none;
+    }
+
+    .visual-badge {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      z-index: 2;
+      align-items: end;
+    }
+
+    .visual-badge small {
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .product-code {
+      font-size: 1.7rem;
+      line-height: 1;
+    }
+
+    .product-price,
+    .detail-price {
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    .stock-pill,
+    .signal-pill {
+      width: fit-content;
+      font-size: 0.62rem;
+    }
+
+    .stock-pill.warning {
+      color: #ffd6d6;
+      background: rgba(255, 107, 107, 0.12);
+      border: 1px solid rgba(255, 107, 107, 0.24);
+    }
+
+    .stock-pill.success,
+    .signal-pill {
+      color: #e2fced;
+      background: rgba(37, 211, 102, 0.12);
+      border: 1px solid rgba(37, 211, 102, 0.22);
+    }
+
+    .card-actions,
+    .detail-actions,
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .notification-card.unread {
+      border-color: rgba(245, 197, 24, 0.38);
+      box-shadow: 0 12px 34px rgba(245, 197, 24, 0.08);
+    }
+
+    .notification-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 18px rgba(255, 107, 107, 0.5);
+      flex: 0 0 auto;
+      margin-top: 6px;
+    }
+
+    .metric-card,
+    .profile-stat,
+    .stats-card {
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      min-width: 122px;
+    }
+
+    .stats-value {
+      font-size: 1.26rem;
+      display: block;
+      line-height: 1.1;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      z-index: 40;
+      width: var(--phone-width);
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: linear-gradient(180deg, transparent, rgba(6, 6, 6, 0.94) 26%);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-shell {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 4px;
+      padding: 5px;
+      border-radius: 22px;
+      background: rgba(18, 18, 18, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-button {
+      min-height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      gap: 2px;
+      padding: 5px 4px 6px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-button.post {
+      background: linear-gradient(135deg, #f5c518, #ffdc62);
+      color: #090909;
+      border-color: rgba(245, 197, 24, 0.82);
+    }
+
+    .nav-button svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .modal,
+    .drawer,
+    .toast-shell {
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 70;
+    }
+
+    .modal.active,
+    .drawer.active,
+    .toast-shell.active {
+      display: block;
+    }
+
+    .modal-backdrop,
+    .drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.62);
+      backdrop-filter: blur(12px);
+    }
+
+    .modal-panel,
+    .drawer-panel {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: var(--phone-width);
+      background: #101010;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      max-height: min(88dvh, 760px);
+      overflow-y: auto;
+    }
+
+    .modal-panel {
+      bottom: 0;
+      border-radius: 28px 28px 0 0;
+      padding: 18px 16px calc(26px + env(safe-area-inset-bottom));
+    }
+
+    .drawer-panel {
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(94vw, 420px);
+      border-radius: 28px;
+      padding: 18px;
+      max-height: 82dvh;
+    }
+
+    .drag-handle {
+      width: 64px;
+      height: 5px;
+      margin: 0 auto 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .detail-price {
+      font-size: 1.15rem;
+      margin: 10px 0;
+      display: block;
+    }
+
+    .comment-card {
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .upload-preview-shell {
+      margin-top: 14px;
+    }
+
+    .preview-card {
+      display: grid;
+      gap: 12px;
+    }
+
+    .preview-empty {
+      min-height: 160px;
+      border-radius: 20px;
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      text-align: center;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .feed-empty {
+      height: 100%;
+      padding: 18px 14px calc(78px + env(safe-area-inset-bottom));
+      display: grid;
+      place-items: center;
+    }
+
+    .empty-state {
+      width: 100%;
+      max-width: 320px;
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+      text-align: center;
+    }
+
+    .empty-title {
+      font-size: 1.05rem;
+      margin: 0 0 8px;
+    }
+
+    .admin-list-card,
+    .locked-card {
+      display: grid;
+      gap: 12px;
+    }
+
+    .admin-list-head {
+      display: grid;
+      gap: 4px;
+    }
+
+    .inline-actions {
+      flex-wrap: wrap;
+    }
+
+    .inline-actions .secondary-cta,
+    .inline-actions .danger-ghost,
+    .inline-actions .cta {
+      min-height: 40px;
+      padding: 0 14px;
+      font-size: 0.82rem;
+    }
+
+    .profile-summary-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .toast-shell {
+      pointer-events: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: calc(88px + env(safe-area-inset-bottom));
+    }
+
+    .toast-shell.active {
+      display: flex;
+    }
+
+    .toast {
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(20, 20, 20, 0.96);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      max-width: 88vw;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 420px) {
+      .hero-tagline {
+        display: none;
+      }
+
+      .brand-name {
+        font-size: 1.08rem;
+      }
+
+      .action-button {
+        width: 50px;
+        min-height: 50px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .feed-content,
+      .card-actions,
+      .detail-actions,
+      .modal-actions,
+      .stats-grid,
+      .profile-grid,
+      .admin-grid,
+      .type-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .post-actions {
+        grid-auto-flow: column;
+        overflow-x: auto;
+        margin-bottom: 8px;
+        justify-items: stretch;
+      }
+    }
+
+    @media (min-width: 600px) {
+      body {
+        align-items: center;
+        min-height: 100dvh;
+        padding: 24px 0;
+      }
+
+      .app {
+        border-radius: 36px;
+        max-height: 92dvh;
+        box-shadow: 0 36px 120px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .bottom-nav {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: none;
+        width: auto;
+        border-radius: 0 0 36px 36px;
+      }
+
+      .app::before {
+        position: absolute;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <main>
+      <section class="screen feed-screen active" id="screen-feed">
+        <div class="hero-top" id="hero-top">
+          <div class="brand-row">
+            <div class="wordmark">
+              <span class="brand-kicker">Urban Threads</span>
+              <strong class="brand-name">CUT FROM CONCRETE</strong>
+              <span class="hero-tagline">Gaborone streetwear feed, fitpics, drops, and direct WhatsApp orders.</span>
+            </div>
+            <button class="icon-button" type="button" id="open-profile" aria-label="Open account">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 21a8 8 0 0 0-16 0"></path>
+                <circle cx="12" cy="8" r="4"></circle>
+              </svg>
+            </button>
+          </div>
+          <div class="top-tools">
+            <button class="chip" type="button" id="install-button">Install App</button>
+            <button class="chip" type="button" id="notify-button">Enable Alerts</button>
+            <a class="chip" href="https://wa.me/26774526407?text=Hi%20Urban%20Threads!%20I%20would%20like%20to%20order%3A%20Baggy%20Jorts%20(Size%3A%20M)%20-%20P400." target="_blank" rel="noreferrer">WhatsApp Orders</a>
+          </div>
+          <div class="feed-tabs" id="feed-tabs"></div>
+        </div>
+        <div class="feed-deck" id="feed-deck"></div>
+      </section>
+
+      <section class="screen" id="screen-fits">
+        <div class="section-row">
+          <div>
+            <p class="brand-kicker">Fits and Inspo</p>
+            <h2 class="section-title">Swipe the feed, pin the look, shop the tag.</h2>
+          </div>
+        </div>
+        <p class="muted">Community fitpics and inspo saves now use actual uploaded media when available.</p>
+        <div class="filter-row" id="fits-filters"></div>
+        <div class="fits-grid" id="fits-grid"></div>
+      </section>
+
+      <section class="screen" id="screen-post">
+        <div class="section-row">
+          <div>
+            <p class="brand-kicker">Post a Fit</p>
+            <h2 class="section-title">Upload your fitpic, video, or inspo save.</h2>
+          </div>
+        </div>
+        <div class="screen-card">
+          <div class="helper-row">
+            <div>
+              <p class="brand-kicker">Posting Access</p>
+              <div class="muted" id="post-user-state">Sign in to post, like, comment, and repost.</div>
+            </div>
+            <button class="secondary-cta" type="button" id="post-open-auth">Account</button>
+          </div>
+          <div class="type-grid" id="post-types"></div>
+          <form id="post-form">
+            <div class="field-group">
+              <label class="field-label" for="post-media">Photo or video</label>
+              <input class="field" id="post-media" type="file" accept="image/*,video/*">
+              <div class="field-note" id="post-media-note">Images are required for Fitpic and Inspo posts. Videos are limited to 60 seconds.</div>
+            </div>
+            <div class="upload-preview-shell" id="post-preview-shell"></div>
+            <div class="field-group">
+              <label class="field-label" for="post-caption">Caption</label>
+              <textarea id="post-caption" placeholder="Tell the community how you styled it."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="post-product">Tag an Urban Threads product</label>
+              <select class="field-select" id="post-product"></select>
+            </div>
+            <div class="field-group">
+              <button class="cta" type="submit">Share to Feed</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-shop">
+        <div class="section-row">
+          <div>
+            <p class="brand-kicker">Shop Catalogue</p>
+            <h2 class="section-title">Everything routes through WhatsApp after size selection.</h2>
+          </div>
+        </div>
+        <p class="muted">Every order action now opens product detail first so the customer chooses the correct size before WhatsApp launches.</p>
+        <div class="shop-categories" id="shop-categories"></div>
+        <div class="shop-grid" id="shop-grid"></div>
+      </section>
+
+      <section class="screen" id="screen-alerts">
+        <div class="section-row">
+          <div>
+            <p class="brand-kicker">Alerts</p>
+            <h2 class="section-title">Drop notices, order updates, and flash sale pushes.</h2>
+          </div>
+        </div>
+        <div class="notification-list" id="alert-list"></div>
+        <div class="screen-card" style="margin-top: 18px;">
+          <p class="brand-kicker">Protected Admin Route</p>
+          <h3 class="card-title">Admin tools are no longer visible in the customer alerts tab.</h3>
+          <p class="muted">Unlock the separate admin preview from the account drawer with the local prototype passcode. Real production protection still needs backend auth and role checks.</p>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-admin">
+        <div class="section-row">
+          <div>
+            <p class="brand-kicker">Admin Preview</p>
+            <h2 class="section-title">Protected control panel for products, content, notifications, and moderation.</h2>
+          </div>
+          <button class="icon-button" type="button" id="admin-back" aria-label="Return to app">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m15 18-6-6 6-6"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="admin-stats" id="admin-stats"></div>
+        <div class="admin-actions" id="admin-tabs"></div>
+        <div class="admin-panel-card" id="admin-panel"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" id="bottom-nav" aria-label="Bottom navigation">
+      <div class="nav-shell">
+        <button class="nav-button active" type="button" data-screen="feed">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 11h16"></path>
+            <path d="M4 6h16"></path>
+            <path d="M4 16h10"></path>
+          </svg>
+          <span>Feed</span>
+        </button>
+        <button class="nav-button" type="button" data-screen="fits">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 5h6v6H5z"></path>
+            <path d="M13 5h6v10h-6z"></path>
+            <path d="M5 13h6v6H5z"></path>
+            <path d="M13 17h6v2h-6z"></path>
+          </svg>
+          <span>Fits</span>
+        </button>
+        <button class="nav-button post" type="button" data-screen="post">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+          </svg>
+          <span>Post</span>
+        </button>
+        <button class="nav-button" type="button" data-screen="shop">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="20" r="1.2"></circle>
+            <circle cx="18" cy="20" r="1.2"></circle>
+            <path d="M3 4h2l2.2 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H7.2"></path>
+          </svg>
+          <span>Shop</span>
+        </button>
+        <button class="nav-button" type="button" data-screen="alerts">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 7h18s-3 0-3-7"></path>
+            <path d="M10 21a2 2 0 0 0 4 0"></path>
+          </svg>
+          <span>Alerts</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <section class="modal" id="product-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="product-modal"></div>
+    <div class="modal-panel">
+      <div class="drag-handle"></div>
+      <div class="detail-visual" id="detail-visual"></div>
+      <div class="section-row">
+        <div>
+          <p class="brand-kicker">Product Detail</p>
+          <h3 class="detail-name" id="detail-name"></h3>
+        </div>
+        <button class="icon-button" type="button" data-close="product-modal" aria-label="Close product detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <span class="detail-price" id="detail-price"></span>
+      <div class="detail-tags" id="detail-tags"></div>
+      <p class="detail-copy" id="detail-copy"></p>
+      <div class="field-group">
+        <span class="field-label">Choose size</span>
+        <div class="size-row" id="size-row"></div>
+      </div>
+      <div class="detail-actions" style="margin-top: 18px;">
+        <button class="cta" type="button" id="detail-order">Order via WhatsApp</button>
+        <button class="secondary-cta" type="button" id="detail-repost">Repost</button>
+      </div>
+      <div class="field-note" style="margin-top: 12px;">The WhatsApp message uses the size selected above before redirecting.</div>
+    </div>
+  </section>
+
+  <section class="drawer" id="comment-drawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close="comment-drawer"></div>
+    <div class="drawer-panel">
+      <div class="section-row">
+        <div>
+          <p class="brand-kicker">Comment Thread</p>
+          <h3 class="modal-title" id="comment-title">Post comments</h3>
+        </div>
+        <button class="icon-button" type="button" data-close="comment-drawer" aria-label="Close comments">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="comment-list" id="comment-list"></div>
+      <div class="field-group">
+        <label class="field-label" for="comment-input">Add a comment</label>
+        <textarea id="comment-input" placeholder="Drop your thoughts on the fit."></textarea>
+      </div>
+      <div class="modal-actions" style="margin-top: 14px;">
+        <button class="cta" type="button" id="comment-submit">Post comment</button>
+        <button class="secondary-cta" type="button" data-close="comment-drawer">Close</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="drawer" id="profile-drawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close="profile-drawer"></div>
+    <div class="drawer-panel">
+      <div class="section-row">
+        <div>
+          <p class="brand-kicker">Account</p>
+          <h3 class="modal-title">Community access and admin unlock</h3>
+        </div>
+        <button class="icon-button" type="button" data-close="profile-drawer" aria-label="Close profile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="profile-summary-grid">
+        <div class="profile-card" id="profile-summary"></div>
+        <div class="login-card">
+          <p class="brand-kicker">Local Prototype Sign In</p>
+          <h3>Create a working session for posting, likes, comments, and reposts.</h3>
+          <div class="field-group">
+            <label class="field-label" for="auth-name">Username</label>
+            <input class="field" id="auth-name" type="text" placeholder="@urbanfan">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="auth-contact">Phone or email</label>
+            <input class="field" id="auth-contact" type="text" placeholder="+267 or email">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="auth-bio">Bio</label>
+            <textarea id="auth-bio" placeholder="Tell the community your style lane."></textarea>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="auth-passcode">Admin passcode (prototype only)</label>
+            <input class="field" id="auth-passcode" type="password" placeholder="Leave blank for shopper access">
+            <div class="field-note">This unlocks the separate admin preview route locally. Real production admin access still requires backend role enforcement.</div>
+          </div>
+          <div class="modal-actions" style="margin-top: 14px;">
+            <button class="cta" type="button" id="auth-submit">Save Session</button>
+            <button class="secondary-cta" type="button" id="auth-logout">Log Out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast-shell" id="toast-shell" aria-live="polite">
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script>
+    const whatsappNumber = "26774526407";
+    const ADMIN_PASSCODE = "CUTFROMCONCRETE";
+    const STORAGE_KEYS = {
+      user: "urban-threads-user-v2",
+      prefs: "urban-threads-prefs-v2"
+    };
+
+    function loadStoredJson(key, fallback) {
+      try {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : fallback;
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function saveStoredJson(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function toSlug(value) {
+      return value
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function getInitials(value) {
+      const cleaned = value.replace(/[^a-z0-9 ]/gi, " ").trim();
+      const parts = cleaned.split(/\s+/).filter(Boolean);
+      if (!parts.length) return "UT";
+      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+      return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+
+    function formatPrice(price) {
+      return "P " + price;
+    }
+
+    function stockToneFromNote(note) {
+      const lower = String(note).toLowerCase();
+      return lower.includes("left") || lower.includes("low") ? "warning" : "success";
+    }
+
+    function createPosterDataUrl(config) {
+      const title = escapeHtml(config.title || "Urban Threads");
+      const subtitle = escapeHtml(config.subtitle || "Cut from Concrete");
+      const code = escapeHtml(config.code || "UT");
+      const accent = config.accent || "#F5C518";
+      const tag = escapeHtml(config.tag || "STREETWEAR");
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1280">
+          <defs>
+            <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1c1c1c"/>
+              <stop offset="100%" stop-color="#090909"/>
+            </linearGradient>
+            <radialGradient id="flare" cx="78%" cy="16%" r="52%">
+              <stop offset="0%" stop-color="${accent}" stop-opacity="0.38"/>
+              <stop offset="100%" stop-color="${accent}" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="720" height="1280" fill="url(#bg)"/>
+          <rect width="720" height="1280" fill="url(#flare)"/>
+          <rect x="54" y="54" width="612" height="1172" rx="48" fill="none" stroke="${accent}" stroke-opacity="0.16" stroke-width="4"/>
+          <rect x="86" y="96" width="142" height="18" rx="9" fill="${accent}" opacity="0.9"/>
+          <rect x="86" y="140" width="240" height="10" rx="5" fill="#3a3a3a"/>
+          <rect x="86" y="160" width="184" height="10" rx="5" fill="#2d2d2d"/>
+          <text x="86" y="458" fill="${accent}" font-family="Space Grotesk, Arial, sans-serif" font-size="216" font-weight="700">${code}</text>
+          <text x="86" y="560" fill="#f5f1e8" font-family="Space Grotesk, Arial, sans-serif" font-size="48" font-weight="700">${title}</text>
+          <text x="86" y="622" fill="#b9b2a6" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="28">${subtitle}</text>
+          <rect x="86" y="718" width="548" height="2" fill="${accent}" opacity="0.2"/>
+          <text x="86" y="776" fill="#b9b2a6" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="24">${tag}</text>
+          <rect x="86" y="848" width="548" height="248" rx="32" fill="#121212" stroke="#222222"/>
+          <rect x="120" y="884" width="282" height="16" rx="8" fill="#252525"/>
+          <rect x="120" y="918" width="396" height="14" rx="7" fill="#202020"/>
+          <rect x="120" y="952" width="354" height="14" rx="7" fill="#1b1b1b"/>
+          <rect x="120" y="1010" width="142" height="22" rx="11" fill="${accent}" opacity="0.18"/>
+          <rect x="464" y="884" width="130" height="130" rx="30" fill="${accent}" opacity="0.14"/>
+          <circle cx="530" cy="950" r="34" fill="${accent}" opacity="0.9"/>
+        </svg>
+      `;
+      return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+    }
+
+    function makeMediaImage(config) {
+      return {
+        type: "image",
+        src: createPosterDataUrl(config)
+      };
+    }
+
+    function createFeedMedia(product, post) {
+      return makeMediaImage({
+        title: product.name,
+        subtitle: post.caption.slice(0, 72),
+        code: post.type === "video" ? "VID" : product.code,
+        accent: product.accent,
+        tag: post.feed + " / " + product.category
+      });
+    }
+
+    const seedProducts = [
+      {
+        id: "baggy-jorts",
+        name: "Baggy Jorts",
+        code: "BJ",
+        accent: "#F5C518",
+        price: 400,
+        category: "Jorts",
+        stockNote: "Only 6 left",
+        stockTone: "warning",
+        delivery: "Standard",
+        sizes: ["S", "M", "L", "XL"],
+        description: "Concrete-washed oversized denim cut for wide-leg fits and clean stacks.",
+        bg: "linear-gradient(145deg, #2e2c30, #111111)"
+      },
+      {
+        id: "heavy-weight-jorts",
+        name: "Heavy Weight Jorts",
+        code: "HJ",
+        accent: "#FFBF5F",
+        price: 400,
+        category: "Jorts",
+        stockNote: "New Collection",
+        stockTone: "success",
+        delivery: "Standard",
+        sizes: ["M", "L", "XL"],
+        description: "Heavier structure with a harder drape for statement street silhouettes.",
+        bg: "linear-gradient(145deg, #403427, #131313)"
+      },
+      {
+        id: "saints-shorts",
+        name: "Saints Shorts",
+        code: "SS",
+        accent: "#6EBCFF",
+        price: 330,
+        category: "Shorts",
+        stockNote: "New Collection",
+        stockTone: "success",
+        delivery: "Standard",
+        sizes: ["S", "M", "L"],
+        description: "Easy daily short with a bold street cut and lightweight move-ready feel.",
+        bg: "linear-gradient(145deg, #1e252d, #0f0f0f)"
+      },
+      {
+        id: "graphic-trucker-cap",
+        name: "Graphic / Trucker Cap",
+        code: "GC",
+        accent: "#F09562",
+        price: 120,
+        category: "Caps",
+        stockNote: "In stock",
+        stockTone: "success",
+        delivery: "Standard",
+        sizes: ["One Size"],
+        description: "Ventilated mesh back and punchy front graphic for everyday rotation.",
+        bg: "linear-gradient(145deg, #2b2419, #0d0d0d)"
+      },
+      {
+        id: "butter-logo-cap",
+        name: "Butter Logo Cap",
+        code: "BC",
+        accent: "#F5C518",
+        price: 120,
+        category: "Caps",
+        stockNote: "In stock",
+        stockTone: "success",
+        delivery: "Standard",
+        sizes: ["One Size"],
+        description: "Clean logo cap with low-key flex and a smooth butter-toned finish.",
+        bg: "linear-gradient(145deg, #3b331c, #111111)"
+      },
+      {
+        id: "denim-crocs",
+        name: "Denim Crocs",
+        code: "DC",
+        accent: "#6CD2FF",
+        price: 250,
+        category: "Crocs",
+        stockNote: "New Collection",
+        stockTone: "success",
+        delivery: "Free delivery",
+        sizes: ["38", "39", "40", "41", "42", "43"],
+        description: "Playful denim-textured pair built for loud styling and effortless comfort.",
+        bg: "linear-gradient(145deg, #223949, #111111)"
+      },
+      {
+        id: "urban-threads-tee",
+        name: "Urban Threads Tee",
+        code: "UT",
+        accent: "#F5C518",
+        price: 300,
+        category: "Tees",
+        stockNote: "In stock",
+        stockTone: "success",
+        delivery: "Standard",
+        sizes: ["S", "M", "L", "XL"],
+        description: "Heavy cotton tee with rotating graphics designed for repeat styling.",
+        bg: "linear-gradient(145deg, #302720, #111111)"
+      },
+      {
+        id: "chrome-hearts-bracelet",
+        name: "Chrome Hearts Bracelet",
+        code: "CB",
+        accent: "#CACACA",
+        price: 250,
+        category: "Accessories",
+        stockNote: "In stock",
+        stockTone: "success",
+        delivery: "Standard",
+        sizes: ["One Size"],
+        description: "Silver-tone finishing touch that sharpens every fit without overdoing it.",
+        bg: "linear-gradient(145deg, #2d2d2d, #111111)"
+      }
+    ];
+
+    const products = seedProducts.map((product) => ({
+      ...product,
+      media: makeMediaImage({
+        title: product.name,
+        subtitle: product.description,
+        code: product.code,
+        accent: product.accent,
+        tag: product.category + " / " + formatPrice(product.price)
+      })
+    }));
+
+    const posts = [
+      {
+        id: "post-1",
+        feed: "Shop",
+        type: "video",
+        user: "@urbanthreads",
+        avatar: "UT",
+        caption: "Baggy Jorts with the clean tee stack. Gaborone after dark.",
+        productId: "baggy-jorts",
+        categories: ["All", "Jorts", "Tees"],
+        likes: 324,
+        comments: 18,
+        reposts: 12,
+        shares: 21,
+        createdAt: "2026-04-26T09:12:00",
+        hidden: false,
+        isOfficial: true,
+        commentsList: [
+          { name: "@lesego.fit", text: "That wash is serious." },
+          { name: "@bw.street", text: "Need the full look link." }
+        ]
+      },
+      {
+        id: "post-2",
+        feed: "Fits",
+        type: "fitpic",
+        user: "@masego_mood",
+        avatar: "MM",
+        caption: "Heavy Weight Jorts, cap low, city energy all the way through.",
+        productId: "heavy-weight-jorts",
+        categories: ["All", "Jorts", "Caps"],
+        likes: 209,
+        comments: 14,
+        reposts: 5,
+        shares: 9,
+        createdAt: "2026-04-26T10:20:00",
+        hidden: false,
+        isOfficial: false,
+        commentsList: [
+          { name: "@urbanthreads", text: "This silhouette lands every time." }
+        ]
+      },
+      {
+        id: "post-3",
+        feed: "Inspo",
+        type: "inspo",
+        user: "@concretevault",
+        avatar: "CV",
+        caption: "Mood board pull for washed denim, warm metals, and layered caps.",
+        productId: "chrome-hearts-bracelet",
+        categories: ["All", "Accessories", "Caps"],
+        likes: 141,
+        comments: 8,
+        reposts: 4,
+        shares: 11,
+        createdAt: "2026-04-26T11:06:00",
+        hidden: false,
+        isOfficial: false,
+        commentsList: [
+          { name: "@neo_wave", text: "The bracelet detail makes this." }
+        ]
+      },
+      {
+        id: "post-4",
+        feed: "Shop",
+        type: "video",
+        user: "@urbanthreads",
+        avatar: "UT",
+        caption: "Denim Crocs just landed. Free delivery and instant WhatsApp orders.",
+        productId: "denim-crocs",
+        categories: ["All", "Crocs"],
+        likes: 287,
+        comments: 22,
+        reposts: 17,
+        shares: 33,
+        createdAt: "2026-04-26T11:55:00",
+        hidden: false,
+        isOfficial: true,
+        commentsList: [
+          { name: "@thatgirlbw", text: "I need size 40 today." },
+          { name: "@urbanthreads", text: "Tap buy and we will sort you on WhatsApp." }
+        ]
+      },
+      {
+        id: "post-5",
+        feed: "Fits",
+        type: "fitpic",
+        user: "@onthatblock",
+        avatar: "OB",
+        caption: "Saints Shorts and Butter Logo Cap with an easy neutral palette.",
+        productId: "saints-shorts",
+        categories: ["All", "Shorts", "Caps"],
+        likes: 188,
+        comments: 12,
+        reposts: 7,
+        shares: 10,
+        createdAt: "2026-04-26T12:40:00",
+        hidden: false,
+        isOfficial: false,
+        commentsList: [
+          { name: "@urbanthreads", text: "Sharp and simple. Love this one." }
+        ]
+      },
+      {
+        id: "post-6",
+        feed: "Inspo",
+        type: "fitpic",
+        user: "@latecheckout",
+        avatar: "LC",
+        caption: "Urban Threads Tee layered under a washed overshirt for colder nights.",
+        productId: "urban-threads-tee",
+        categories: ["All", "Tees"],
+        likes: 156,
+        comments: 6,
+        reposts: 3,
+        shares: 7,
+        createdAt: "2026-04-26T13:08:00",
+        hidden: false,
+        isOfficial: false,
+        commentsList: [
+          { name: "@fitsbyneo", text: "Need the tee graphic close-up." }
+        ]
+      }
+    ];
+
+    posts.forEach((post) => {
+      const product = productById(post.productId);
+      post.media = createFeedMedia(product, post);
+      post.bg = product.bg;
+    });
+
+    const notifications = [
+      {
+        title: "New drop: Denim Crocs",
+        copy: "Free delivery is live on the new collection pair. Tap through to pick your size first.",
+        unread: true
+      },
+      {
+        title: "Order confirmation",
+        copy: "Your Baggy Jorts request has been confirmed on WhatsApp by the Urban Threads team.",
+        unread: true
+      },
+      {
+        title: "Flash sale alert",
+        copy: "Graphic / Trucker Cap is moving at P120 while stock lasts.",
+        unread: false
+      },
+      {
+        title: "Delivery update",
+        copy: "Your Heavy Weight Jorts order is ready for standard delivery dispatch.",
+        unread: false
+      }
+    ];
+
+    const adminTabs = [
+      { id: "products", label: "Products" },
+      { id: "feed", label: "Official Feed" },
+      { id: "broadcasts", label: "Push Broadcasts" },
+      { id: "moderation", label: "Moderation" },
+      { id: "analytics", label: "Analytics" }
+    ];
+
+    const feedTabs = ["For You", "Fits", "Inspo", "Shop"];
+    const categories = ["All", "Jorts", "Tees", "Caps", "Crocs", "Shorts", "Accessories"];
+    const postTypes = ["Fitpic", "Video", "Inspo"];
+
+    const savedPrefs = loadStoredJson(STORAGE_KEYS.prefs, {});
+    let activeFeedTab = savedPrefs.activeFeedTab || "For You";
+    let activeCategory = savedPrefs.activeCategory || "All";
+    let activeFitsFilter = savedPrefs.activeFitsFilter || "All";
+    let activeShopCategory = savedPrefs.activeShopCategory || "All";
+    let selectedPostType = savedPrefs.selectedPostType || "Fitpic";
+    let activeAdminTab = "products";
+    let currentProduct = products[0];
+    let currentSize = currentProduct.sizes[0];
+    let currentCommentsPost = posts[0];
+    let deferredPrompt = null;
+    let currentUser = normalizeUser(loadStoredJson(STORAGE_KEYS.user, null));
+    let postMediaDraft = null;
+    let adminProductMediaDraft = null;
+    let adminFeedMediaDraft = null;
+    let productEditingId = null;
+    let previousScreen = "feed";
+
+    const screenMap = {
+      feed: document.getElementById("screen-feed"),
+      fits: document.getElementById("screen-fits"),
+      post: document.getElementById("screen-post"),
+      shop: document.getElementById("screen-shop"),
+      alerts: document.getElementById("screen-alerts"),
+      admin: document.getElementById("screen-admin")
+    };
+
+    const heroTopEl = document.getElementById("hero-top");
+    const bottomNavEl = document.getElementById("bottom-nav");
+    const feedTabsEl = document.getElementById("feed-tabs");
+    const feedDeckEl = document.getElementById("feed-deck");
+    const fitsFiltersEl = document.getElementById("fits-filters");
+    const fitsGridEl = document.getElementById("fits-grid");
+    const postTypesEl = document.getElementById("post-types");
+    const postProductEl = document.getElementById("post-product");
+    const shopCategoriesEl = document.getElementById("shop-categories");
+    const shopGridEl = document.getElementById("shop-grid");
+    const alertListEl = document.getElementById("alert-list");
+    const adminStatsEl = document.getElementById("admin-stats");
+    const adminTabsEl = document.getElementById("admin-tabs");
+    const adminPanelEl = document.getElementById("admin-panel");
+    const toastShell = document.getElementById("toast-shell");
+    const toastEl = document.getElementById("toast");
+    const profileSummaryEl = document.getElementById("profile-summary");
+    const postUserStateEl = document.getElementById("post-user-state");
+    const postPreviewShellEl = document.getElementById("post-preview-shell");
+    const postMediaInputEl = document.getElementById("post-media");
+
+    function normalizeUser(user) {
+      if (!user) return null;
+      return {
+        username: user.username || "@urbanfan",
+        contact: user.contact || "",
+        bio: user.bio || "",
+        isAdmin: Boolean(user.isAdmin),
+        joinedAt: user.joinedAt || new Date().toISOString(),
+        activity: {
+          likes: Number(user.activity && user.activity.likes) || 0,
+          reposts: Number(user.activity && user.activity.reposts) || 0,
+          comments: Number(user.activity && user.activity.comments) || 0
+        }
+      };
+    }
+
+    function persistPrefs() {
+      saveStoredJson(STORAGE_KEYS.prefs, {
+        activeFeedTab,
+        activeCategory,
+        activeFitsFilter,
+        activeShopCategory,
+        selectedPostType
+      });
+    }
+
+    function persistUser() {
+      if (currentUser) {
+        saveStoredJson(STORAGE_KEYS.user, currentUser);
+      } else {
+        localStorage.removeItem(STORAGE_KEYS.user);
+      }
+    }
+
+    function showToast(message) {
+      toastEl.textContent = message;
+      toastShell.classList.add("active");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toastShell.classList.remove("active"), 2400);
+    }
+
+    function setViewportMetrics() {
+      const heroHeight = heroTopEl ? heroTopEl.offsetHeight : 132;
+      const navHeight = bottomNavEl ? bottomNavEl.offsetHeight : 72;
+      document.documentElement.style.setProperty("--hero-height", heroHeight + "px");
+      document.documentElement.style.setProperty("--nav-height", navHeight + "px");
+    }
+
+    function productById(id) {
+      return products.find((product) => product.id === id);
+    }
+
+    function buildWhatsAppUrl(product, size) {
+      const message = `Hi Urban Threads! I would like to order: ${product.name} (Size: ${size}) - P${product.price}.`;
+      return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    }
+
+    function setScreen(screenKey) {
+      if (screenKey === "admin" && (!currentUser || !currentUser.isAdmin)) {
+        showToast("Admin preview is locked.");
+        openModal("profile-drawer");
+        return;
+      }
+
+      Object.entries(screenMap).forEach(([key, element]) => {
+        element.classList.toggle("active", key === screenKey);
+      });
+
+      if (screenKey !== "admin") {
+        previousScreen = screenKey;
+      }
+
+      document.querySelectorAll(".nav-button").forEach((button) => {
+        if (screenKey === "admin") {
+          button.classList.remove("active");
+          return;
+        }
+        const isActive = button.dataset.screen === screenKey;
+        button.classList.toggle("active", isActive);
+      });
+
+      setViewportMetrics();
+    }
+
+    function ensureAuthenticated(reason) {
+      if (currentUser) return true;
+      showToast(reason || "Please sign in first.");
+      openModal("profile-drawer");
+      return false;
+    }
+
+    function getVisiblePosts() {
+      return posts.filter((post) => !post.hidden && productById(post.productId));
+    }
+
+    function getFeedPosts() {
+      const visiblePosts = getVisiblePosts();
+      const tabFiltered = visiblePosts.filter((post) => {
+        if (activeFeedTab === "For You") return true;
+        return post.feed === activeFeedTab;
+      });
+      const categoryFiltered = tabFiltered.filter((post) => {
+        return activeCategory === "All" || post.categories.includes(activeCategory);
+      });
+
+      if (activeFeedTab === "For You") {
+        return [...categoryFiltered].sort((a, b) => {
+          const aScore = a.likes + a.comments * 2 + a.reposts;
+          const bScore = b.likes + b.comments * 2 + b.reposts;
+          return bScore - aScore;
+        });
+      }
+
+      return [...categoryFiltered].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+
+    function getFitsPosts() {
+      return getVisiblePosts()
+        .filter((post) => post.feed === "Fits" || post.feed === "Inspo" || post.type === "fitpic" || post.type === "inspo" || post.type === "video")
+        .filter((post) => activeFitsFilter === "All" || post.categories.includes(activeFitsFilter))
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+
+    function getPostMediaMarkup(post) {
+      if (post.media && post.media.type === "video" && post.media.src) {
+        return `<div class="post-media-layer"><video class="post-media" src="${escapeHtml(post.media.src)}" autoplay muted loop playsinline preload="metadata"></video></div>`;
+      }
+      if (post.media && post.media.src) {
+        return `<div class="post-media-layer"><img class="post-media" src="${escapeHtml(post.media.src)}" alt="${escapeHtml(post.caption)}"></div>`;
+      }
+      return "";
+    }
+
+    function getVisualMarkup(product, mode) {
+      const mediaClass = mode === "detail" ? "visual-media detail-media" : mode === "mini" ? "visual-media mini-media" : "visual-media product-media";
+      const mediaMarkup = product.media && product.media.src
+        ? `<div class="visual-media-layer"><img class="${mediaClass}" src="${escapeHtml(product.media.src)}" alt="${escapeHtml(product.name)}"></div>`
+        : "";
+      return `
+        ${mediaMarkup}
+        <div class="visual-badge">
+          <span class="product-code">${escapeHtml(product.code)}</span>
+          <small>${escapeHtml(product.category)}</small>
+        </div>
+      `;
+    }
+
+    function getPreviewMarkup(draft, headline) {
+      if (!draft) {
+        return `
+          <div class="preview-empty">
+            <div>
+              <p class="empty-title">No media selected yet.</p>
+              <div class="muted">Pick an image or video to see it here before you post.</div>
+            </div>
+          </div>
+        `;
+      }
+
+      const mediaMarkup = draft.kind === "video"
+        ? `<div class="preview-visual"><video class="preview-media" src="${escapeHtml(draft.src)}" controls muted playsinline preload="metadata"></video></div>`
+        : `<div class="preview-visual"><img class="preview-media" src="${escapeHtml(draft.src)}" alt="${escapeHtml(draft.name)}"></div>`;
+
+      return `
+        <div class="preview-card">
+          ${mediaMarkup}
+          <div>
+            <p class="brand-kicker">${escapeHtml(headline)}</p>
+            <h3>${escapeHtml(draft.name)}</h3>
+            <p class="preview-copy">${draft.kind === "video" ? `Video preview - ${draft.duration.toFixed(1)} seconds.` : "Image preview ready for feed rendering."}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFeedTabs() {
+      feedTabsEl.innerHTML = "";
+      feedTabs.forEach((tab) => {
+        const button = document.createElement("button");
+        button.className = "tab" + (tab === activeFeedTab ? " active" : "");
+        button.type = "button";
+        button.textContent = tab;
+        button.addEventListener("click", () => {
+          activeFeedTab = tab;
+          persistPrefs();
+          renderFeedTabs();
+          renderFeed();
+        });
+        feedTabsEl.appendChild(button);
+      });
+    }
+
+    function renderFeed() {
+      const filteredPosts = getFeedPosts();
+      feedDeckEl.innerHTML = "";
+
+      if (!filteredPosts.length) {
+        feedDeckEl.innerHTML = `
+          <div class="feed-empty">
+            <div class="empty-state">
+              <p class="empty-title">No posts match this filter yet.</p>
+              <div class="muted">Try another category or switch tabs to keep browsing the drop.</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      filteredPosts.forEach((post) => {
+        const product = productById(post.productId);
+        const article = document.createElement("article");
+        article.className = "feed-post";
+        article.dataset.postId = post.id;
+        article.style.setProperty("--post-bg", post.bg);
+
+        const mediaMeta = post.type === "video" && post.media && post.media.type === "video"
+          ? "Muted auto-play loop"
+          : post.type === "video"
+            ? "Video preview"
+            : "Community post";
+
+        article.innerHTML = `
+          ${getPostMediaMarkup(post)}
+          <div class="post-badges">
+            <span class="badge">${escapeHtml(post.type === "video" ? "Video" : post.feed)}</span>
+            <button class="product-pill" type="button" data-product="${escapeHtml(product.id)}">${escapeHtml(product.name)} P${product.price}</button>
+          </div>
+          <div class="feed-content">
+            <div class="post-copy">
+              <div class="post-user">
+                <div class="avatar">${escapeHtml(post.avatar)}</div>
+                <div>
+                  <strong>${escapeHtml(post.user)}</strong>
+                  <span>${escapeHtml(mediaMeta)} - ${escapeHtml(product.category)}</span>
+                </div>
+              </div>
+              <div class="caption">${escapeHtml(post.caption)}</div>
+              <a class="shop-link" href="#" data-product="${escapeHtml(product.id)}">Shop this look</a>
+            </div>
+            <div class="post-actions">
+              <button class="action-button" type="button" data-action="like" data-post="${escapeHtml(post.id)}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 21-1.4-1.2C5 14.9 2 12.1 2 8.6 2 5.8 4.2 4 7 4c1.7 0 3.3.8 4.2 2.2C12.1 4.8 13.7 4 15.4 4 18.2 4 20.4 5.8 20.4 8.6c0 3.5-3 6.3-8.6 11.2L12 21Z"/></svg>
+                <span class="count">${post.likes}</span>
+              </button>
+              <button class="action-button" type="button" data-action="comment" data-post="${escapeHtml(post.id)}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span class="count">${post.comments}</span>
+              </button>
+              <button class="action-button" type="button" data-action="repost" data-post="${escapeHtml(post.id)}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 1v6h-6"></path><path d="M7 23v-6h6"></path><path d="M20.5 8A8.5 8.5 0 0 0 6 5.5L5 7"></path><path d="M3.5 16A8.5 8.5 0 0 0 18 18.5L19 17"></path></svg>
+                <span class="count">${post.reposts}</span>
+              </button>
+              <button class="action-button" type="button" data-action="share" data-post="${escapeHtml(post.id)}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"></path><path d="m16 6-4-4-4 4"></path><path d="M12 2v14"></path></svg>
+                <span>Share</span>
+              </button>
+              <button class="action-button" type="button" data-action="buy" data-post="${escapeHtml(post.id)}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle><path d="M3 4h2l2.2 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H7.2"></path></svg>
+                <span>Buy</span>
+              </button>
+            </div>
+          </div>
+          <div class="post-footer">
+            <div class="category-scroll"></div>
+            <button class="order-strip" type="button" data-buy="${escapeHtml(post.id)}">
+              <span>Order on WhatsApp</span>
+              <span>${formatPrice(product.price)}</span>
+            </button>
+          </div>
+        `;
+
+        const categoryContainer = article.querySelector(".category-scroll");
+        categories.forEach((category) => {
+          const button = document.createElement("button");
+          button.className = "category-pill" + (category === activeCategory ? " active" : "");
+          button.type = "button";
+          button.textContent = category;
+          button.addEventListener("click", () => {
+            activeCategory = category;
+            persistPrefs();
+            renderFeed();
+          });
+          categoryContainer.appendChild(button);
+        });
+
+        article.querySelectorAll("[data-product]").forEach((button) => {
+          button.addEventListener("click", (event) => {
+            event.preventDefault();
+            openProduct(product.id);
+          });
+        });
+
+        article.querySelectorAll("[data-action]").forEach((button) => {
+          button.addEventListener("click", () => {
+            handlePostAction(button.dataset.action, post.id, button);
+          });
+        });
+
+        article.querySelector("[data-buy]").addEventListener("click", () => openProduct(product.id));
+        feedDeckEl.appendChild(article);
+      });
+    }
+
+    function renderFitsFilters() {
+      fitsFiltersEl.innerHTML = "";
+      categories.forEach((category) => {
+        const button = document.createElement("button");
+        button.className = "chip" + (category === activeFitsFilter ? " active" : "");
+        button.type = "button";
+        button.textContent = category;
+        button.addEventListener("click", () => {
+          activeFitsFilter = category;
+          persistPrefs();
+          renderFitsFilters();
+          renderFitsGrid();
+        });
+        fitsFiltersEl.appendChild(button);
+      });
+    }
+
+    function renderFitsGrid() {
+      fitsGridEl.innerHTML = "";
+      const fitPosts = getFitsPosts();
+
+      if (!fitPosts.length) {
+        fitsGridEl.innerHTML = `
+          <div class="empty-state" style="break-inside: avoid;">
+            <p class="empty-title">No fitpics in this category yet.</p>
+            <div class="muted">Switch the filter and keep exploring the archive.</div>
+          </div>
+        `;
+        return;
+      }
+
+      fitPosts.forEach((post) => {
+        const product = productById(post.productId);
+        const article = document.createElement("article");
+        article.className = "fit-card";
+        article.innerHTML = `
+          ${post.type === "video" ? '<div class="video-badge">VID</div>' : ""}
+          ${post.media && post.media.type === "video" && post.media.src
+            ? `<div class="preview-media-layer"><video class="fit-media" src="${escapeHtml(post.media.src)}" autoplay muted loop playsinline preload="metadata"></video></div>`
+            : `<div class="preview-media-layer"><img class="fit-media" src="${escapeHtml(post.media.src)}" alt="${escapeHtml(post.caption)}"></div>`}
+          <div class="fit-card-content">
+            <span class="badge">${escapeHtml(post.feed)}</span>
+            <h3>${escapeHtml(post.user)}</h3>
+            <p>${escapeHtml(post.caption)}</p>
+            <button class="product-pill" type="button">${escapeHtml(product.name)}</button>
+          </div>
+        `;
+        article.querySelector("button").addEventListener("click", () => openProduct(product.id));
+        fitsGridEl.appendChild(article);
+      });
+    }
+
+    function renderPostTypes() {
+      postTypesEl.innerHTML = "";
+      postTypes.forEach((type) => {
+        const button = document.createElement("button");
+        button.className = "type-card" + (type === selectedPostType ? " active" : "");
+        button.type = "button";
+        button.innerHTML = `
+          <strong>${escapeHtml(type)}</strong>
+          <span class="muted">${type === "Video" ? "Up to 60s" : type === "Inspo" ? "Moodboard save" : "Outfit photo"}</span>
+        `;
+        button.addEventListener("click", () => {
+          selectedPostType = type;
+          persistPrefs();
+          renderPostTypes();
+        });
+        postTypesEl.appendChild(button);
+      });
+    }
+
+    function renderPostProductOptions() {
+      postProductEl.innerHTML = products
+        .map((product) => `<option value="${escapeHtml(product.id)}">${escapeHtml(product.name)} - P${product.price}</option>`)
+        .join("");
+    }
+
+    function renderPostPreview() {
+      postPreviewShellEl.innerHTML = getPreviewMarkup(postMediaDraft, "Composer Preview");
+    }
+
+    function renderShopCategories() {
+      shopCategoriesEl.innerHTML = "";
+      categories.forEach((category) => {
+        const button = document.createElement("button");
+        button.className = "chip" + (category === activeShopCategory ? " active" : "");
+        button.type = "button";
+        button.textContent = category;
+        button.addEventListener("click", () => {
+          activeShopCategory = category;
+          persistPrefs();
+          renderShopCategories();
+          renderShop();
+        });
+        shopCategoriesEl.appendChild(button);
+      });
+    }
+
+    function renderShop() {
+      shopGridEl.innerHTML = "";
+      products
+        .filter((product) => activeShopCategory === "All" || product.category === activeShopCategory)
+        .forEach((product) => {
+          const card = document.createElement("article");
+          card.className = "shop-card";
+          card.innerHTML = `
+            <div class="product-visual">
+              ${getVisualMarkup(product, "shop")}
+            </div>
+            <div>
+              <span class="brand-kicker">${escapeHtml(product.category)}</span>
+              <h3>${escapeHtml(product.name)}</h3>
+              <p>${escapeHtml(product.description)}</p>
+            </div>
+            <div class="section-row">
+              <span class="product-price">${formatPrice(product.price)}</span>
+              <span class="stock-pill ${escapeHtml(product.stockTone)}">${escapeHtml(product.stockNote)}</span>
+            </div>
+            <div class="card-actions">
+              <button class="cta" type="button" data-open="${escapeHtml(product.id)}">View Product</button>
+              <button class="secondary-cta" type="button" data-order="${escapeHtml(product.id)}">Order</button>
+            </div>
+          `;
+          card.querySelector("[data-open]").addEventListener("click", () => openProduct(product.id));
+          card.querySelector("[data-order]").addEventListener("click", () => openProduct(product.id));
+          shopGridEl.appendChild(card);
+        });
+    }
+
+    function renderAlerts() {
+      alertListEl.innerHTML = "";
+      notifications.forEach((notification, index) => {
+        const card = document.createElement("article");
+        card.className = "notification-card" + (notification.unread ? " unread" : "");
+        card.innerHTML = `
+          <div class="notification-head">
+            <div>
+              <strong class="notification-title">${escapeHtml(notification.title)}</strong>
+              <p class="notification-copy">${escapeHtml(notification.copy)}</p>
+            </div>
+            ${notification.unread ? '<span class="dot"></span>' : ""}
+          </div>
+          <button class="secondary-cta" type="button">Open</button>
+        `;
+        card.querySelector("button").addEventListener("click", () => {
+          notification.unread = false;
+          renderAlerts();
+          if (index === 0) {
+            setScreen("shop");
+          } else {
+            showToast("Notification opened.");
+          }
+        });
+        alertListEl.appendChild(card);
+      });
+    }
+
+    function getUserStats() {
+      if (!currentUser) {
+        return [
+          { label: "Posts", value: "0" },
+          { label: "Likes", value: "0" },
+          { label: "Comments", value: "0" },
+          { label: "Reposts", value: "0" }
+        ];
+      }
+
+      const userPosts = getVisiblePosts().filter((post) => post.user === currentUser.username).length;
+      return [
+        { label: "Posts", value: String(userPosts) },
+        { label: "Likes", value: String(currentUser.activity.likes) },
+        { label: "Comments", value: String(currentUser.activity.comments) },
+        { label: "Reposts", value: String(currentUser.activity.reposts) }
+      ];
+    }
+
+    function renderProfileSummary() {
+      const stats = getUserStats();
+
+      if (!currentUser) {
+        profileSummaryEl.innerHTML = `
+          <p class="brand-kicker">Guest Session</p>
+          <h3>Browse freely. Sign in locally to post, like, comment, and repost.</h3>
+          <p class="muted">This prototype now gates community actions behind a working local session instead of accepting anonymous posting.</p>
+          <div class="profile-grid">
+            ${stats.map((stat) => `
+              <div class="profile-stat">
+                <strong class="stats-value">${escapeHtml(stat.value)}</strong>
+                <span class="muted">${escapeHtml(stat.label)}</span>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      } else {
+        profileSummaryEl.innerHTML = `
+          <div class="profile-row">
+            <div style="display:flex; gap:12px; align-items:center;">
+              <div class="profile-avatar">${escapeHtml(getInitials(currentUser.username))}</div>
+              <div>
+                <strong class="profile-name">${escapeHtml(currentUser.username)}</strong>
+                <div class="muted">${escapeHtml(currentUser.bio || "Urban Threads community member.")}</div>
+              </div>
+            </div>
+            <span class="signal-pill">${currentUser.isAdmin ? "Admin Unlocked" : "Shopper Session"}</span>
+          </div>
+          <div class="profile-grid">
+            ${stats.map((stat) => `
+              <div class="profile-stat">
+                <strong class="stats-value">${escapeHtml(stat.value)}</strong>
+                <span class="muted">${escapeHtml(stat.label)}</span>
+              </div>
+            `).join("")}
+          </div>
+          <div class="profile-actions" style="margin-top:14px;">
+            <button class="secondary-cta" type="button" id="profile-session-button">Stay Signed In</button>
+            ${currentUser.isAdmin ? '<button class="cta" type="button" id="open-admin-route">Open Admin</button>' : ""}
+          </div>
+        `;
+      }
+
+      const sessionButton = document.getElementById("profile-session-button");
+      if (sessionButton) {
+        sessionButton.addEventListener("click", () => showToast("Session is active on this device."));
+      }
+
+      const openAdminButton = document.getElementById("open-admin-route");
+      if (openAdminButton) {
+        openAdminButton.addEventListener("click", () => {
+          closeModal("profile-drawer");
+          setScreen("admin");
+        });
+      }
+
+      document.getElementById("auth-name").value = currentUser ? currentUser.username : "";
+      document.getElementById("auth-contact").value = currentUser ? currentUser.contact : "";
+      document.getElementById("auth-bio").value = currentUser ? currentUser.bio : "";
+      document.getElementById("auth-passcode").value = "";
+      document.getElementById("auth-logout").classList.toggle("hidden", !currentUser);
+    }
+
+    function renderPostAccessState() {
+      postUserStateEl.textContent = currentUser
+        ? `${currentUser.username} is active on this device. Your post will use this profile automatically.`
+        : "Sign in locally to unlock posting, likes, comments, and reposts.";
+    }
+
+    function renderAdminStats() {
+      const visiblePosts = getVisiblePosts();
+      const hiddenPosts = posts.filter((post) => post.hidden).length;
+      const officialPosts = visiblePosts.filter((post) => post.isOfficial).length;
+
+      adminStatsEl.innerHTML = `
+        <div class="metric-card"><strong class="stats-value">${currentUser ? "1" : "0"}</strong><span class="muted">Local accounts</span></div>
+        <div class="metric-card"><strong class="stats-value">${visiblePosts.length}</strong><span class="muted">Live posts</span></div>
+        <div class="metric-card"><strong class="stats-value">${hiddenPosts}</strong><span class="muted">Hidden posts</span></div>
+        <div class="metric-card"><strong class="stats-value">${officialPosts}</strong><span class="muted">Official uploads</span></div>
+      `;
+    }
+
+    function renderAdminTabs() {
+      adminTabsEl.innerHTML = "";
+      adminTabs.forEach((tab) => {
+        const button = document.createElement("button");
+        button.className = "chip" + (tab.id === activeAdminTab ? " active" : "");
+        button.type = "button";
+        button.textContent = tab.label;
+        button.addEventListener("click", () => {
+          activeAdminTab = tab.id;
+          renderAdmin();
+        });
+        adminTabsEl.appendChild(button);
+      });
+    }
+
+    function renderAdmin() {
+      if (!currentUser || !currentUser.isAdmin) {
+        adminPanelEl.innerHTML = `
+          <div class="locked-card">
+            <p class="brand-kicker">Admin Locked</p>
+            <h3>Unlock the local admin preview first.</h3>
+            <p class="muted">Open the account drawer and enter the prototype admin passcode before returning here.</p>
+          </div>
+        `;
+        return;
+      }
+
+      renderAdminStats();
+      renderAdminTabs();
+
+      if (activeAdminTab === "products") {
+        renderAdminProducts();
+        return;
+      }
+
+      if (activeAdminTab === "feed") {
+        renderAdminFeed();
+        return;
+      }
+
+      if (activeAdminTab === "broadcasts") {
+        renderAdminBroadcasts();
+        return;
+      }
+
+      if (activeAdminTab === "moderation") {
+        renderAdminModeration();
+        return;
+      }
+
+      renderAdminAnalytics();
+    }
+
+    function categoryOptionsHtml(selectedValue) {
+      return categories
+        .filter((category) => category !== "All")
+        .map((category) => `<option value="${escapeHtml(category)}"${selectedValue === category ? " selected" : ""}>${escapeHtml(category)}</option>`)
+        .join("");
+    }
+
+    function productOptionsHtml(selectedValue) {
+      return products
+        .map((product) => `<option value="${escapeHtml(product.id)}"${selectedValue === product.id ? " selected" : ""}>${escapeHtml(product.name)} - ${formatPrice(product.price)}</option>`)
+        .join("");
+    }
+
+    function renderAdminProducts() {
+      const editingProduct = productEditingId ? productById(productEditingId) : null;
+
+      adminPanelEl.innerHTML = `
+        <div class="admin-list-head">
+          <p class="brand-kicker">${editingProduct ? "Edit Product" : "Add Product"}</p>
+          <h3 class="card-title">${editingProduct ? escapeHtml(editingProduct.name) : "Catalogue management"}</h3>
+          <p class="admin-note">Add, edit, and delete products locally in the prototype. Uploaded product images render immediately in Shop and Product Detail.</p>
+        </div>
+        <form id="admin-product-form">
+          <div class="field-group">
+            <label class="field-label" for="admin-product-name">Product name</label>
+            <input class="field" id="admin-product-name" type="text" value="${editingProduct ? escapeHtml(editingProduct.name) : ""}" placeholder="Baggy Jorts">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="admin-product-price">Price (BWP)</label>
+            <input class="field" id="admin-product-price" type="number" min="0" value="${editingProduct ? editingProduct.price : ""}" placeholder="400">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="admin-product-category">Category</label>
+            <select class="field-select" id="admin-product-category">${categoryOptionsHtml(editingProduct ? editingProduct.category : "Jorts")}</select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="admin-product-stock">Stock note</label>
+            <input class="field" id="admin-product-stock" type="text" value="${editingProduct ? escapeHtml(editingProduct.stockNote) : ""}" placeholder="Only 6 left">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="admin-product-sizes">Sizes</label>
+            <input class="field" id="admin-product-sizes" type="text" value="${editingProduct ? escapeHtml(editingProduct.sizes.join(", ")) : ""}" placeholder="S, M, L, XL">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="admin-product-delivery">Delivery</label>
+            <select class="field-select" id="admin-product-delivery">
+              <option value="Standard"${editingProduct && editingProduct.delivery === "Standard" ? " selected" : ""}>Standard</option>
+              <option value="Free delivery"${editingProduct && editingProduct.delivery === "Free delivery" ? " selected" : ""}>Free delivery</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="admin-product-description">Description</label>
+            <textarea id="admin-product-description" placeholder="Describe the product.">${editingProduct ? escapeHtml(editingProduct.description) : ""}</textarea>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="admin-product-media">Product image</label>
+            <input class="field" id="admin-product-media" type="file" accept="image/*">
+          </div>
+          <div class="upload-preview-shell" id="admin-product-preview"></div>
+          <div class="modal-actions" style="margin-top: 14px;">
+            <button class="cta" type="submit">${editingProduct ? "Save Changes" : "Add Product"}</button>
+            <button class="secondary-cta" type="button" id="admin-product-reset">Clear</button>
+          </div>
+        </form>
+        <div class="admin-list" id="admin-product-list"></div>
+      `;
+
+      document.getElementById("admin-product-preview").innerHTML = getPreviewMarkup(adminProductMediaDraft, "Product Preview");
+      document.getElementById("admin-product-media").addEventListener("change", async (event) => {
+        adminProductMediaDraft = await prepareMediaDraft(event.target.files[0], "image");
+        document.getElementById("admin-product-preview").innerHTML = getPreviewMarkup(adminProductMediaDraft, "Product Preview");
+      });
+
+      document.getElementById("admin-product-reset").addEventListener("click", () => {
+        productEditingId = null;
+        adminProductMediaDraft = null;
+        renderAdminProducts();
+      });
+
+      document.getElementById("admin-product-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const name = document.getElementById("admin-product-name").value.trim();
+        const price = Number(document.getElementById("admin-product-price").value);
+        const category = document.getElementById("admin-product-category").value;
+        const stockNote = document.getElementById("admin-product-stock").value.trim();
+        const sizes = document.getElementById("admin-product-sizes").value.split(",").map((size) => size.trim()).filter(Boolean);
+        const delivery = document.getElementById("admin-product-delivery").value;
+        const description = document.getElementById("admin-product-description").value.trim();
+
+        if (!name || !price || !stockNote || !sizes.length || !description) {
+          showToast("Complete every product field first.");
+          return;
+        }
+
+        const existing = productEditingId ? productById(productEditingId) : null;
+        const product = {
+          id: existing ? existing.id : toSlug(name),
+          name,
+          code: getInitials(name),
+          accent: existing ? existing.accent : "#F5C518",
+          price,
+          category,
+          stockNote,
+          stockTone: stockToneFromNote(stockNote),
+          delivery,
+          sizes,
+          description,
+          bg: existing ? existing.bg : "linear-gradient(145deg, #2e2c30, #111111)",
+          media: adminProductMediaDraft
+            ? { type: "image", src: adminProductMediaDraft.src }
+            : existing
+              ? existing.media
+              : makeMediaImage({
+                  title: name,
+                  subtitle: description,
+                  code: getInitials(name),
+                  accent: "#F5C518",
+                  tag: category + " / " + formatPrice(price)
+                })
+        };
+
+        if (existing) {
+          Object.assign(existing, product);
+          showToast("Product updated.");
+        } else {
+          products.unshift(product);
+          showToast("Product added.");
+        }
+
+        productEditingId = null;
+        adminProductMediaDraft = null;
+        renderPostProductOptions();
+        renderShop();
+        renderFeed();
+        renderFitsGrid();
+        renderAdmin();
+      });
+
+      const list = document.getElementById("admin-product-list");
+      products.forEach((product) => {
+        const card = document.createElement("article");
+        card.className = "admin-list-card";
+        card.innerHTML = `
+          <div class="mini-visual">${getVisualMarkup(product, "mini")}</div>
+          <div>
+            <strong>${escapeHtml(product.name)}</strong>
+            <p>${escapeHtml(product.category)} - ${formatPrice(product.price)} - ${escapeHtml(product.stockNote)}</p>
+          </div>
+          <div class="inline-actions">
+            <button class="secondary-cta" type="button" data-edit-product="${escapeHtml(product.id)}">Edit</button>
+            <button class="danger-ghost" type="button" data-delete-product="${escapeHtml(product.id)}">Delete</button>
+          </div>
+        `;
+        card.querySelector("[data-edit-product]").addEventListener("click", () => {
+          productEditingId = product.id;
+          adminProductMediaDraft = null;
+          renderAdminProducts();
+        });
+        card.querySelector("[data-delete-product]").addEventListener("click", () => {
+          const productIndex = products.findIndex((item) => item.id === product.id);
+          if (productIndex < 0) return;
+          products.splice(productIndex, 1);
+          for (let index = posts.length - 1; index >= 0; index -= 1) {
+            if (posts[index].productId === product.id) {
+              posts.splice(index, 1);
+            }
+          }
+          showToast("Product deleted.");
+          renderPostProductOptions();
+          renderShop();
+          renderFeed();
+          renderFitsGrid();
+          renderAlerts();
+          renderAdmin();
+        });
+        list.appendChild(card);
+      });
+    }
+
+    function renderAdminFeed() {
+      adminPanelEl.innerHTML = `
+        <div class="admin-list-head">
+          <p class="brand-kicker">Official Feed Upload</p>
+          <h3 class="card-title">Publish drop content into the main feed.</h3>
+          <p class="admin-note">This local preview now creates functional official posts with optional image or video media.</p>
+        </div>
+        <form id="admin-feed-form">
+          <div class="field-group">
+            <label class="field-label" for="admin-feed-type">Post type</label>
+            <select class="field-select" id="admin-feed-type">
+              <option value="fitpic">Fitpic</option>
+              <option value="video">Video</option>
+              <option value="inspo">Inspo</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="admin-feed-tab">Feed tab</label>
+            <select class="field-select" id="admin-feed-tab">
+              <option value="Shop">Shop</option>
+              <option value="For You">For You</option>
+              <option value="Fits">Fits</option>
+              <option value="Inspo">Inspo</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="admin-feed-product">Tagged product</label>
+            <select class="field-select" id="admin-feed-product">${productOptionsHtml(products[0] ? products[0].id : "")}</select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="admin-feed-caption">Caption</label>
+            <textarea id="admin-feed-caption" placeholder="Describe the drop or styling direction."></textarea>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="admin-feed-media">Upload media</label>
+            <input class="field" id="admin-feed-media" type="file" accept="image/*,video/*">
+          </div>
+          <div class="upload-preview-shell" id="admin-feed-preview"></div>
+          <div class="modal-actions" style="margin-top: 14px;">
+            <button class="cta" type="submit">Publish Official Post</button>
+            <button class="secondary-cta" type="button" id="admin-feed-reset">Clear</button>
+          </div>
+        </form>
+        <div class="admin-list" id="admin-official-list"></div>
+      `;
+
+      document.getElementById("admin-feed-preview").innerHTML = getPreviewMarkup(adminFeedMediaDraft, "Official Media Preview");
+
+      document.getElementById("admin-feed-media").addEventListener("change", async (event) => {
+        const selectedType = document.getElementById("admin-feed-type").value;
+        adminFeedMediaDraft = await prepareMediaDraft(event.target.files[0], selectedType === "video" ? "video" : "image");
+        document.getElementById("admin-feed-preview").innerHTML = getPreviewMarkup(adminFeedMediaDraft, "Official Media Preview");
+      });
+
+      document.getElementById("admin-feed-reset").addEventListener("click", () => {
+        adminFeedMediaDraft = null;
+        renderAdminFeed();
+      });
+
+      document.getElementById("admin-feed-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const type = document.getElementById("admin-feed-type").value;
+        const feed = document.getElementById("admin-feed-tab").value;
+        const productId = document.getElementById("admin-feed-product").value;
+        const caption = document.getElementById("admin-feed-caption").value.trim();
+        const product = productById(productId);
+
+        if (!caption || !product) {
+          showToast("Add a caption and choose a product first.");
+          return;
+        }
+
+        const media = adminFeedMediaDraft
+          ? { type: adminFeedMediaDraft.kind, src: adminFeedMediaDraft.src }
+          : createFeedMedia(product, { caption, feed, type });
+
+        posts.unshift({
+          id: "post-" + Date.now(),
+          feed,
+          type,
+          user: "@urbanthreads",
+          avatar: "UT",
+          caption,
+          productId,
+          categories: ["All", product.category],
+          likes: 0,
+          comments: 0,
+          reposts: 0,
+          shares: 0,
+          createdAt: new Date().toISOString(),
+          hidden: false,
+          isOfficial: true,
+          commentsList: [],
+          media,
+          bg: product.bg
+        });
+
+        adminFeedMediaDraft = null;
+        renderFeed();
+        renderFitsGrid();
+        renderAdmin();
+        showToast("Official post published.");
+      });
+
+      const officialList = document.getElementById("admin-official-list");
+      getVisiblePosts()
+        .filter((post) => post.isOfficial)
+        .slice(0, 6)
+        .forEach((post) => {
+          const product = productById(post.productId);
+          const card = document.createElement("article");
+          card.className = "admin-list-card";
+          card.innerHTML = `
+            <div><strong>${escapeHtml(post.feed)} - ${escapeHtml(product.name)}</strong><p>${escapeHtml(post.caption)}</p></div>
+            <div class="inline-actions">
+              <button class="secondary-cta" type="button" data-open-official="${escapeHtml(product.id)}">Open Product</button>
+              <button class="danger-ghost" type="button" data-hide-official="${escapeHtml(post.id)}">${post.hidden ? "Restore" : "Hide"}</button>
+            </div>
+          `;
+          card.querySelector("[data-open-official]").addEventListener("click", () => openProduct(product.id));
+          card.querySelector("[data-hide-official]").addEventListener("click", () => {
+            post.hidden = !post.hidden;
+            renderFeed();
+            renderFitsGrid();
+            renderAdmin();
+          });
+          officialList.appendChild(card);
+        });
+    }
+
+    function renderAdminBroadcasts() {
+      adminPanelEl.innerHTML = `
+        <div class="admin-list-head">
+          <p class="brand-kicker">Push Broadcasts</p>
+          <h3 class="card-title">Send notifications into the in-app alerts inbox.</h3>
+          <p class="admin-note">Permission prompts are connected locally. Full Firebase Cloud Messaging still needs project credentials and server setup.</p>
+        </div>
+        <form id="admin-broadcast-form">
+          <div class="field-group">
+            <label class="field-label" for="broadcast-title">Title</label>
+            <input class="field" id="broadcast-title" type="text" placeholder="New drop: Butter Logo Cap">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="broadcast-copy">Message</label>
+            <textarea id="broadcast-copy" placeholder="Tell the community what just landed."></textarea>
+          </div>
+          <div class="modal-actions" style="margin-top: 14px;">
+            <button class="cta" type="submit">Send Broadcast</button>
+            <button class="secondary-cta" type="button" id="broadcast-permission">Request Permission</button>
+          </div>
+        </form>
+        <div class="admin-list" id="broadcast-history"></div>
+      `;
+
+      document.getElementById("broadcast-permission").addEventListener("click", requestNotifications);
+
+      document.getElementById("admin-broadcast-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const title = document.getElementById("broadcast-title").value.trim();
+        const copy = document.getElementById("broadcast-copy").value.trim();
+
+        if (!title || !copy) {
+          showToast("Write a title and message first.");
+          return;
+        }
+
+        notifications.unshift({ title, copy, unread: true });
+        renderAlerts();
+        renderAdmin();
+        showToast("Broadcast added to alerts.");
+
+        if ("Notification" in window && Notification.permission === "granted") {
+          new Notification(title, { body: copy });
+        }
+      });
+
+      const history = document.getElementById("broadcast-history");
+      notifications.slice(0, 5).forEach((notification) => {
+        const card = document.createElement("article");
+        card.className = "admin-list-card";
+        card.innerHTML = `
+          <div><strong>${escapeHtml(notification.title)}</strong><p>${escapeHtml(notification.copy)}</p></div>
+        `;
+        history.appendChild(card);
+      });
+    }
+
+    function renderAdminModeration() {
+      const communityPosts = posts.filter((post) => post.user !== "@urbanthreads");
+      adminPanelEl.innerHTML = `
+        <div class="admin-list-head">
+          <p class="brand-kicker">Moderation Queue</p>
+          <h3 class="card-title">Approve, hide, or delete community posts.</h3>
+          <p class="admin-note">Hidden posts are removed from both the feed and the fits grid immediately.</p>
+        </div>
+        <div class="admin-list" id="moderation-list"></div>
+      `;
+
+      const list = document.getElementById("moderation-list");
+      if (!communityPosts.length) {
+        list.innerHTML = `<div class="empty-state"><p class="empty-title">No community posts yet.</p><div class="muted">New uploads will appear here for moderation controls.</div></div>`;
+        return;
+      }
+
+      communityPosts.forEach((post) => {
+        const product = productById(post.productId);
+        const card = document.createElement("article");
+        card.className = "admin-list-card";
+        card.innerHTML = `
+          <div><strong>${escapeHtml(post.user)}</strong><p>${escapeHtml(post.caption)}</p><p class="muted">${escapeHtml(product.name)} - ${post.hidden ? "Hidden" : "Visible"}</p></div>
+          <div class="inline-actions">
+            <button class="secondary-cta" type="button" data-toggle-post="${escapeHtml(post.id)}">${post.hidden ? "Restore" : "Hide"}</button>
+            <button class="danger-ghost" type="button" data-delete-post="${escapeHtml(post.id)}">Delete</button>
+          </div>
+        `;
+        card.querySelector("[data-toggle-post]").addEventListener("click", () => {
+          post.hidden = !post.hidden;
+          renderFeed();
+          renderFitsGrid();
+          renderAdmin();
+        });
+        card.querySelector("[data-delete-post]").addEventListener("click", () => {
+          const postIndex = posts.findIndex((item) => item.id === post.id);
+          if (postIndex >= 0) {
+            posts.splice(postIndex, 1);
+            renderFeed();
+            renderFitsGrid();
+            renderAdmin();
+            showToast("Community post deleted.");
+          }
+        });
+        list.appendChild(card);
+      });
+    }
+
+    function renderAdminAnalytics() {
+      const visiblePosts = getVisiblePosts();
+      const officialPosts = visiblePosts.filter((post) => post.isOfficial).length;
+      const communityPosts = visiblePosts.filter((post) => !post.isOfficial).length;
+      const videoPosts = visiblePosts.filter((post) => post.type === "video").length;
+      const unreadAlerts = notifications.filter((notification) => notification.unread).length;
+
+      adminPanelEl.innerHTML = `
+        <div class="admin-list-head">
+          <p class="brand-kicker">Analytics Snapshot</p>
+          <h3 class="card-title">Dynamic prototype metrics instead of hardcoded placeholders.</h3>
+          <p class="admin-note">These values now reflect the local prototype state. Real multi-user analytics still need database-backed tracking.</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stats-card"><strong class="stats-value">${visiblePosts.length}</strong><span class="muted">Visible posts</span></div>
+          <div class="stats-card"><strong class="stats-value">${officialPosts}</strong><span class="muted">Official posts</span></div>
+          <div class="stats-card"><strong class="stats-value">${communityPosts}</strong><span class="muted">Community posts</span></div>
+          <div class="stats-card"><strong class="stats-value">${videoPosts}</strong><span class="muted">Video posts</span></div>
+          <div class="stats-card"><strong class="stats-value">${notifications.length}</strong><span class="muted">Alerts in inbox</span></div>
+          <div class="stats-card"><strong class="stats-value">${unreadAlerts}</strong><span class="muted">Unread alerts</span></div>
+        </div>
+      `;
+    }
+
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    function openProduct(productId) {
+      currentProduct = productById(productId);
+      if (!currentProduct) return;
+      currentSize = currentProduct.sizes[0];
+
+      const detailVisual = document.getElementById("detail-visual");
+      detailVisual.innerHTML = getVisualMarkup(currentProduct, "detail");
+      detailVisual.style.background = currentProduct.bg;
+      document.getElementById("detail-name").textContent = currentProduct.name;
+      document.getElementById("detail-price").textContent = formatPrice(currentProduct.price);
+      document.getElementById("detail-copy").textContent = currentProduct.description;
+
+      const tagsEl = document.getElementById("detail-tags");
+      tagsEl.innerHTML = `
+        <span class="stock-pill ${escapeHtml(currentProduct.stockTone)}">${escapeHtml(currentProduct.stockNote)}</span>
+        <span class="badge">${escapeHtml(currentProduct.category)}</span>
+        <span class="signal-pill">${escapeHtml(currentProduct.delivery)}</span>
+      `;
+
+      renderSizeButtons();
+      openModal("product-modal");
+    }
+
+    function renderSizeButtons() {
+      const sizeRow = document.getElementById("size-row");
+      sizeRow.innerHTML = "";
+      currentProduct.sizes.forEach((size) => {
+        const button = document.createElement("button");
+        button.className = "size-button" + (size === currentSize ? " active" : "");
+        button.type = "button";
+        button.textContent = size;
+        button.addEventListener("click", () => {
+          currentSize = size;
+          renderSizeButtons();
+        });
+        sizeRow.appendChild(button);
+      });
+    }
+
+    function openComments(postId) {
+      currentCommentsPost = posts.find((post) => post.id === postId);
+      if (!currentCommentsPost) return;
+      document.getElementById("comment-title").textContent = currentCommentsPost.user + " comments";
+      const commentListEl = document.getElementById("comment-list");
+      commentListEl.innerHTML = "";
+
+      if (!currentCommentsPost.commentsList.length) {
+        commentListEl.innerHTML = `<div class="empty-state"><p class="empty-title">No comments yet.</p><div class="muted">Be the first to speak on the look.</div></div>`;
+      } else {
+        currentCommentsPost.commentsList.forEach((comment) => {
+          const item = document.createElement("article");
+          item.className = "comment-card";
+          item.innerHTML = `
+            <strong class="comment-name">${escapeHtml(comment.name)}</strong>
+            <p class="comment-copy">${escapeHtml(comment.text)}</p>
+          `;
+          commentListEl.appendChild(item);
+        });
+      }
+
+      openModal("comment-drawer");
+    }
+
+    function updateRenderedPostCount(postId, action, value) {
+      document.querySelectorAll(`[data-post="${postId}"][data-action="${action}"] .count`).forEach((element) => {
+        element.textContent = value;
+      });
+    }
+
+    async function handlePostAction(action, postId, button) {
+      const post = posts.find((item) => item.id === postId);
+      const product = productById(post.productId);
+      if (!post || !product) return;
+
+      if (action === "buy") {
+        openProduct(product.id);
+        return;
+      }
+
+      if (action === "comment") {
+        openComments(postId);
+        return;
+      }
+
+      if (action === "share" && navigator.share) {
+        try {
+          await navigator.share({
+            title: "Urban Threads",
+            text: post.caption,
+            url: location.href
+          });
+          showToast("Share sheet opened.");
+        } catch (error) {
+          showToast("Share cancelled.");
+        }
+        return;
+      }
+
+      if (action === "share") {
+        try {
+          await navigator.clipboard.writeText(location.href);
+          showToast("Link copied.");
+        } catch (error) {
+          showToast("Share is not available in this browser.");
+        }
+        return;
+      }
+
+      if (!ensureAuthenticated("Sign in to interact with posts.")) {
+        return;
+      }
+
+      if (action === "like") {
+        post.likes += 1;
+        currentUser.activity.likes += 1;
+        persistUser();
+        updateRenderedPostCount(post.id, "like", post.likes);
+        renderProfileSummary();
+        showToast("Post liked.");
+        return;
+      }
+
+      if (action === "repost") {
+        post.reposts += 1;
+        currentUser.activity.reposts += 1;
+        persistUser();
+        updateRenderedPostCount(post.id, "repost", post.reposts);
+        renderProfileSummary();
+        showToast("Reposted to your followers.");
+      }
+    }
+
+    async function promptInstall() {
+      if (!deferredPrompt) {
+        showToast("Install prompt will appear when your browser allows it.");
+        return;
+      }
+
+      deferredPrompt.prompt();
+      const result = await deferredPrompt.userChoice;
+      showToast(result.outcome === "accepted" ? "Install started." : "Install dismissed.");
+      deferredPrompt = null;
+    }
+
+    async function requestNotifications() {
+      if (!("Notification" in window)) {
+        showToast("Notifications are not supported in this browser.");
+        return;
+      }
+
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        showToast("Alerts enabled. Full background FCM still needs production setup.");
+      } else {
+        showToast("Notification permission not granted.");
+      }
+    }
+
+    async function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("Could not read file."));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function prepareMediaDraft(file, expectedKind) {
+      if (!file) return null;
+
+      const isVideo = file.type.startsWith("video/");
+      const actualKind = isVideo ? "video" : "image";
+
+      if (expectedKind && expectedKind !== actualKind) {
+        showToast(expectedKind === "video" ? "Please choose a video file." : "Please choose an image file.");
+        return null;
+      }
+
+      if (isVideo) {
+        const objectUrl = URL.createObjectURL(file);
+        const duration = await new Promise((resolve, reject) => {
+          const video = document.createElement("video");
+          video.preload = "metadata";
+          video.src = objectUrl;
+          video.onloadedmetadata = () => resolve(video.duration || 0);
+          video.onerror = () => reject(new Error("Could not read video metadata."));
+        });
+
+        if (duration > 60) {
+          URL.revokeObjectURL(objectUrl);
+          showToast("Videos must stay under 60 seconds.");
+          return null;
+        }
+
+        return {
+          kind: "video",
+          src: objectUrl,
+          name: file.name,
+          duration,
+          file
+        };
+      }
+
+      const src = await fileToDataUrl(file);
+      return {
+        kind: "image",
+        src,
+        name: file.name,
+        duration: 0,
+        file
+      };
+    }
+
+    async function handlePostMediaChange(event) {
+      const expectedKind = selectedPostType === "Video" ? "video" : "image";
+      postMediaDraft = await prepareMediaDraft(event.target.files[0], expectedKind);
+      renderPostPreview();
+      if (!postMediaDraft && event.target) {
+        event.target.value = "";
+      }
+    }
+
+    function buildUserPost(payload) {
+      const product = productById(payload.productId);
+      return {
+        id: "post-" + Date.now(),
+        feed: payload.type === "Inspo" ? "Inspo" : "Fits",
+        type: payload.type.toLowerCase(),
+        user: currentUser.username,
+        avatar: getInitials(currentUser.username),
+        caption: payload.caption,
+        productId: payload.productId,
+        categories: ["All", product.category],
+        likes: 0,
+        comments: 0,
+        reposts: 0,
+        shares: 0,
+        createdAt: new Date().toISOString(),
+        hidden: false,
+        isOfficial: false,
+        commentsList: [],
+        media: {
+          type: payload.media.kind,
+          src: payload.media.src
+        },
+        bg: product.bg
+      };
+    }
+
+    document.querySelectorAll(".nav-button").forEach((button) => {
+      button.addEventListener("click", () => setScreen(button.dataset.screen));
+    });
+
+    document.querySelectorAll("[data-close]").forEach((button) => {
+      button.addEventListener("click", () => closeModal(button.dataset.close));
+    });
+
+    document.getElementById("detail-order").addEventListener("click", () => {
+      window.open(buildWhatsAppUrl(currentProduct, currentSize), "_blank", "noopener");
+    });
+
+    document.getElementById("detail-repost").addEventListener("click", () => {
+      if (!ensureAuthenticated("Sign in to repost this product.")) {
+        return;
+      }
+      currentUser.activity.reposts += 1;
+      persistUser();
+      renderProfileSummary();
+      showToast(currentProduct.name + " reposted.");
+    });
+
+    document.getElementById("comment-submit").addEventListener("click", () => {
+      if (!ensureAuthenticated("Sign in to comment.")) {
+        return;
+      }
+
+      const input = document.getElementById("comment-input");
+      const value = input.value.trim();
+      if (!value) {
+        showToast("Write a comment first.");
+        return;
+      }
+
+      currentCommentsPost.commentsList.unshift({ name: currentUser.username, text: value });
+      currentCommentsPost.comments += 1;
+      currentUser.activity.comments += 1;
+      persistUser();
+      input.value = "";
+      updateRenderedPostCount(currentCommentsPost.id, "comment", currentCommentsPost.comments);
+      renderProfileSummary();
+      openComments(currentCommentsPost.id);
+      showToast("Comment posted.");
+    });
+
+    document.getElementById("open-profile").addEventListener("click", () => openModal("profile-drawer"));
+    document.getElementById("post-open-auth").addEventListener("click", () => openModal("profile-drawer"));
+
+    document.getElementById("auth-submit").addEventListener("click", () => {
+      const usernameInput = document.getElementById("auth-name").value.trim();
+      const contact = document.getElementById("auth-contact").value.trim();
+      const bio = document.getElementById("auth-bio").value.trim();
+      const passcode = document.getElementById("auth-passcode").value.trim();
+
+      if (!usernameInput || !contact) {
+        showToast("Username and phone or email are required.");
+        return;
+      }
+
+      const username = usernameInput.startsWith("@") ? usernameInput : "@" + usernameInput;
+      currentUser = normalizeUser({
+        username,
+        contact,
+        bio,
+        isAdmin: passcode === ADMIN_PASSCODE,
+        joinedAt: currentUser && currentUser.joinedAt ? currentUser.joinedAt : new Date().toISOString(),
+        activity: currentUser && currentUser.activity ? currentUser.activity : { likes: 0, reposts: 0, comments: 0 }
+      });
+      persistUser();
+      renderProfileSummary();
+      renderPostAccessState();
+      renderAdmin();
+      closeModal("profile-drawer");
+      showToast(currentUser.isAdmin ? "Session saved with admin preview unlocked." : "Session saved.");
+    });
+
+    document.getElementById("auth-logout").addEventListener("click", () => {
+      currentUser = null;
+      persistUser();
+      renderProfileSummary();
+      renderPostAccessState();
+      renderAdmin();
+      if (screenMap.admin.classList.contains("active")) {
+        setScreen(previousScreen || "feed");
+      }
+      showToast("Logged out.");
+    });
+
+    document.getElementById("install-button").addEventListener("click", promptInstall);
+    document.getElementById("notify-button").addEventListener("click", requestNotifications);
+    document.getElementById("admin-back").addEventListener("click", () => setScreen(previousScreen));
+
+    postMediaInputEl.addEventListener("change", handlePostMediaChange);
+
+    document.getElementById("post-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!ensureAuthenticated("Sign in to post to the feed.")) {
+        return;
+      }
+
+      const caption = document.getElementById("post-caption").value.trim();
+      const productId = document.getElementById("post-product").value;
+
+      if (!caption) {
+        showToast("Add a caption before posting.");
+        return;
+      }
+
+      if (!postMediaDraft) {
+        showToast("Choose a photo or video first.");
+        return;
+      }
+
+      if ((selectedPostType === "Video" && postMediaDraft.kind !== "video") || (selectedPostType !== "Video" && postMediaDraft.kind !== "image")) {
+        showToast(selectedPostType === "Video" ? "Video posts need a video file." : "Fitpic and Inspo posts need an image.");
+        return;
+      }
+
+      const post = buildUserPost({
+        type: selectedPostType,
+        caption,
+        productId,
+        media: postMediaDraft
+      });
+
+      posts.unshift(post);
+      event.target.reset();
+      postMediaDraft = null;
+      renderPostPreview();
+      renderFeed();
+      renderFitsGrid();
+      renderProfileSummary();
+      setScreen("feed");
+      showToast("Post shared to the community feed.");
+    });
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      deferredPrompt = event;
+      showToast("Install prompt is ready.");
+    });
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(() => {
+          showToast("Service worker registration failed.");
+        });
+      });
+    }
+
+    window.addEventListener("resize", setViewportMetrics);
+    window.addEventListener("orientationchange", setViewportMetrics);
+
+    renderFeedTabs();
+    renderFeed();
+    renderFitsFilters();
+    renderFitsGrid();
+    renderPostTypes();
+    renderPostProductOptions();
+    renderPostPreview();
+    renderPostAccessState();
+    renderShopCategories();
+    renderShop();
+    renderAlerts();
+    renderProfileSummary();
+    renderAdminStats();
+    renderAdminTabs();
+    renderAdmin();
+    setViewportMetrics();
+  </script>
+</body>
+</html>

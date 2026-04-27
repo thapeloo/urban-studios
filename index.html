@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Urban Threads | Cut from Concrete</title> 
+  <title>Urban Threads | Cut from Concrete</title>
   <meta
     name="description"
     content="Urban Threads is a Botswana streetwear PWA for community fitpics, product drops, and WhatsApp ordering."
@@ -40,8 +40,8 @@
       --phone-width: min(100vw, 430px);
       --font-display: "Space Grotesk", sans-serif;
       --font-body: "Plus Jakarta Sans", sans-serif;
-      --hero-height: 132px;
-      --nav-height: 72px;
+      --hero-height: 36px;
+      --nav-height: 54px;
     }
 
     * {
@@ -130,13 +130,13 @@
       position: sticky;
       top: 0;
       z-index: 30;
-      padding: max(14px, env(safe-area-inset-top)) 14px 8px;
-      background: linear-gradient(180deg, rgba(8, 8, 8, 0.98), rgba(8, 8, 8, 0.76), transparent);
-      backdrop-filter: blur(14px);
+      min-height: calc(36px + env(safe-area-inset-top));
+      padding: env(safe-area-inset-top) 10px 0;
+      background: linear-gradient(180deg, rgba(6, 6, 6, 0.72), rgba(6, 6, 6, 0.14), transparent);
+      backdrop-filter: blur(12px);
     }
 
-    .brand-row,
-    .top-tools,
+    .feed-topbar,
     .feed-tabs,
     .category-scroll,
     .section-row,
@@ -155,18 +155,12 @@
       gap: 10px;
     }
 
-    .brand-row,
+    .feed-topbar,
     .section-row,
     .profile-row,
     .helper-row {
       align-items: center;
       justify-content: space-between;
-    }
-
-    .wordmark {
-      display: grid;
-      gap: 2px;
-      min-width: 0;
     }
 
     .brand-kicker,
@@ -197,11 +191,6 @@
       font-family: var(--font-display);
     }
 
-    .brand-name {
-      font-size: 1.16rem;
-      line-height: 1;
-    }
-
     .hero-tagline,
     .muted,
     .caption,
@@ -212,10 +201,6 @@
     .preview-copy,
     .admin-note {
       color: var(--muted);
-    }
-
-    .hero-tagline {
-      font-size: 0.8rem;
     }
 
     .icon-button,
@@ -244,7 +229,6 @@
       flex: 0 0 auto;
     }
 
-    .top-tools,
     .feed-tabs,
     .category-scroll,
     .filter-row,
@@ -255,7 +239,6 @@
       scrollbar-width: none;
     }
 
-    .top-tools::-webkit-scrollbar,
     .feed-tabs::-webkit-scrollbar,
     .category-scroll::-webkit-scrollbar,
     .filter-row::-webkit-scrollbar,
@@ -265,11 +248,6 @@
       display: none;
     }
 
-    .top-tools {
-      margin-top: 10px;
-      gap: 8px;
-    }
-
     .tab,
     .chip,
     .category-pill {
@@ -277,11 +255,70 @@
       padding: 6px 12px;
     }
 
-    .top-tools .chip {
-      padding: 5px 10px;
-      font-size: 0.58rem;
-      background: rgba(245, 197, 24, 0.08);
-      border-color: rgba(245, 197, 24, 0.18);
+    .category-pill {
+      min-height: 24px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.34);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+    }
+
+    .feed-topbar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+    }
+
+    .feed-brand-label {
+      position: absolute;
+      left: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(245, 241, 232, 0.6);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      white-space: nowrap;
+    }
+
+    .feed-tabs {
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 0 16px;
+    }
+
+    .feed-tabs .tab {
+      min-height: 34px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: rgba(245, 241, 232, 0.58);
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .feed-tabs .tab::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 4px;
+      width: 0;
+      height: 2px;
+      margin: 0 auto;
+      border-radius: 999px;
+      background: var(--gold);
+      transition: width 0.2s ease;
     }
 
     .tab.active,
@@ -293,6 +330,16 @@
       background: var(--gold);
       border-color: rgba(245, 197, 24, 0.82);
       color: #090909;
+    }
+
+    .feed-tabs .tab.active {
+      background: transparent;
+      border: 0;
+      color: var(--text);
+    }
+
+    .feed-tabs .tab.active::after {
+      width: 20px;
     }
 
     .feed-deck {
@@ -308,7 +355,7 @@
       scroll-snap-align: start;
       display: flex;
       align-items: flex-end;
-      padding: 14px 14px calc(16px + env(safe-area-inset-bottom));
+      padding: 12px 12px calc(18px + env(safe-area-inset-bottom));
       isolation: isolate;
       overflow: hidden;
     }
@@ -366,7 +413,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 12px;
+      padding: 6px 10px;
       border-radius: 999px;
       backdrop-filter: blur(14px);
     }
@@ -395,7 +442,7 @@
     .post-copy {
       display: grid;
       gap: 10px;
-      padding-bottom: 84px;
+      padding-bottom: 86px;
     }
 
     .post-user {
@@ -449,44 +496,64 @@
 
     .post-actions {
       display: grid;
-      gap: 10px;
+      gap: 8px;
       align-items: end;
       justify-items: center;
-      margin-bottom: 70px;
+      margin-bottom: 60px;
     }
 
     .action-button {
-      width: 52px;
-      min-height: 52px;
       display: grid;
-      place-items: center;
-      gap: 4px;
-      padding: 7px 4px;
-      border-radius: 18px;
-      background: rgba(14, 14, 14, 0.5);
-      backdrop-filter: blur(12px);
+      gap: 3px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      justify-items: center;
     }
 
     .action-button svg {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
+      display: block;
     }
 
-    .action-button span {
-      font-size: 0.68rem;
-      font-weight: 700;
-      line-height: 1;
+    .action-circle {
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      background: transparent;
+      display: block;
+      line-height: 0;
+      backdrop-filter: none;
+      box-shadow: none;
+    }
+
+    .action-button.buy-action .action-circle {
+      color: var(--gold);
+    }
+
+    .action-label,
+    .action-button .count {
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.05;
+      color: #ffffff;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     }
 
     .post-footer {
       position: absolute;
-      left: 14px;
-      right: 14px;
+      left: 12px;
+      right: 12px;
       bottom: calc(12px + env(safe-area-inset-bottom));
       display: grid;
-      gap: 8px;
-      padding-bottom: 4px;
+      gap: 6px;
+      padding-bottom: calc(2px + env(safe-area-inset-bottom));
       z-index: 1;
+    }
+
+    .post-footer .category-scroll {
+      max-width: calc(100% - 72px);
     }
 
     .order-strip {
@@ -679,6 +746,9 @@
     .cta,
     .secondary-cta,
     .danger-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       min-height: 50px;
       border-radius: 18px;
       font-weight: 800;
@@ -853,7 +923,7 @@
       transform: translateX(-50%);
       z-index: 40;
       width: var(--phone-width);
-      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      padding: 3px 8px calc(3px + env(safe-area-inset-bottom));
       background: linear-gradient(180deg, transparent, rgba(6, 6, 6, 0.94) 26%);
       backdrop-filter: blur(18px);
     }
@@ -861,35 +931,49 @@
     .nav-shell {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 4px;
-      padding: 5px;
-      border-radius: 22px;
+      gap: 1px;
+      padding: 2px;
+      border-radius: 16px;
       background: rgba(18, 18, 18, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .nav-button {
-      min-height: 44px;
-      border-radius: 16px;
+      min-height: 38px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
       gap: 2px;
-      padding: 5px 4px 6px;
-      font-size: 0.65rem;
+      padding: 2px 2px 3px;
+      font-size: 10px;
       font-weight: 700;
       line-height: 1;
       letter-spacing: 0.04em;
+      background: transparent;
+      border-color: transparent;
     }
 
     .nav-button.post {
+      min-height: 44px;
       background: linear-gradient(135deg, #f5c518, #ffdc62);
       color: #090909;
       border-color: rgba(245, 197, 24, 0.82);
     }
 
     .nav-button svg {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .nav-button.active {
+      background: transparent;
+      border-color: transparent;
+      color: var(--gold);
+    }
+
+    .nav-button.post,
+    .nav-button.post.active {
+      color: #090909;
     }
 
     .modal,
@@ -937,7 +1021,7 @@
     .drawer-panel {
       top: 50%;
       transform: translate(-50%, -50%);
-      width: min(94vw, 420px);
+      width: min(94vw, 430px);
       border-radius: 28px;
       padding: 18px;
       max-height: 82dvh;
@@ -984,7 +1068,7 @@
 
     .feed-empty {
       height: 100%;
-      padding: 18px 14px calc(78px + env(safe-area-inset-bottom));
+      padding: 16px 12px calc(66px + env(safe-area-inset-bottom));
       display: grid;
       place-items: center;
     }
@@ -1032,6 +1116,22 @@
       gap: 14px;
     }
 
+    .profile-utility-card {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .utility-actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    .utility-actions .secondary-cta,
+    .utility-actions .cta {
+      min-height: 46px;
+    }
+
     .toast-shell {
       pointer-events: none;
       align-items: flex-end;
@@ -1059,17 +1159,9 @@
     }
 
     @media (max-width: 420px) {
-      .hero-tagline {
-        display: none;
-      }
-
-      .brand-name {
-        font-size: 1.08rem;
-      }
-
-      .action-button {
-        width: 50px;
-        min-height: 50px;
+      .feed-tabs {
+        gap: 12px;
+        padding: 0 14px;
       }
     }
 
@@ -1085,11 +1177,13 @@
         grid-template-columns: 1fr;
       }
 
-      .post-actions {
-        grid-auto-flow: column;
-        overflow-x: auto;
-        margin-bottom: 8px;
-        justify-items: stretch;
+      .feed-brand-label {
+        font-size: 9px;
+      }
+
+      .feed-tabs {
+        gap: 10px;
+        padding: 0 12px;
       }
     }
 
@@ -1128,25 +1222,10 @@
     <main>
       <section class="screen feed-screen active" id="screen-feed">
         <div class="hero-top" id="hero-top">
-          <div class="brand-row">
-            <div class="wordmark">
-              <span class="brand-kicker">Urban Threads</span>
-              <strong class="brand-name">CUT FROM CONCRETE</strong>
-              <span class="hero-tagline">Gaborone streetwear feed, fitpics, drops, and direct WhatsApp orders.</span>
-            </div>
-            <button class="icon-button" type="button" id="open-profile" aria-label="Open account">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 21a8 8 0 0 0-16 0"></path>
-                <circle cx="12" cy="8" r="4"></circle>
-              </svg>
-            </button>
+          <div class="feed-topbar">
+            <span class="feed-brand-label">Urban Threads</span>
+            <div class="feed-tabs" id="feed-tabs"></div>
           </div>
-          <div class="top-tools">
-            <button class="chip" type="button" id="install-button">Install App</button>
-            <button class="chip" type="button" id="notify-button">Enable Alerts</button>
-            <a class="chip" href="https://wa.me/26774526407?text=Hi%20Urban%20Threads!%20I%20would%20like%20to%20order%3A%20Baggy%20Jorts%20(Size%3A%20M)%20-%20P400." target="_blank" rel="noreferrer">WhatsApp Orders</a>
-          </div>
-          <div class="feed-tabs" id="feed-tabs"></div>
         </div>
         <div class="feed-deck" id="feed-deck"></div>
       </section>
@@ -1367,29 +1446,86 @@
       </div>
       <div class="profile-summary-grid">
         <div class="profile-card" id="profile-summary"></div>
-        <div class="login-card">
-          <p class="brand-kicker">Local Prototype Sign In</p>
-          <h3>Create a working session for posting, likes, comments, and reposts.</h3>
-          <div class="field-group">
-            <label class="field-label" for="auth-name">Username</label>
-            <input class="field" id="auth-name" type="text" placeholder="@urbanfan">
+        <div class="login-card" id="auth-card">
+          <p class="brand-kicker">Sign In / Create Account</p>
+          <h3>Join the Urban Threads community.</h3>
+
+          <!-- Auth method tabs -->
+          <div class="feed-tabs" style="justify-content:flex-start; gap:8px; margin-bottom:14px; overflow-x:auto;">
+            <button class="tab active" type="button" id="auth-tab-email">Email</button>
+            <button class="tab" type="button" id="auth-tab-phone">Phone</button>
+            <button class="tab" type="button" id="auth-tab-google">Google</button>
           </div>
-          <div class="field-group">
-            <label class="field-label" for="auth-contact">Phone or email</label>
-            <input class="field" id="auth-contact" type="text" placeholder="+267 or email">
+
+          <!-- Email / Password panel -->
+          <div id="auth-panel-email">
+            <div class="field-group">
+              <label class="field-label" for="auth-name">Display name</label>
+              <input class="field" id="auth-name" type="text" placeholder="@urbanfan" autocomplete="name">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="auth-email">Email address</label>
+              <input class="field" id="auth-email" type="email" placeholder="you@example.com" autocomplete="email">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="auth-password">Password</label>
+              <input class="field" id="auth-password" type="password" placeholder="Min 6 characters" autocomplete="current-password">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="auth-bio">Bio (optional)</label>
+              <textarea id="auth-bio" placeholder="Tell the community your style lane."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="auth-passcode">Admin passcode (optional)</label>
+              <input class="field" id="auth-passcode" type="password" placeholder="Leave blank for shopper access">
+            </div>
+            <div class="modal-actions" style="margin-top:14px;">
+              <button class="cta" type="button" id="auth-email-signup">Create Account</button>
+              <button class="secondary-cta" type="button" id="auth-email-login">Sign In</button>
+            </div>
           </div>
-          <div class="field-group">
-            <label class="field-label" for="auth-bio">Bio</label>
-            <textarea id="auth-bio" placeholder="Tell the community your style lane."></textarea>
+
+          <!-- Phone OTP panel -->
+          <div id="auth-panel-phone" class="hidden">
+            <div class="field-group">
+              <label class="field-label" for="auth-phone">Phone number</label>
+              <input class="field" id="auth-phone" type="tel" placeholder="+267 74 526 407" autocomplete="tel">
+              <div class="field-note">Include country code e.g. +267 for Botswana</div>
+            </div>
+            <div id="auth-recaptcha" style="margin-top:10px;"></div>
+            <div class="field-group" id="auth-otp-group" style="display:none;">
+              <label class="field-label" for="auth-otp">Verification code</label>
+              <input class="field" id="auth-otp" type="number" placeholder="6-digit code">
+            </div>
+            <div class="modal-actions" style="margin-top:14px;">
+              <button class="cta" type="button" id="auth-phone-send">Send Code</button>
+              <button class="secondary-cta hidden" type="button" id="auth-phone-verify">Verify Code</button>
+            </div>
           </div>
-          <div class="field-group">
-            <label class="field-label" for="auth-passcode">Admin passcode (prototype only)</label>
-            <input class="field" id="auth-passcode" type="password" placeholder="Leave blank for shopper access">
-            <div class="field-note">This unlocks the separate admin preview route locally. Real production admin access still requires backend role enforcement.</div>
+
+          <!-- Google panel -->
+          <div id="auth-panel-google" class="hidden">
+            <p class="muted" style="margin:0 0 14px;">Sign in instantly with your Google account. No password needed.</p>
+            <button class="cta" type="button" id="auth-google-btn" style="width:100%; display:flex; align-items:center; justify-content:center; gap:10px;">
+              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 2.9l5.7-5.7C34.5 6.5 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.7 19 12 24 12c3.1 0 5.8 1.1 8 2.9l5.7-5.7C34.5 6.5 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.2 26.8 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.9 2.4-2.5 4.5-4.6 5.9l6.2 5.2C36.9 38.6 44 33 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+              Continue with Google
+            </button>
           </div>
-          <div class="modal-actions" style="margin-top: 14px;">
-            <button class="cta" type="button" id="auth-submit">Save Session</button>
-            <button class="secondary-cta" type="button" id="auth-logout">Log Out</button>
+
+          <!-- Signed in state -->
+          <div id="auth-signed-in" class="hidden" style="margin-top:14px;">
+            <button class="danger-ghost" type="button" id="auth-logout" style="width:100%;">Sign Out</button>
+          </div>
+        </div>
+
+        <div class="screen-card profile-utility-card">
+          <p class="brand-kicker">Utilities</p>
+          <h3>Install guidance, notifications, and quick ordering live here now.</h3>
+          <p class="muted" id="profile-install-copy">Install and notification actions have been moved out of the feed so the clothing stays the focus.</p>
+          <div class="utility-actions">
+            <button class="cta" type="button" id="profile-install-button">Install App</button>
+            <button class="secondary-cta" type="button" id="profile-notify-button">Enable Alerts</button>
+            <a class="secondary-cta" id="profile-orders-link" href="https://wa.me/26774526407?text=Hi%20Urban%20Threads!%20I%20would%20like%20to%20order%3A%20Baggy%20Jorts%20(Size%3A%20M)%20-%20P400." target="_blank" rel="noreferrer">WhatsApp Orders</a>
           </div>
         </div>
       </div>
@@ -1400,6 +1536,35 @@
     <div class="toast" id="toast"></div>
   </div>
 
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, RecaptchaVerifier, signInWithPhoneNumber, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDOSc5LtPpy1__njoWpNeMEfa0wJa4DS-M",
+      authDomain: "urban-threads-e8ff8.firebaseapp.com",
+      projectId: "urban-threads-e8ff8",
+      storageBucket: "urban-threads-e8ff8.firebasestorage.app",
+      messagingSenderId: "50232708799",
+      appId: "1:50232708799:web:be1b58ebbf7397056c400a"
+    };
+
+    const fbApp = initializeApp(firebaseConfig);
+    const fbAuth = getAuth(fbApp);
+    const fbDb = getFirestore(fbApp);
+    const fbStorage = getStorage(fbApp);
+    const googleProvider = new GoogleAuthProvider();
+
+    window._fb = { fbAuth, fbDb, fbStorage, googleProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged, updateProfile, RecaptchaVerifier, signInWithPhoneNumber, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp, doc, updateDoc, increment, ref, uploadBytes, getDownloadURL };
+
+    onAuthStateChanged(fbAuth, (user) => {
+      if (window._onFbAuthChange) window._onFbAuthChange(user);
+    });
+  </script>
+
   <script>
     const whatsappNumber = "26774526407";
     const ADMIN_PASSCODE = "CUTFROMCONCRETE";
@@ -1407,6 +1572,10 @@
       user: "urban-threads-user-v2",
       prefs: "urban-threads-prefs-v2"
     };
+
+    const userAgent = navigator.userAgent || "";
+    const isiOS = /iPad|iPhone|iPod/i.test(userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const isSafariBrowser = /Safari/i.test(userAgent) && !/CriOS|FxiOS|EdgiOS|OPiOS|Chrome|Android/i.test(userAgent);
 
     function loadStoredJson(key, fallback) {
       try {
@@ -1852,6 +2021,9 @@
     const postUserStateEl = document.getElementById("post-user-state");
     const postPreviewShellEl = document.getElementById("post-preview-shell");
     const postMediaInputEl = document.getElementById("post-media");
+    const profileInstallButtonEl = document.getElementById("profile-install-button");
+    const profileNotifyButtonEl = document.getElementById("profile-notify-button");
+    const profileInstallCopyEl = document.getElementById("profile-install-copy");
 
     function normalizeUser(user) {
       if (!user) return null;
@@ -1860,6 +2032,7 @@
         contact: user.contact || "",
         bio: user.bio || "",
         isAdmin: Boolean(user.isAdmin),
+        uid: user.uid || null,
         joinedAt: user.joinedAt || new Date().toISOString(),
         activity: {
           likes: Number(user.activity && user.activity.likes) || 0,
@@ -1892,6 +2065,34 @@
       toastShell.classList.add("active");
       clearTimeout(showToast.timer);
       showToast.timer = setTimeout(() => toastShell.classList.remove("active"), 2400);
+    }
+
+    function isStandaloneMode() {
+      return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+    }
+
+    function getInstallMode() {
+      if (isStandaloneMode()) return "installed";
+      if (isiOS && isSafariBrowser) return "ios";
+      return "generic";
+    }
+
+    function renderProfileUtilityState() {
+      const mode = getInstallMode();
+      if (mode === "installed") {
+        profileInstallCopyEl.textContent = "This device is already using the installed app experience.";
+        profileInstallButtonEl.textContent = "App Installed";
+        return;
+      }
+
+      if (mode === "ios") {
+        profileInstallCopyEl.textContent = "On iPhone, use Safari Share then Add to Home Screen to install Urban Threads.";
+        profileInstallButtonEl.textContent = "Install on iPhone";
+        return;
+      }
+
+      profileInstallCopyEl.textContent = "Use the install button here if you missed the browser prompt. Alerts stay out of the feed so the clothing stays the focus.";
+      profileInstallButtonEl.textContent = "Install App";
     }
 
     function setViewportMetrics() {
@@ -2094,24 +2295,24 @@
             </div>
             <div class="post-actions">
               <button class="action-button" type="button" data-action="like" data-post="${escapeHtml(post.id)}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 21-1.4-1.2C5 14.9 2 12.1 2 8.6 2 5.8 4.2 4 7 4c1.7 0 3.3.8 4.2 2.2C12.1 4.8 13.7 4 15.4 4 18.2 4 20.4 5.8 20.4 8.6c0 3.5-3 6.3-8.6 11.2L12 21Z"/></svg>
+                <span class="action-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 21-1.4-1.2C5 14.9 2 12.1 2 8.6 2 5.8 4.2 4 7 4c1.7 0 3.3.8 4.2 2.2C12.1 4.8 13.7 4 15.4 4 18.2 4 20.4 5.8 20.4 8.6c0 3.5-3 6.3-8.6 11.2L12 21Z"/></svg></span>
                 <span class="count">${post.likes}</span>
               </button>
               <button class="action-button" type="button" data-action="comment" data-post="${escapeHtml(post.id)}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span class="action-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
                 <span class="count">${post.comments}</span>
               </button>
               <button class="action-button" type="button" data-action="repost" data-post="${escapeHtml(post.id)}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 1v6h-6"></path><path d="M7 23v-6h6"></path><path d="M20.5 8A8.5 8.5 0 0 0 6 5.5L5 7"></path><path d="M3.5 16A8.5 8.5 0 0 0 18 18.5L19 17"></path></svg>
+                <span class="action-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 1v6h-6"></path><path d="M7 23v-6h6"></path><path d="M20.5 8A8.5 8.5 0 0 0 6 5.5L5 7"></path><path d="M3.5 16A8.5 8.5 0 0 0 18 18.5L19 17"></path></svg></span>
                 <span class="count">${post.reposts}</span>
               </button>
-              <button class="action-button" type="button" data-action="share" data-post="${escapeHtml(post.id)}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"></path><path d="m16 6-4-4-4 4"></path><path d="M12 2v14"></path></svg>
-                <span>Share</span>
+              <button class="action-button share-action" type="button" data-action="share" data-post="${escapeHtml(post.id)}">
+                <span class="action-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"></path><path d="m16 6-4-4-4 4"></path><path d="M12 2v14"></path></svg></span>
+                <span class="action-label">Share</span>
               </button>
-              <button class="action-button" type="button" data-action="buy" data-post="${escapeHtml(post.id)}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle><path d="M3 4h2l2.2 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H7.2"></path></svg>
-                <span>Buy</span>
+              <button class="action-button buy-action" type="button" data-action="buy" data-post="${escapeHtml(post.id)}">
+                <span class="action-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle><path d="M3 4h2l2.2 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H7.2"></path></svg></span>
+                <span class="action-label">Buy</span>
               </button>
             </div>
           </div>
@@ -2390,10 +2591,17 @@
       }
 
       document.getElementById("auth-name").value = currentUser ? currentUser.username : "";
-      document.getElementById("auth-contact").value = currentUser ? currentUser.contact : "";
-      document.getElementById("auth-bio").value = currentUser ? currentUser.bio : "";
-      document.getElementById("auth-passcode").value = "";
-      document.getElementById("auth-logout").classList.toggle("hidden", !currentUser);
+      const emailEl = document.getElementById("auth-email");
+      if (emailEl) emailEl.value = currentUser ? (currentUser.contact || "") : "";
+      const bioEl = document.getElementById("auth-bio");
+      if (bioEl) bioEl.value = currentUser ? (currentUser.bio || "") : "";
+      const passcodeEl = document.getElementById("auth-passcode");
+      if (passcodeEl) passcodeEl.value = "";
+      const logoutEl = document.getElementById("auth-logout");
+      if (logoutEl) logoutEl.classList.toggle("hidden", !currentUser);
+      const signedInEl = document.getElementById("auth-signed-in");
+      if (signedInEl) signedInEl.classList.toggle("hidden", !currentUser);
+      renderProfileUtilityState();
     }
 
     function renderPostAccessState() {
@@ -3051,6 +3259,16 @@
     }
 
     async function promptInstall() {
+      if (isStandaloneMode()) {
+        showToast("Urban Threads is already installed on this device.");
+        return;
+      }
+
+      if (getInstallMode() === "ios") {
+        showToast("Use Safari Share, then Add to Home Screen.");
+        return;
+      }
+
       if (!deferredPrompt) {
         showToast("Install prompt will appear when your browser allows it.");
         return;
@@ -3058,6 +3276,7 @@
 
       deferredPrompt.prompt();
       const result = await deferredPrompt.userChoice;
+      renderProfileUtilityState();
       showToast(result.outcome === "accepted" ? "Install started." : "Install dismissed.");
       deferredPrompt = null;
     }
@@ -3212,38 +3431,148 @@
       showToast("Comment posted.");
     });
 
-    document.getElementById("open-profile").addEventListener("click", () => openModal("profile-drawer"));
     document.getElementById("post-open-auth").addEventListener("click", () => openModal("profile-drawer"));
 
-    document.getElementById("auth-submit").addEventListener("click", () => {
-      const usernameInput = document.getElementById("auth-name").value.trim();
-      const contact = document.getElementById("auth-contact").value.trim();
-      const bio = document.getElementById("auth-bio").value.trim();
-      const passcode = document.getElementById("auth-passcode").value.trim();
+    // ── Firebase Auth helpers ──────────────────────────────────────────────
+    let phoneConfirmationResult = null;
 
-      if (!usernameInput || !contact) {
-        showToast("Username and phone or email are required.");
-        return;
-      }
+    function fbAuthAvailable() {
+      return window._fb && window._fb.fbAuth;
+    }
 
-      const username = usernameInput.startsWith("@") ? usernameInput : "@" + usernameInput;
+    function applyFbUser(fbUser, extraData) {
+      if (!fbUser) return;
+      const displayName = (fbUser.displayName || extraData.username || fbUser.email || fbUser.phoneNumber || "urban_fan").replace(/\s+/g, "_");
+      const username = displayName.startsWith("@") ? displayName : "@" + displayName;
       currentUser = normalizeUser({
         username,
-        contact,
-        bio,
-        isAdmin: passcode === ADMIN_PASSCODE,
+        contact: fbUser.email || fbUser.phoneNumber || "",
+        bio: extraData.bio || "",
+        isAdmin: (extraData.passcode || "") === ADMIN_PASSCODE,
         joinedAt: currentUser && currentUser.joinedAt ? currentUser.joinedAt : new Date().toISOString(),
-        activity: currentUser && currentUser.activity ? currentUser.activity : { likes: 0, reposts: 0, comments: 0 }
+        activity: currentUser && currentUser.activity ? currentUser.activity : { likes: 0, reposts: 0, comments: 0 },
+        uid: fbUser.uid
       });
       persistUser();
       renderProfileSummary();
       renderPostAccessState();
       renderAdmin();
       closeModal("profile-drawer");
-      showToast(currentUser.isAdmin ? "Session saved with admin preview unlocked." : "Session saved.");
+      showToast("Signed in as " + username);
+    }
+
+    // Firebase auth state sync
+    window._onFbAuthChange = function(fbUser) {
+      if (fbUser && !currentUser) {
+        applyFbUser(fbUser, {});
+      } else if (!fbUser && currentUser && currentUser.uid) {
+        currentUser = null;
+        persistUser();
+        renderProfileSummary();
+        renderPostAccessState();
+        renderAdmin();
+        showToast("Signed out.");
+      }
+    };
+
+    // Auth tab switching
+    function setAuthTab(tab) {
+      ["email", "phone", "google"].forEach(t => {
+        document.getElementById("auth-tab-" + t).classList.toggle("active", t === tab);
+        document.getElementById("auth-panel-" + t).classList.toggle("hidden", t !== tab);
+      });
+    }
+
+    document.getElementById("auth-tab-email").addEventListener("click", () => setAuthTab("email"));
+    document.getElementById("auth-tab-phone").addEventListener("click", () => setAuthTab("phone"));
+    document.getElementById("auth-tab-google").addEventListener("click", () => setAuthTab("google"));
+
+    // Email sign up
+    document.getElementById("auth-email-signup").addEventListener("click", async () => {
+      if (!fbAuthAvailable()) { showToast("Firebase not ready yet."); return; }
+      const { fbAuth, createUserWithEmailAndPassword, updateProfile } = window._fb;
+      const name = document.getElementById("auth-name").value.trim();
+      const email = document.getElementById("auth-email").value.trim();
+      const password = document.getElementById("auth-password").value;
+      const bio = document.getElementById("auth-bio").value.trim();
+      const passcode = document.getElementById("auth-passcode").value.trim();
+      if (!name || !email || !password) { showToast("Name, email, and password are required."); return; }
+      try {
+        const cred = await createUserWithEmailAndPassword(fbAuth, email, password);
+        await updateProfile(cred.user, { displayName: name });
+        applyFbUser({ ...cred.user, displayName: name }, { username: name, bio, passcode });
+      } catch (err) {
+        showToast(err.code === "auth/email-already-in-use" ? "Email already registered. Use Sign In." : err.message);
+      }
     });
 
-    document.getElementById("auth-logout").addEventListener("click", () => {
+    // Email sign in
+    document.getElementById("auth-email-login").addEventListener("click", async () => {
+      if (!fbAuthAvailable()) { showToast("Firebase not ready yet."); return; }
+      const { fbAuth, signInWithEmailAndPassword } = window._fb;
+      const email = document.getElementById("auth-email").value.trim();
+      const password = document.getElementById("auth-password").value;
+      const passcode = document.getElementById("auth-passcode").value.trim();
+      if (!email || !password) { showToast("Email and password are required."); return; }
+      try {
+        const cred = await signInWithEmailAndPassword(fbAuth, email, password);
+        applyFbUser(cred.user, { passcode });
+      } catch (err) {
+        showToast(err.code === "auth/wrong-password" || err.code === "auth/invalid-credential" ? "Incorrect email or password." : err.message);
+      }
+    });
+
+    // Google sign in
+    document.getElementById("auth-google-btn").addEventListener("click", async () => {
+      if (!fbAuthAvailable()) { showToast("Firebase not ready yet."); return; }
+      const { fbAuth, signInWithPopup, googleProvider } = window._fb;
+      const passcode = document.getElementById("auth-passcode") ? document.getElementById("auth-passcode").value.trim() : "";
+      try {
+        const cred = await signInWithPopup(fbAuth, googleProvider);
+        applyFbUser(cred.user, { passcode });
+      } catch (err) {
+        if (err.code !== "auth/popup-closed-by-user") showToast("Google sign in failed. Try again.");
+      }
+    });
+
+    // Phone — send OTP
+    document.getElementById("auth-phone-send").addEventListener("click", async () => {
+      if (!fbAuthAvailable()) { showToast("Firebase not ready yet."); return; }
+      const { fbAuth, RecaptchaVerifier, signInWithPhoneNumber } = window._fb;
+      const phone = document.getElementById("auth-phone").value.trim();
+      if (!phone) { showToast("Enter your phone number first."); return; }
+      try {
+        if (!window._recaptchaVerifier) {
+          window._recaptchaVerifier = new RecaptchaVerifier(fbAuth, "auth-recaptcha", { size: "invisible" });
+        }
+        phoneConfirmationResult = await signInWithPhoneNumber(fbAuth, phone, window._recaptchaVerifier);
+        document.getElementById("auth-otp-group").style.display = "block";
+        document.getElementById("auth-phone-verify").classList.remove("hidden");
+        document.getElementById("auth-phone-send").classList.add("hidden");
+        showToast("Code sent to " + phone);
+      } catch (err) {
+        showToast("Could not send code: " + err.message);
+        if (window._recaptchaVerifier) { window._recaptchaVerifier.clear(); window._recaptchaVerifier = null; }
+      }
+    });
+
+    // Phone — verify OTP
+    document.getElementById("auth-phone-verify").addEventListener("click", async () => {
+      const otp = document.getElementById("auth-otp").value.trim();
+      if (!otp || !phoneConfirmationResult) { showToast("Enter the code you received."); return; }
+      try {
+        const cred = await phoneConfirmationResult.confirm(otp);
+        applyFbUser(cred.user, {});
+      } catch (err) {
+        showToast("Invalid code. Try again.");
+      }
+    });
+
+    // Sign out
+    document.getElementById("auth-logout").addEventListener("click", async () => {
+      if (fbAuthAvailable() && window._fb.fbAuth.currentUser) {
+        try { await window._fb.signOut(window._fb.fbAuth); } catch(e) {}
+      }
       currentUser = null;
       persistUser();
       renderProfileSummary();
@@ -3252,16 +3581,16 @@
       if (screenMap.admin.classList.contains("active")) {
         setScreen(previousScreen || "feed");
       }
-      showToast("Logged out.");
+      showToast("Signed out.");
     });
 
-    document.getElementById("install-button").addEventListener("click", promptInstall);
-    document.getElementById("notify-button").addEventListener("click", requestNotifications);
+    profileInstallButtonEl.addEventListener("click", promptInstall);
+    profileNotifyButtonEl.addEventListener("click", requestNotifications);
     document.getElementById("admin-back").addEventListener("click", () => setScreen(previousScreen));
 
     postMediaInputEl.addEventListener("change", handlePostMediaChange);
 
-    document.getElementById("post-form").addEventListener("submit", (event) => {
+    document.getElementById("post-form").addEventListener("submit", async (event) => {
       event.preventDefault();
 
       if (!ensureAuthenticated("Sign in to post to the feed.")) {
@@ -3293,6 +3622,29 @@
         media: postMediaDraft
       });
 
+      // Upload to Firebase if available
+      if (window._fb && window._fb.fbStorage && postMediaDraft.file) {
+        showToast("Uploading...");
+        try {
+          const { fbStorage, fbDb, ref, uploadBytes, getDownloadURL, collection, addDoc, serverTimestamp } = window._fb;
+          const fileRef = ref(fbStorage, "posts/" + Date.now() + "_" + postMediaDraft.name);
+          const snapshot = await uploadBytes(fileRef, postMediaDraft.file);
+          const downloadUrl = await getDownloadURL(snapshot.ref);
+          post.media.src = downloadUrl;
+          post.media.cloudUrl = downloadUrl;
+          // Save post to Firestore
+          await addDoc(collection(fbDb, "posts"), {
+            ...post,
+            uid: currentUser.uid || null,
+            createdAt: serverTimestamp()
+          });
+          showToast("Post uploaded to the cloud.");
+        } catch (err) {
+          showToast("Cloud upload failed — post saved locally.");
+          console.error("Firebase upload error:", err);
+        }
+      }
+
       posts.unshift(post);
       event.target.reset();
       postMediaDraft = null;
@@ -3307,7 +3659,13 @@
     window.addEventListener("beforeinstallprompt", (event) => {
       event.preventDefault();
       deferredPrompt = event;
-      showToast("Install prompt is ready.");
+      renderProfileUtilityState();
+    });
+
+    window.addEventListener("appinstalled", () => {
+      deferredPrompt = null;
+      renderProfileUtilityState();
+      showToast("Urban Threads installed.");
     });
 
     if ("serviceWorker" in navigator) {

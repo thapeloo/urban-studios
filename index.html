@@ -1405,111 +1405,6 @@
       text-align: center;
     }
 
-    .profile-post-thumbnail {
-      aspect-ratio: 1 / 1;
-      border: 0;
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-      border-radius: 8px;
-      background: #1a1a1a;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-
-    .profile-post-thumbnail:hover {
-      opacity: 0.85;
-    }
-
-    .profile-compact-header {
-      padding: 12px 16px;
-      display: grid;
-      gap: 10px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.034));
-    }
-
-    .profile-compact-identity {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      justify-content: space-between;
-    }
-
-    .profile-compact-bio {
-      font-size: 0.81rem;
-      line-height: 1.4;
-      max-height: 2.8em;
-      overflow: hidden;
-      color: var(--muted);
-    }
-
-    .profile-compact-stats {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 6px;
-      margin-top: 6px;
-    }
-
-    .profile-compact-stat-btn {
-      border: none;
-      background: transparent;
-      padding: 6px;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: background 0.2s;
-      display: grid;
-      gap: 2px;
-      align-items: center;
-      text-align: center;
-      color: inherit;
-      font: inherit;
-    }
-
-    .profile-compact-stat-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .profile-compact-stat-value {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .profile-compact-stat-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    .profile-post-grid-3col {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 10px;
-    }
-
-    .profile-content-tabs-compact {
-      display: flex;
-      gap: 4px;
-      margin-top: 10px;
-      height: 36px;
-      align-items: center;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .profile-content-tabs-compact::-webkit-scrollbar {
-      display: none;
-    }
-
-    @media (max-width: 360px) {
-      .profile-post-grid-3col {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
     .hidden {
       display: none !important;
     }
@@ -1955,63 +1850,6 @@
     </div>
   </section>
 
-  <section class="drawer" id="orders-drawer" aria-hidden="true">
-    <div class="drawer-backdrop" data-close="orders-drawer"></div>
-    <div class="drawer-panel">
-      <div class="section-row">
-        <div>
-          <p class="brand-kicker">Order History</p>
-          <h3 class="modal-title">Quick reorder from WhatsApp</h3>
-        </div>
-        <button class="icon-button" type="button" data-close="orders-drawer" aria-label="Close orders">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M18 6 6 18"></path>
-            <path d="m6 6 12 12"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="orders-list" id="drawer-orders-list"></div>
-    </div>
-  </section>
-
-  <section class="drawer" id="followers-drawer" aria-hidden="true">
-    <div class="drawer-backdrop" data-close="followers-drawer"></div>
-    <div class="drawer-panel">
-      <div class="section-row">
-        <div>
-          <p class="brand-kicker">Followers</p>
-          <h3 class="modal-title">People following you</h3>
-        </div>
-        <button class="icon-button" type="button" data-close="followers-drawer" aria-label="Close followers">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M18 6 6 18"></path>
-            <path d="m6 6 12 12"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="user-list" id="drawer-followers-list"></div>
-    </div>
-  </section>
-
-  <section class="drawer" id="following-drawer" aria-hidden="true">
-    <div class="drawer-backdrop" data-close="following-drawer"></div>
-    <div class="drawer-panel">
-      <div class="section-row">
-        <div>
-          <p class="brand-kicker">Following</p>
-          <h3 class="modal-title">People you follow</h3>
-        </div>
-        <button class="icon-button" type="button" data-close="following-drawer" aria-label="Close following">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M18 6 6 18"></path>
-            <path d="m6 6 12 12"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="user-list" id="drawer-following-list"></div>
-    </div>
-  </section>
-
   <section class="drawer" id="user-drawer" aria-hidden="true">
     <div class="drawer-backdrop" data-close="user-drawer"></div>
     <div class="drawer-panel">
@@ -2062,6 +1900,10 @@
     onAuthStateChanged(fbAuth, (user) => {
       if (window._onFbAuthChange) window._onFbAuthChange(user);
     });
+
+    // Signal that Firebase is fully ready
+    window._fbReady = true;
+    if (window._onFbReady) window._onFbReady();
   </script>
 
   <script>
@@ -2328,29 +2170,6 @@
       };
     }
 
-    const seedProfiles = [
-      { username: "@neo.modise", displayName: "Neo Modise", bio: "Gabs streetwear. Jorts and tees only.", followers: 312, posts: 42 },
-      { username: "@lesego.fits", displayName: "Lesego Tau", bio: "Outfit of the day from BW.", followers: 841, posts: 67 },
-      { username: "@tlotlo_wave", displayName: "Tlotlo Keabetswe", bio: "Street culture Gaborone.", followers: 203, posts: 28 },
-      { username: "@boipelo.bw", displayName: "Boipelo Sithole", bio: "Fashion, food, and the city.", followers: 567, posts: 89 },
-      { username: "@mpho.concrete", displayName: "Mpho Ditsele", bio: "Cut from concrete literally.", followers: 1204, posts: 156 },
-      { username: "@onthatblock_bw", displayName: "Kagiso Nkwe", bio: "On the block every weekend.", followers: 489, posts: 73 },
-      { username: "@sibo.zw", displayName: "Sibongile Moyo", bio: "Harare to Gaborone.", followers: 734, posts: 92 },
-      { username: "@chido.style", displayName: "Chido Ncube", bio: "Zim girl in BW making it work.", followers: 328, posts: 51 },
-      { username: "@tinashe.fits", displayName: "Tinashe Manyika", bio: "Vintage and streetwear.", followers: 156, posts: 18 },
-      { username: "@bongani.sa", displayName: "Bongani Dlamini", bio: "Joburg energy in Gabs.", followers: 2103, posts: 180 },
-      { username: "@ayanda.ke", displayName: "Ayanda Khumalo", bio: "Sneakers and sets.", followers: 891, posts: 124 },
-      { username: "@lerato.lookbook", displayName: "Lerato Nkosi", bio: "Daily fits from the south.", followers: 445, posts: 76 },
-      { username: "@jayden.threads", displayName: "Jayden Williams", bio: "Streetwear from the block.", followers: 672, posts: 103 },
-      { username: "@amara.edit", displayName: "Amara Diallo", bio: "West African in Southern Africa.", followers: 289, posts: 45 },
-      { username: "@kofi.bw", displayName: "Kofi Asante", bio: "Accra to Gabs. Pan-African fits.", followers: 512, posts: 81 },
-      { username: "@tumi.archive", displayName: "Tumi Motlhabi", bio: "Archive pieces and local drops.", followers: 1876, posts: 167 },
-      { username: "@kgosi.drip", displayName: "Kgosi Moagi", bio: "Only the freshest from Gaborone.", followers: 934, posts: 148 },
-      { username: "@rethabile.r", displayName: "Rethabile Ramotswa", bio: "Minimalist fits, maximum vibe.", followers: 267, posts: 35 },
-      { username: "@naledi.looks", displayName: "Naledi Segwabe", bio: "Gabs girl doing it her way.", followers: 743, posts: 94 },
-      { username: "@concrete.vault", displayName: "Concrete Vault", bio: "Curated streetwear inspo from BW.", followers: 2847, posts: 176 }
-    ];
-
     const posts = [
       {
         id: "post-cap-1",
@@ -2548,6 +2367,10 @@
         ]
       }
     ];
+
+    function productById(id) {
+      return products.find((product) => product.id === id);
+    }
 
     posts.forEach((post) => {
       const product = productById(post.productId);
@@ -2874,10 +2697,6 @@
       document.documentElement.style.setProperty("--nav-height", navHeight + "px");
     }
 
-    function productById(id) {
-      return products.find((product) => product.id === id);
-    }
-
     function buildWhatsAppUrl(product, size) {
       const message = `Hi Urban Threads! I would like to order: ${product.name} (Size: ${size}) - P${product.price}.`;
       return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
@@ -2928,19 +2747,6 @@
           photoURL: post.photoURL || ""
         });
         map.set(profileKey(profile), { ...(map.get(profileKey(profile)) || {}), ...profile });
-      });
-
-      // Add seed profiles
-      seedProfiles.forEach((seed) => {
-        const normalized = normalizeUser({
-          username: seed.username,
-          displayName: seed.displayName,
-          bio: seed.bio,
-          joinedAt: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toISOString()
-        });
-        if (!map.has(profileKey(normalized))) {
-          map.set(profileKey(normalized), normalized);
-        }
       });
 
       if (currentUser) {
@@ -3535,11 +3341,6 @@
         ? `<div class="user-avatar"><img src="${escapeHtml(profile.photoURL)}" alt="${escapeHtml(profile.username)}"></div>`
         : `<div class="user-avatar">${escapeHtml(getInitials(profile.username))}</div>`;
 
-      // Get follower count from seed or tracked followers
-      const seedProfile = seedProfiles.find((s) => s.username === profile.username);
-      const followerCount = seedProfile ? seedProfile.followers : getFollowerEntriesFor(profile.uid || profile.username).length;
-      const postCount = seedProfile ? seedProfile.posts : getPostsForProfile(profile).length;
-
       return `
         <article class="user-row">
           <div class="user-row-head">
@@ -3547,7 +3348,7 @@
               ${avatar}
               <div class="user-meta">
                 <strong>${escapeHtml(profile.username)}</strong>
-                <span class="muted">${escapeHtml(profile.bio || "Urban Threads member.")} • ${followerCount} followers</span>
+                <span class="muted">${escapeHtml(profile.bio || "Urban Threads member.")}</span>
               </div>
             </button>
             ${isSelf ? '<span class="signal-pill">You</span>' : `<button class="${actionKind === "unfollow" ? "danger-ghost" : "secondary-cta"}" type="button" data-user-action="${escapeHtml(actionKind)}" data-user-key="${escapeHtml(profile.uid || profile.username)}">${escapeHtml(actionLabel)}</button>`}
@@ -3559,32 +3360,6 @@
     function getSuggestedProfiles() {
       const followingKeys = new Set(getFollowingEntries().map((entry) => String(entry.followingId || entry.followingUsername || "").toLowerCase()));
       const currentKey = String(getViewerKey()).toLowerCase();
-      const followCount = getFollowingEntries().length;
-      
-      // If user follows fewer than 3 people, show all 20 seed profiles first
-      if (followCount < 3) {
-        const seedSuggested = seedProfiles
-          .map((seed) => normalizeUser(seed))
-          .filter((profile) => !followingKeys.has(String(profile.username).toLowerCase()) && String(profile.username).toLowerCase() !== currentKey)
-          .slice(0, 20);
-        
-        // Add any real profiles that exist
-        const realSuggested = getKnownProfiles()
-          .filter((profile) => !seedProfiles.some((seed) => seed.username === profile.username))
-          .filter((profile) => String(profile.uid || profile.username).toLowerCase() !== currentKey)
-          .filter((profile) => !followingKeys.has(String(profile.uid || profile.username).toLowerCase()))
-          .sort((a, b) => {
-            const aFollowers = getFollowerEntriesFor(a.uid || a.username).length;
-            const bFollowers = getFollowerEntriesFor(b.uid || b.username).length;
-            if (bFollowers !== aFollowers) return bFollowers - aFollowers;
-            return new Date(b.joinedAt) - new Date(a.joinedAt);
-          })
-          .slice(0, 5);
-        
-        return [...realSuggested, ...seedSuggested];
-      }
-      
-      // Otherwise show regular suggestions
       return getKnownProfiles()
         .filter((profile) => String(profile.uid || profile.username).toLowerCase() !== currentKey)
         .filter((profile) => !followingKeys.has(String(profile.uid || profile.username).toLowerCase()))
@@ -3601,37 +3376,7 @@
       const container = document.getElementById(containerId);
       if (!container) return;
       if (!profiles.length) {
-        if (mode === "following") {
-          container.innerHTML = `
-            <div class="community-empty">
-              <p class="empty-title">${escapeHtml(emptyMessage)}</p>
-              <p class="muted">Discover people, follow their looks, and keep your circle close.</p>
-              <button class="secondary-cta" type="button" id="empty-discover-btn" style="margin-top:12px;">Discover people</button>
-            </div>
-          `;
-          const discoverBtn = document.getElementById("empty-discover-btn");
-          if (discoverBtn) {
-            discoverBtn.addEventListener("click", () => {
-              activeCommunityTab = "Discover";
-              persistPrefs();
-              renderCommunity();
-            });
-          }
-        } else if (mode === "followers") {
-          container.innerHTML = `
-            <div class="community-empty">
-              <p class="empty-title">${escapeHtml(emptyMessage)}</p>
-              <p class="muted">Share your profile link to grow your community.</p>
-              <button class="secondary-cta" type="button" id="empty-share-btn" style="margin-top:12px;">Share profile</button>
-            </div>
-          `;
-          const shareBtn = document.getElementById("empty-share-btn");
-          if (shareBtn) {
-            shareBtn.addEventListener("click", shareCurrentProfile);
-          }
-        } else {
-          container.innerHTML = `<div class="community-empty"><p class="empty-title">${escapeHtml(emptyMessage)}</p></div>`;
-        }
+        container.innerHTML = `<div class="community-empty"><p class="empty-title">${escapeHtml(emptyMessage)}</p></div>`;
         return;
       }
       container.innerHTML = profiles.map((profile) => {
@@ -3907,75 +3652,10 @@
       `;
     }
 
-    function renderOrdersDrawer() {
-      const ordersList = document.getElementById("drawer-orders-list");
-      if (!ordersList) return;
-      const history = getOrderHistory();
-      if (!history.length) {
-        ordersList.innerHTML = `<div class="profile-empty"><p class="empty-title">No orders yet.</p><p class="muted">Your WhatsApp orders will appear here for quick reordering.</p></div>`;
-        return;
-      }
-      ordersList.innerHTML = history.map((entry) => `
-        <article class="order-card">
-          <div class="order-card-head">
-            <div>
-              <strong>${escapeHtml(entry.productName)}</strong>
-              <div class="muted">Size ${escapeHtml(entry.size)} • ${formatPrice(entry.price)} • ${escapeHtml(formatDisplayDate(entry.createdAt))}</div>
-            </div>
-            <button class="secondary-cta order-replay" type="button" data-reorder="${escapeHtml(entry.id)}">Reorder</button>
-          </div>
-        </article>
-      `).join("");
-      
-      ordersList.querySelectorAll("[data-reorder]").forEach((button) => {
-        button.addEventListener("click", () => {
-          const entry = history.find((order) => order.id === button.dataset.reorder);
-          if (!entry) return;
-          window.open(entry.message, "_blank", "noopener");
-        });
-      });
-    }
+    function renderProfileScreen() {
+      if (!profileScreenShellEl) return;
 
-    function renderFollowersDrawer() {
-      const followerProfiles = getFollowerEntriesFor(getViewerKey()).map((entry) => getProfileByKey(entry.followerId)).filter(Boolean);
-      const container = document.getElementById("drawer-followers-list");
-      if (!container) return;
-      if (!followerProfiles.length) {
-        container.innerHTML = `<div class="profile-empty"><p class="empty-title">No followers yet.</p><p class="muted">Share your profile to grow your community.</p></div>`;
-        return;
-      }
-      container.innerHTML = followerProfiles.map((profile) => {
-        const following = isFollowingProfile(profile);
-        return buildUserRow(profile, following ? "Unfollow" : "Follow Back", following ? "unfollow" : "follow");
-      }).join("");
-      
-      container.querySelectorAll("[data-view-user]").forEach((button) => {
-        button.addEventListener("click", () => openUserProfile(button.dataset.viewUser));
-      });
-      container.querySelectorAll("[data-user-action]").forEach((button) => {
-        button.addEventListener("click", () => toggleFollow(button.dataset.userKey));
-      });
-    }
-
-    function renderFollowingDrawer() {
-      const followingProfiles = getFollowingEntries().map((entry) => getProfileByKey(entry.followingId || entry.followingUsername)).filter(Boolean);
-      const container = document.getElementById("drawer-following-list");
-      if (!container) return;
-      if (!followingProfiles.length) {
-        container.innerHTML = `<div class="profile-empty"><p class="empty-title">You are not following anyone yet.</p><p class="muted">Discover people to follow.</p></div>`;
-        return;
-      }
-      container.innerHTML = followingProfiles.map((profile) => buildUserRow(profile, "Unfollow", "unfollow")).join("");
-      
-      container.querySelectorAll("[data-view-user]").forEach((button) => {
-        button.addEventListener("click", () => openUserProfile(button.dataset.viewUser));
-      });
-      container.querySelectorAll("[data-user-action]").forEach((button) => {
-        button.addEventListener("click", () => toggleFollow(button.dataset.userKey));
-      });
-    }
-
-    function renderProfileScreenSignedOut() {
+      if (!currentUser) {
         profileScreenShellEl.innerHTML = `
           <div class="profile-panel">
             <div class="profile-hero-card">
@@ -3991,118 +3671,111 @@
         `;
         document.getElementById("profile-open-auth").addEventListener("click", () => openModal("profile-drawer"));
         document.getElementById("profile-open-alerts").addEventListener("click", () => setScreen("alerts"));
-        `;
-        document.getElementById("profile-open-auth").addEventListener("click", () => openModal("profile-drawer"));
-        document.getElementById("profile-open-alerts").addEventListener("click", () => setScreen("alerts"));
+        return;
       }
 
-    function renderProfileScreenSignedIn() {
       const stats = getProfileStatsFor(currentUser);
       const profilePosts = getProfileTabPosts(currentUser);
       const tabLabels = ["My Posts", "Liked", "Reposts", "Saved"];
-      const icons = ["📋", "♥", "↻", "🔖"];
       const avatarMarkup = currentUser.photoURL
-        ? `<div class="profile-avatar-lg" style="width:64px;height:64px;"><img src="${escapeHtml(currentUser.photoURL)}" alt="${escapeHtml(currentUser.username)}"></div>`
-        : `<div class="profile-avatar-lg" style="width:64px;height:64px;font-size:1.8rem;">${escapeHtml(getInitials(currentUser.username))}</div>`;
+        ? `<div class="profile-avatar-lg"><img src="${escapeHtml(currentUser.photoURL)}" alt="${escapeHtml(currentUser.username)}"></div>`
+        : `<div class="profile-avatar-lg">${escapeHtml(getInitials(currentUser.username))}</div>`;
 
-      const profileHTML = `
+      profileScreenShellEl.innerHTML = `
         <div class="profile-panel">
-          <!-- Compact Identity Section (max 90px total) -->
-          <div class="profile-compact-header">
-            <div class="profile-compact-identity">
-              <div style="position:relative;flex-shrink:0;">
-                ${avatarMarkup}
-                <button class="avatar-upload-trigger" type="button" id="profile-photo-trigger" style="width:20px;height:20px;font-size:0.75rem;">+</button>
-                <input id="profile-photo-input" type="file" accept="image/*" class="hidden">
+          <div class="profile-hero-card">
+            <div class="profile-hero-head">
+              <div class="profile-identity">
+                <div class="profile-avatar-stack">
+                  ${avatarMarkup}
+                  <button class="avatar-upload-trigger" type="button" id="profile-photo-trigger">+</button>
+                  <input id="profile-photo-input" type="file" accept="image/*" class="hidden">
+                </div>
+                <div class="profile-meta">
+                  <strong>${escapeHtml(currentUser.displayName || currentUser.username.replace(/^@/, ""))}</strong>
+                  <span class="muted">${escapeHtml(currentUser.username)}</span>
+                  <span class="muted">${escapeHtml(currentUser.location || "Gaborone, Botswana")} • Joined ${escapeHtml(formatDisplayDate(currentUser.joinedAt))}</span>
+                </div>
               </div>
-              <div class="profile-meta" style="min-width:0;flex:1;">
-                <strong style="font-size:0.95rem;">${escapeHtml(currentUser.displayName || currentUser.username.replace(/^@/, ""))}</strong>
-                <span class="muted" style="font-size:0.8rem;display:block;margin-top:2px;">${escapeHtml(currentUser.username)}</span>
-              </div>
-              <button class="icon-button" type="button" id="profile-settings-btn" title="Settings" style="flex-shrink:0;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m2.98 2.98l4.24 4.24M1 12h6m6 0h6m-16.78 7.78l4.24-4.24m2.98-2.98l4.24-4.24"></path>
-                </svg>
-              </button>
+              <span class="signal-pill">${escapeHtml(currentUser.provider || "Local")}</span>
             </div>
 
-            <!-- Compact Bio (max 2 lines, 13px font) -->
-            <div class="profile-compact-bio">${escapeHtml(currentUser.bio || "Urban Threads community member.")}</div>
-
-            <!-- Stats Row (max 52px, clickable) -->
-            <div class="profile-compact-stats">
-              <button class="profile-compact-stat-btn" id="stat-posts" type="button" title="Posts">
-                <div class="profile-compact-stat-value">${stats.posts}</div>
-                <div class="profile-compact-stat-label">Posts</div>
-              </button>
-              <button class="profile-compact-stat-btn" id="stat-followers" type="button" title="Followers">
-                <div class="profile-compact-stat-value">${stats.followers}</div>
-                <div class="profile-compact-stat-label">Followers</div>
-              </button>
-              <button class="profile-compact-stat-btn" id="stat-following" type="button" title="Following">
-                <div class="profile-compact-stat-value">${stats.following}</div>
-                <div class="profile-compact-stat-label">Following</div>
-              </button>
-              <button class="profile-compact-stat-btn" id="stat-likes" type="button" title="Likes">
-                <div class="profile-compact-stat-value">${stats.likesReceived}</div>
-                <div class="profile-compact-stat-label">Likes</div>
-              </button>
+            <div class="profile-stats-row" style="margin-top:14px;">
+              <div class="profile-stat"><strong class="stats-value">${stats.posts}</strong><span class="muted">Posts</span></div>
+              <div class="profile-stat"><strong class="stats-value">${stats.followers}</strong><span class="muted">Followers</span></div>
+              <div class="profile-stat"><strong class="stats-value">${stats.following}</strong><span class="muted">Following</span></div>
+              <div class="profile-stat"><strong class="stats-value">${stats.likesReceived}</strong><span class="muted">Likes</span></div>
             </div>
           </div>
 
-          <!-- Compact Content Tabs (max 36px) -->
-          <div class="profile-content-tabs-compact" style="margin-top:10px;">
-            ${tabLabels.map((label, idx) => `<button class="section-tab${label === activeProfileTab ? " active" : ""}" type="button" data-profile-tab="${escapeHtml(label)}" style="min-height:32px;padding:4px 10px;font-size:0.7rem;" title="${label}">${icons[idx]}</button>`).join("")}
-          </div>
-
-          <!-- 3-Column Square Post Grid -->
-          <div class="profile-post-grid-3col">
-            ${profilePosts.length ? profilePosts.map((post) => {
-              const mediaMarkup = post.media && post.media.type === "video"
-                ? `<video class="fit-media" src="${escapeHtml(post.media.src)}" autoplay muted loop playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>`
-                : `<img class="fit-media" src="${escapeHtml(post.media.src)}" alt="${escapeHtml(post.caption)}" style="width:100%;height:100%;object-fit:cover;">`;
-              return `
-                <button type="button" class="profile-post-thumbnail" data-open-post-product="${escapeHtml(post.productId)}" style="aspect-ratio:1/1;">
-                  ${mediaMarkup}
-                  ${post.type === "video" ? '<div style="position:absolute;top:4px;right:4px;width:24px;height:24px;background:rgba(0,0,0,0.6);border-radius:50%;display:grid;place-items:center;font-size:12px;">▶</div>' : ""}
-                  ${post.likes ? '<div style="position:absolute;bottom:4px;left:4px;font-size:11px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.8);">♥ ' + post.likes + '</div>' : ""}
-                </button>
-              `;
-            }).join("") : `<div style="grid-column:1/-1;padding:20px;text-align:center;color:var(--muted);"><p class="empty-title">No posts</p></div>`}
-          </div>
-
-          <!-- Orders Button with WhatsApp accent -->
-          <button class="secondary-cta" type="button" id="profile-orders-button" style="width:100%;margin-top:14px;min-height:46px;border-left:4px solid var(--green);background:linear-gradient(to right,rgba(37,211,102,0.1),transparent);">📦 Orders</button>
-
-          <!-- Account Settings Section -->
-          <div class="settings-card" style="margin-top:14px;">
-            <p class="brand-kicker">Edit Profile</p>
+          <div class="settings-card">
+            <p class="brand-kicker">Identity</p>
             <div class="profile-edit-grid">
               <div class="field-group"><label class="field-label" for="profile-display-name">Display name</label><input class="field" id="profile-display-name" type="text" value="${escapeHtml(currentUser.displayName || "")}"></div>
-              <div class="field-group"><label class="field-label" for="profile-bio">Bio</label><textarea id="profile-bio" style="min-height:60px;">${escapeHtml(currentUser.bio || "")}</textarea></div>
+              <div class="field-group"><label class="field-label" for="profile-username">Username</label><input class="field" id="profile-username" type="text" value="${escapeHtml(currentUser.username)}"></div>
+              <div class="field-group"><label class="field-label" for="profile-bio">Bio</label><textarea id="profile-bio">${escapeHtml(currentUser.bio || "")}</textarea></div>
               <div class="field-group"><label class="field-label" for="profile-location">Location</label><input class="field" id="profile-location" type="text" value="${escapeHtml(currentUser.location || "")}" placeholder="Gaborone, Botswana"></div>
               <div class="field-group"><label class="field-label" for="profile-default-size">Default size</label><input class="field" id="profile-default-size" type="text" value="${escapeHtml(currentUser.defaultSize || "M")}" placeholder="M"></div>
-              <div class="field-group"><label class="field-label">Linked sign-in</label><div class="inline-field-note">${escapeHtml(currentUser.provider || "Local")} • ${escapeHtml(currentUser.contact || "No contact")}</div></div>
+              <div class="field-group"><label class="field-label">Linked sign-in</label><div class="inline-field-note">${escapeHtml(currentUser.provider || "Local")} • ${escapeHtml(currentUser.contact || "No contact available")}</div></div>
             </div>
-            <button class="cta" type="button" id="profile-save-button" style="margin-top:14px;width:100%;">Save Profile</button>
+            <div class="modal-actions" style="margin-top:14px;">
+              <button class="cta" type="button" id="profile-save-button">Save Profile</button>
+              <button class="secondary-cta" type="button" id="profile-open-auth-drawer">Account Access</button>
+            </div>
           </div>
 
-          <!-- Utilities -->
-          <div class="settings-card" style="margin-top:14px;">
-            <p class="brand-kicker">App</p>
+          <div class="settings-card">
+            <p class="brand-kicker">Content</p>
+            <div class="profile-content-tabs" id="profile-content-tabs">
+              ${tabLabels.map((label) => `<button class="section-tab${label === activeProfileTab ? " active" : ""}" type="button" data-profile-tab="${escapeHtml(label)}">${escapeHtml(label)}</button>`).join("")}
+            </div>
+            <div class="profile-post-grid" id="profile-post-grid">
+              ${profilePosts.length ? profilePosts.map(profilePostCardMarkup).join("") : `<div class="profile-empty"><p class="empty-title">No posts in this tab yet.</p><div class="muted">Your ${escapeHtml(activeProfileTab.toLowerCase())} activity will show here.</div></div>`}
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <p class="brand-kicker">Orders</p>
+            <div class="orders-list" id="profile-order-list">
+              ${getOrderHistory().length ? getOrderHistory().map((entry) => `
+                <article class="order-card">
+                  <div class="order-card-head">
+                    <div>
+                      <strong>${escapeHtml(entry.productName)}</strong>
+                      <div class="muted">Size ${escapeHtml(entry.size)} • ${formatPrice(entry.price)} • ${escapeHtml(formatDisplayDate(entry.createdAt))}</div>
+                    </div>
+                    <button class="secondary-cta order-replay" type="button" data-reorder="${escapeHtml(entry.id)}">Reorder</button>
+                  </div>
+                </article>
+              `).join("") : `<div class="profile-empty"><p class="empty-title">No WhatsApp orders logged yet.</p><div class="muted">Orders placed from this device will appear here for quick reorders.</div></div>`}
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <p class="brand-kicker">Utilities</p>
             <div class="profile-utility-grid">
-              <button class="cta" type="button" id="profile-screen-install">Install</button>
-              <button class="secondary-cta" type="button" id="profile-screen-alerts">Alerts</button>
-              <button class="secondary-cta" type="button" id="profile-screen-notify">Push</button>
-              <button class="secondary-cta" type="button" id="profile-share-link">Share</button>
+              <button class="cta" type="button" id="profile-screen-install">Install App</button>
+              <button class="secondary-cta" type="button" id="profile-screen-alerts">Open Alerts</button>
+              <button class="secondary-cta" type="button" id="profile-screen-notify">Enable Alerts</button>
+              <button class="secondary-cta" type="button" id="profile-share-link">Share Profile</button>
+              ${currentUser.isAdmin ? '<button class="cta" type="button" id="profile-admin-shortcut">Open Admin</button>' : ""}
             </div>
           </div>
 
-          <!-- Danger Zone -->
-          <div class="settings-card" style="margin-top:14px;">
-            <p class="brand-kicker">Account</p>
-            <div class="modal-actions">
+          <div class="settings-card">
+            <p class="brand-kicker">Account Settings</p>
+            ${currentUser.provider === "Email" ? `
+              <div class="field-group">
+                <label class="field-label" for="profile-new-password">Change password</label>
+                <input class="field" id="profile-new-password" type="password" placeholder="Enter a new password">
+              </div>
+              <button class="secondary-cta" type="button" id="profile-password-button" style="margin-top:14px;">Update Password</button>
+            ` : `<div class="inline-field-note">Password changes are only available for email/password accounts.</div>`}
+          </div>
+
+          <div class="settings-card">
+            <p class="brand-kicker">Danger Zone</p>
+            <div class="profile-utility-grid">
               <button class="danger-ghost" type="button" id="profile-signout-button">Sign Out</button>
               <button class="danger-ghost" type="button" id="profile-delete-button">Delete Account</button>
             </div>
@@ -4110,18 +3783,20 @@
         </div>
       `;
 
-      profileScreenShellEl.innerHTML = profileHTML;
-
-      // Attach event listeners
       document.getElementById("profile-photo-trigger").addEventListener("click", () => document.getElementById("profile-photo-input").click());
       document.getElementById("profile-photo-input").addEventListener("change", handleProfilePhotoChange);
-      document.getElementById("profile-settings-btn").addEventListener("click", () => openModal("profile-drawer"));
       document.getElementById("profile-save-button").addEventListener("click", saveProfileSettings);
+      document.getElementById("profile-open-auth-drawer").addEventListener("click", () => openModal("profile-drawer"));
       document.getElementById("profile-screen-install").addEventListener("click", promptInstall);
       document.getElementById("profile-screen-alerts").addEventListener("click", () => setScreen("alerts"));
       document.getElementById("profile-screen-notify").addEventListener("click", requestNotifications);
       document.getElementById("profile-share-link").addEventListener("click", shareCurrentProfile);
-      document.getElementById("profile-orders-button").addEventListener("click", () => { renderOrdersDrawer(); openModal("orders-drawer"); });
+      if (document.getElementById("profile-admin-shortcut")) {
+        document.getElementById("profile-admin-shortcut").addEventListener("click", () => setScreen("admin"));
+      }
+      if (document.getElementById("profile-password-button")) {
+        document.getElementById("profile-password-button").addEventListener("click", changeProfilePassword);
+      }
       document.getElementById("profile-signout-button").addEventListener("click", async () => {
         if (fbAuthAvailable() && window._fb.fbAuth.currentUser) {
           try { await window._fb.signOut(window._fb.fbAuth); } catch (error) {}
@@ -4131,28 +3806,10 @@
         renderProfileSummary();
         renderProfileScreen();
         renderCommunity();
-        renderFeed();
-        renderPostAccessState();
         renderAdmin();
         showToast("Signed out.");
       });
       document.getElementById("profile-delete-button").addEventListener("click", deleteCurrentAccount);
-
-      // Stats buttons
-      document.getElementById("stat-posts").addEventListener("click", () => {
-        activeProfileTab = "My Posts";
-        persistPrefs();
-        renderProfileScreen();
-      });
-      document.getElementById("stat-followers").addEventListener("click", () => { renderFollowersDrawer(); openModal("followers-drawer"); });
-      document.getElementById("stat-following").addEventListener("click", () => { renderFollowingDrawer(); openModal("following-drawer"); });
-      document.getElementById("stat-likes").addEventListener("click", () => {
-        activeProfileTab = "Liked";
-        persistPrefs();
-        renderProfileScreen();
-      });
-
-      // Content tabs
       document.querySelectorAll("[data-profile-tab]").forEach((button) => {
         button.addEventListener("click", () => {
           activeProfileTab = button.dataset.profileTab;
@@ -4160,20 +3817,16 @@
           renderProfileScreen();
         });
       });
-
-      // Post thumbnails
       document.querySelectorAll("[data-open-post-product]").forEach((button) => {
         button.addEventListener("click", () => openProduct(button.dataset.openPostProduct));
       });
-    }
-
-    function renderProfileScreen() {
-      if (!profileScreenShellEl) return;
-      if (!currentUser) {
-        renderProfileScreenSignedOut();
-      } else {
-        renderProfileScreenSignedIn();
-      }
+      document.querySelectorAll("[data-reorder]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const entry = getOrderHistory().find((order) => order.id === button.dataset.reorder);
+          if (!entry) return;
+          window.open(entry.message, "_blank", "noopener");
+        });
+      });
     }
 
     function renderPublicProfile(profile) {
@@ -5423,6 +5076,21 @@
       return window._fb && window._fb.fbAuth;
     }
 
+    // Returns a promise that resolves once Firebase module is loaded
+    function waitForFb() {
+      return new Promise((resolve) => {
+        if (window._fbReady && window._fb) return resolve(window._fb);
+        window._onFbReady = () => resolve(window._fb);
+        // Fallback: poll every 100ms up to 8 seconds
+        let attempts = 0;
+        const poll = setInterval(() => {
+          attempts++;
+          if (window._fb) { clearInterval(poll); resolve(window._fb); }
+          else if (attempts > 80) { clearInterval(poll); resolve(null); }
+        }, 100);
+      });
+    }
+
     function applyFbUser(fbUser, extraData) {
       if (!fbUser) return;
       const displayName = (fbUser.displayName || extraData.username || fbUser.email || fbUser.phoneNumber || "urban_fan").replace(/\s+/g, "_");
@@ -5492,8 +5160,9 @@
 
     // Email sign up
     document.getElementById("auth-email-signup").addEventListener("click", async () => {
-      if (!fbAuthAvailable()) { showToast("Firebase not ready yet."); return; }
-      const { fbAuth, createUserWithEmailAndPassword, updateProfile } = window._fb;
+      const fb = await waitForFb();
+      if (!fb) { showToast("Firebase unavailable. Check your connection."); return; }
+      const { fbAuth, createUserWithEmailAndPassword, updateProfile } = fb;
       const name = document.getElementById("auth-name").value.trim();
       const email = document.getElementById("auth-email").value.trim();
       const password = document.getElementById("auth-password").value;
@@ -5511,8 +5180,9 @@
 
     // Email sign in
     document.getElementById("auth-email-login").addEventListener("click", async () => {
-      if (!fbAuthAvailable()) { showToast("Firebase not ready yet."); return; }
-      const { fbAuth, signInWithEmailAndPassword } = window._fb;
+      const fb = await waitForFb();
+      if (!fb) { showToast("Firebase unavailable. Check your connection."); return; }
+      const { fbAuth, signInWithEmailAndPassword } = fb;
       const email = document.getElementById("auth-email").value.trim();
       const password = document.getElementById("auth-password").value;
       const passcode = document.getElementById("auth-passcode").value.trim();
@@ -5527,8 +5197,9 @@
 
     // Google sign in
     document.getElementById("auth-google-btn").addEventListener("click", async () => {
-      if (!fbAuthAvailable()) { showToast("Firebase not ready yet."); return; }
-      const { fbAuth, signInWithPopup, googleProvider } = window._fb;
+      const fb = await waitForFb();
+      if (!fb) { showToast("Firebase unavailable. Check your connection."); return; }
+      const { fbAuth, signInWithPopup, googleProvider } = fb;
       const passcode = document.getElementById("auth-passcode") ? document.getElementById("auth-passcode").value.trim() : "";
       try {
         const cred = await signInWithPopup(fbAuth, googleProvider);
@@ -5540,8 +5211,9 @@
 
     // Phone — send OTP
     document.getElementById("auth-phone-send").addEventListener("click", async () => {
-      if (!fbAuthAvailable()) { showToast("Firebase not ready yet."); return; }
-      const { fbAuth, RecaptchaVerifier, signInWithPhoneNumber } = window._fb;
+      const fb = await waitForFb();
+      if (!fb) { showToast("Firebase unavailable. Check your connection."); return; }
+      const { fbAuth, RecaptchaVerifier, signInWithPhoneNumber } = fb;
       const phone = document.getElementById("auth-phone").value.trim();
       if (!phone) { showToast("Enter your phone number first."); return; }
       try {

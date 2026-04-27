@@ -645,6 +645,10 @@
       z-index: 1;
     }
 
+    .fit-card .preview-media-layer {
+      z-index: 0;
+    }
+
     .fit-card-content {
       position: relative;
       z-index: 2;
@@ -1132,6 +1136,253 @@
       min-height: 46px;
     }
 
+    .section-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin-top: 18px;
+    }
+
+    .section-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .section-tab {
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .section-tab.active {
+      background: var(--gold);
+      border-color: rgba(245, 197, 24, 0.82);
+      color: #090909;
+    }
+
+    .community-shell,
+    .profile-screen-shell {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .search-field {
+      width: 100%;
+      min-height: 50px;
+      padding: 0 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.045);
+      color: var(--text);
+    }
+
+    .community-panel,
+    .profile-panel {
+      display: grid;
+      gap: 14px;
+    }
+
+    .community-feed-deck {
+      height: min(70dvh, 680px);
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .user-list,
+    .orders-list,
+    .leaderboard-list,
+    .profile-post-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .user-row,
+    .order-card,
+    .leaderboard-card,
+    .profile-post-card,
+    .public-user-card,
+    .profile-hero-card,
+    .settings-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.034));
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+
+    .user-row,
+    .leaderboard-card {
+      display: grid;
+      gap: 12px;
+    }
+
+    .user-row-head,
+    .profile-hero-head,
+    .public-user-head,
+    .order-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-identity,
+    .profile-identity,
+    .public-user-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .avatar-stack,
+    .profile-avatar-stack {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      flex: 0 0 auto;
+    }
+
+    .profile-avatar-lg,
+    .public-avatar,
+    .user-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(245, 197, 24, 0.7);
+      background: linear-gradient(135deg, rgba(245, 197, 24, 0.86), rgba(255, 255, 255, 0.18));
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: #090909;
+      overflow: hidden;
+    }
+
+    .profile-avatar-lg img,
+    .public-avatar img,
+    .user-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-upload-trigger {
+      position: absolute;
+      right: -4px;
+      bottom: -4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid rgba(245, 197, 24, 0.82);
+      background: var(--gold);
+      color: #090909;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .profile-meta,
+    .user-meta {
+      min-width: 0;
+    }
+
+    .profile-meta strong,
+    .user-meta strong,
+    .public-user-identity strong {
+      display: block;
+      font-size: 1rem;
+    }
+
+    .profile-meta .muted,
+    .user-meta .muted {
+      display: block;
+      margin-top: 2px;
+    }
+
+    .profile-edit-grid,
+    .settings-grid,
+    .profile-utility-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .profile-stats-row,
+    .public-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .profile-content-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .profile-content-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .profile-post-card {
+      display: grid;
+      gap: 10px;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .profile-post-card .fit-media,
+    .profile-post-card .post-media {
+      height: 180px;
+    }
+
+    .profile-post-copy {
+      padding: 0 14px 14px;
+    }
+
+    .inline-field-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .profile-utility-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .profile-utility-grid .secondary-cta,
+    .profile-utility-grid .cta,
+    .profile-utility-grid .danger-ghost {
+      width: 100%;
+      min-height: 46px;
+    }
+
+    .community-empty,
+    .profile-empty {
+      padding: 24px 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .order-replay {
+      min-height: 42px;
+      padding: 0 14px;
+    }
+
     .toast-shell {
       pointer-events: none;
       align-items: flex-end;
@@ -1185,6 +1436,12 @@
         gap: 10px;
         padding: 0 12px;
       }
+
+      .profile-stats-row,
+      .public-stats-row,
+      .profile-utility-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (min-width: 600px) {
@@ -1230,16 +1487,67 @@
         <div class="feed-deck" id="feed-deck"></div>
       </section>
 
-      <section class="screen" id="screen-fits">
+      <section class="screen" id="screen-community">
         <div class="section-row">
           <div>
-            <p class="brand-kicker">Fits and Inspo</p>
-            <h2 class="section-title">Swipe the feed, pin the look, shop the tag.</h2>
+            <p class="brand-kicker">Friends and Community</p>
+            <h2 class="section-title">Find people, follow their looks, and keep your circle close.</h2>
           </div>
         </div>
-        <p class="muted">Community fitpics and inspo saves now use actual uploaded media when available.</p>
-        <div class="filter-row" id="fits-filters"></div>
-        <div class="fits-grid" id="fits-grid"></div>
+        <p class="muted">Discover new members, manage your following list, watch a followed-only feed, and still browse the fits grid.</p>
+        <div class="community-shell">
+          <input class="search-field" id="community-search" type="search" placeholder="Search by @username">
+          <div class="section-tabs" id="community-tabs"></div>
+
+          <div class="community-panel" id="community-discover-panel">
+            <div class="screen-card">
+              <p class="brand-kicker">Search Results</p>
+              <div class="user-list" id="community-search-results"></div>
+            </div>
+            <div class="screen-card">
+              <p class="brand-kicker">Suggested Accounts</p>
+              <div class="user-list" id="community-suggested-list"></div>
+            </div>
+            <div class="screen-card">
+              <p class="brand-kicker">New Members</p>
+              <div class="user-list" id="community-new-members"></div>
+            </div>
+          </div>
+
+          <div class="community-panel hidden" id="community-following-panel">
+            <div class="screen-card">
+              <p class="brand-kicker">Following</p>
+              <div class="user-list" id="community-following-list"></div>
+            </div>
+          </div>
+
+          <div class="community-panel hidden" id="community-followers-panel">
+            <div class="screen-card">
+              <p class="brand-kicker">Followers</p>
+              <div class="user-list" id="community-followers-list"></div>
+            </div>
+          </div>
+
+          <div class="community-panel hidden" id="community-feed-panel">
+            <div class="screen-card">
+              <p class="brand-kicker">Followed Feed</p>
+              <div class="muted">Posts from people you follow, ranked with the same scoring logic as For You.</div>
+            </div>
+            <div class="community-feed-deck" id="community-feed-deck"></div>
+          </div>
+
+          <div class="community-panel hidden" id="community-fits-panel">
+            <div class="filter-row" id="fits-filters"></div>
+            <div class="fits-grid" id="fits-grid"></div>
+          </div>
+
+          <div class="community-panel hidden" id="community-leaderboard-panel">
+            <div class="screen-card">
+              <p class="brand-kicker">This Week</p>
+              <div class="leaderboard-list" id="community-leaderboard"></div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="screen" id="screen-post">
@@ -1307,6 +1615,16 @@
         </div>
       </section>
 
+      <section class="screen" id="screen-profile">
+        <div class="section-row">
+          <div>
+            <p class="brand-kicker">Profile</p>
+            <h2 class="section-title">Your Urban Threads identity, activity, settings, and order history.</h2>
+          </div>
+        </div>
+        <div class="profile-screen-shell" id="profile-screen-shell"></div>
+      </section>
+
       <section class="screen" id="screen-admin">
         <div class="section-row">
           <div>
@@ -1335,14 +1653,14 @@
           </svg>
           <span>Feed</span>
         </button>
-        <button class="nav-button" type="button" data-screen="fits">
+        <button class="nav-button" type="button" data-screen="community">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 5h6v6H5z"></path>
-            <path d="M13 5h6v10h-6z"></path>
-            <path d="M5 13h6v6H5z"></path>
-            <path d="M13 17h6v2h-6z"></path>
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
           </svg>
-          <span>Fits</span>
+          <span>Friends</span>
         </button>
         <button class="nav-button post" type="button" data-screen="post">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1359,12 +1677,12 @@
           </svg>
           <span>Shop</span>
         </button>
-        <button class="nav-button" type="button" data-screen="alerts">
+        <button class="nav-button" type="button" data-screen="profile">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 7h18s-3 0-3-7"></path>
-            <path d="M10 21a2 2 0 0 0 4 0"></path>
+            <path d="M20 21a8 8 0 0 0-16 0"></path>
+            <circle cx="12" cy="8" r="4"></circle>
           </svg>
-          <span>Alerts</span>
+          <span>Profile</span>
         </button>
       </div>
     </nav>
@@ -1532,6 +1850,25 @@
     </div>
   </section>
 
+  <section class="drawer" id="user-drawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close="user-drawer"></div>
+    <div class="drawer-panel">
+      <div class="section-row">
+        <div>
+          <p class="brand-kicker">Community Member</p>
+          <h3 class="modal-title">Public profile</h3>
+        </div>
+        <button class="icon-button" type="button" data-close="user-drawer" aria-label="Close user profile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="public-profile-shell"></div>
+    </div>
+  </section>
+
   <div class="toast-shell" id="toast-shell" aria-live="polite">
     <div class="toast" id="toast"></div>
   </div>
@@ -1539,8 +1876,8 @@
   <!-- Firebase SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, RecaptchaVerifier, signInWithPhoneNumber, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, RecaptchaVerifier, signInWithPhoneNumber, signOut, onAuthStateChanged, updateProfile, deleteUser, updatePassword } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp, doc, updateDoc, increment, where, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
 
     const firebaseConfig = {
@@ -1558,7 +1895,7 @@
     const fbStorage = getStorage(fbApp);
     const googleProvider = new GoogleAuthProvider();
 
-    window._fb = { fbAuth, fbDb, fbStorage, googleProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged, updateProfile, RecaptchaVerifier, signInWithPhoneNumber, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp, doc, updateDoc, increment, ref, uploadBytes, getDownloadURL };
+    window._fb = { fbAuth, fbDb, fbStorage, googleProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged, updateProfile, deleteUser, updatePassword, RecaptchaVerifier, signInWithPhoneNumber, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp, doc, updateDoc, increment, where, deleteDoc, setDoc, ref, uploadBytes, getDownloadURL };
 
     onAuthStateChanged(fbAuth, (user) => {
       if (window._onFbAuthChange) window._onFbAuthChange(user);
@@ -1570,7 +1907,14 @@
     const ADMIN_PASSCODE = "CUTFROMCONCRETE";
     const STORAGE_KEYS = {
       user: "urban-threads-user-v2",
-      prefs: "urban-threads-prefs-v2"
+      prefs: "urban-threads-prefs-v2",
+      follows: "urban-threads-follows-v1",
+      likes: "urban-threads-likes-v1",
+      saved: "urban-threads-saved-v1",
+      reposts: "urban-threads-reposts-v1",
+      seen: "urban-threads-seen-v1",
+      orders: "urban-threads-orders-v1",
+      profiles: "urban-threads-profiles-v1"
     };
 
     const userAgent = navigator.userAgent || "";
@@ -1681,6 +2025,12 @@
         tag: post.feed + " / " + product.category
       });
     }
+
+    const mediaLibrary = {
+      graphicTruckerCapBlond: "./media/posts/graphic-trucker-cap-blond.webp",
+      graphicTruckerCapClutch: "./media/posts/graphic-trucker-cap-clutch.jpg",
+      graphicTruckerCapBlue: "./media/posts/graphic-trucker-cap-blue.jpg"
+    };
 
     const seedProducts = [
       {
@@ -1808,7 +2158,88 @@
       })
     }));
 
+    const graphicTruckerCapProduct = products.find((product) => product.id === "graphic-trucker-cap");
+    if (graphicTruckerCapProduct) {
+      graphicTruckerCapProduct.media = {
+        type: "image",
+        src: mediaLibrary.graphicTruckerCapBlond
+      };
+    }
+
     const posts = [
+      {
+        id: "post-cap-1",
+        feed: "Shop",
+        type: "fitpic",
+        user: "@urbanthreads",
+        avatar: "UT",
+        caption: "Graphic / Trucker Cap close-up. White mesh, blue print, clean front profile.",
+        productId: "graphic-trucker-cap",
+        categories: ["All", "Caps"],
+        likes: 412,
+        comments: 26,
+        reposts: 18,
+        shares: 34,
+        createdAt: "2026-04-27T08:15:00",
+        hidden: false,
+        isOfficial: true,
+        media: {
+          type: "image",
+          src: mediaLibrary.graphicTruckerCapBlond
+        },
+        commentsList: [
+          { name: "@bwfitsdaily", text: "That front graphic lands hard." },
+          { name: "@urbanthreads", text: "Caps are live in the WhatsApp orders now." }
+        ]
+      },
+      {
+        id: "post-cap-2",
+        feed: "Fits",
+        type: "fitpic",
+        user: "@clutchseason",
+        avatar: "CS",
+        caption: "Burgundy trucker with loose black pants and studio light. Quiet flex.",
+        productId: "graphic-trucker-cap",
+        categories: ["All", "Caps"],
+        likes: 276,
+        comments: 14,
+        reposts: 9,
+        shares: 15,
+        createdAt: "2026-04-27T09:02:00",
+        hidden: false,
+        isOfficial: false,
+        media: {
+          type: "image",
+          src: mediaLibrary.graphicTruckerCapClutch
+        },
+        commentsList: [
+          { name: "@urbanthreads", text: "Studio energy is sharp on this one." }
+        ]
+      },
+      {
+        id: "post-cap-3",
+        feed: "Fits",
+        type: "fitpic",
+        user: "@messiah.moves",
+        avatar: "MM",
+        caption: "Blue mesh trucker from the back with the red bandana hit. Summer rotation.",
+        productId: "graphic-trucker-cap",
+        categories: ["All", "Caps"],
+        likes: 238,
+        comments: 11,
+        reposts: 7,
+        shares: 13,
+        createdAt: "2026-04-27T09:48:00",
+        hidden: false,
+        isOfficial: false,
+        media: {
+          type: "image",
+          src: mediaLibrary.graphicTruckerCapBlue
+        },
+        commentsList: [
+          { name: "@fitframebw", text: "The back angle makes the cap color pop." }
+        ]
+      },
       {
         id: "post-1",
         feed: "Shop",
@@ -1935,7 +2366,7 @@
 
     posts.forEach((post) => {
       const product = productById(post.productId);
-      post.media = createFeedMedia(product, post);
+      post.media = post.media || createFeedMedia(product, post);
       post.bg = product.bg;
     });
 
@@ -1980,24 +2411,43 @@
     let activeFitsFilter = savedPrefs.activeFitsFilter || "All";
     let activeShopCategory = savedPrefs.activeShopCategory || "All";
     let selectedPostType = savedPrefs.selectedPostType || "Fitpic";
+    let activeCommunityTab = savedPrefs.activeCommunityTab || "Discover";
+    let activeProfileTab = savedPrefs.activeProfileTab || "My Posts";
     let activeAdminTab = "products";
     let currentProduct = products[0];
     let currentSize = currentProduct.sizes[0];
     let currentCommentsPost = posts[0];
     let deferredPrompt = null;
     let currentUser = normalizeUser(loadStoredJson(STORAGE_KEYS.user, null));
+    let followEntries = loadStoredJson(STORAGE_KEYS.follows, []);
+    let likeEntries = loadStoredJson(STORAGE_KEYS.likes, []);
+    let savedEntries = loadStoredJson(STORAGE_KEYS.saved, []);
+    let repostEntries = loadStoredJson(STORAGE_KEYS.reposts, []);
+    let seenEntries = loadStoredJson(STORAGE_KEYS.seen, []);
+    let orderEntries = loadStoredJson(STORAGE_KEYS.orders, []);
+    let profileCache = loadStoredJson(STORAGE_KEYS.profiles, {});
     let postMediaDraft = null;
     let adminProductMediaDraft = null;
     let adminFeedMediaDraft = null;
     let productEditingId = null;
     let previousScreen = "feed";
+    let communitySearchTerm = "";
+    let viewedUserKey = null;
+    let feedObserver = null;
+    let communityFeedObserver = null;
+    let currentVisibleFeedPostId = null;
+    let currentVisibleCommunityPostId = null;
+    let cloudUserProfiles = [];
+    let cloudFollowEntries = [];
+    let cloudLikeEntries = [];
 
     const screenMap = {
       feed: document.getElementById("screen-feed"),
-      fits: document.getElementById("screen-fits"),
+      community: document.getElementById("screen-community"),
       post: document.getElementById("screen-post"),
       shop: document.getElementById("screen-shop"),
       alerts: document.getElementById("screen-alerts"),
+      profile: document.getElementById("screen-profile"),
       admin: document.getElementById("screen-admin")
     };
 
@@ -2005,6 +2455,11 @@
     const bottomNavEl = document.getElementById("bottom-nav");
     const feedTabsEl = document.getElementById("feed-tabs");
     const feedDeckEl = document.getElementById("feed-deck");
+    const communityTabsEl = document.getElementById("community-tabs");
+    const communitySearchEl = document.getElementById("community-search");
+    const communityFeedDeckEl = document.getElementById("community-feed-deck");
+    const profileScreenShellEl = document.getElementById("profile-screen-shell");
+    const publicProfileShellEl = document.getElementById("public-profile-shell");
     const fitsFiltersEl = document.getElementById("fits-filters");
     const fitsGridEl = document.getElementById("fits-grid");
     const postTypesEl = document.getElementById("post-types");
@@ -2027,10 +2482,17 @@
 
     function normalizeUser(user) {
       if (!user) return null;
+      const usernameSource = user.username || user.displayName || user.contact || "urbanfan";
+      const username = usernameSource.startsWith("@") ? usernameSource : "@" + usernameSource.replace(/\s+/g, "_");
       return {
-        username: user.username || "@urbanfan",
+        username,
+        displayName: user.displayName || username.replace(/^@/, ""),
         contact: user.contact || "",
         bio: user.bio || "",
+        location: user.location || "",
+        photoURL: user.photoURL || "",
+        defaultSize: user.defaultSize || "M",
+        provider: user.provider || "Local",
         isAdmin: Boolean(user.isAdmin),
         uid: user.uid || null,
         joinedAt: user.joinedAt || new Date().toISOString(),
@@ -2048,7 +2510,9 @@
         activeCategory,
         activeFitsFilter,
         activeShopCategory,
-        selectedPostType
+        selectedPostType,
+        activeCommunityTab,
+        activeProfileTab
       });
     }
 
@@ -2057,6 +2521,129 @@
         saveStoredJson(STORAGE_KEYS.user, currentUser);
       } else {
         localStorage.removeItem(STORAGE_KEYS.user);
+      }
+    }
+
+    function persistSocialState() {
+      saveStoredJson(STORAGE_KEYS.follows, followEntries);
+      saveStoredJson(STORAGE_KEYS.likes, likeEntries);
+      saveStoredJson(STORAGE_KEYS.saved, savedEntries);
+      saveStoredJson(STORAGE_KEYS.reposts, repostEntries);
+      saveStoredJson(STORAGE_KEYS.seen, seenEntries);
+      saveStoredJson(STORAGE_KEYS.orders, orderEntries);
+      saveStoredJson(STORAGE_KEYS.profiles, profileCache);
+    }
+
+    function getViewerKey(user = currentUser) {
+      return user ? (user.uid || user.username) : "guest-session";
+    }
+
+    function profileKey(profile) {
+      return String((profile && (profile.uid || profile.username || profile.contact || "")) || "").toLowerCase();
+    }
+
+    function upsertProfileCache(profile) {
+      if (!profile) return;
+      const normalized = normalizeUser(profile);
+      const key = profileKey(normalized);
+      if (!key) return;
+      profileCache[key] = { ...(profileCache[key] || {}), ...normalized };
+      persistSocialState();
+    }
+
+    function getProfileFromCache(keyOrUser) {
+      const key = typeof keyOrUser === "string"
+        ? String(keyOrUser).toLowerCase()
+        : profileKey(keyOrUser);
+      return key ? profileCache[key] || null : null;
+    }
+
+    function toIsoDate(value) {
+      if (!value) return new Date().toISOString();
+      if (typeof value === "string") return value;
+      if (value instanceof Date) return value.toISOString();
+      if (value && typeof value.toDate === "function") return value.toDate().toISOString();
+      return new Date(value).toISOString();
+    }
+
+    function getPostOwnerKey(post) {
+      return String(post.uid || post.user || "").toLowerCase();
+    }
+
+    function getFollowingEntries() {
+      const viewerKey = getViewerKey();
+      const merged = [...followEntries, ...cloudFollowEntries];
+      const filtered = merged.filter((entry) => String(entry.followerId || "").toLowerCase() === String(viewerKey).toLowerCase());
+      const deduped = new Map();
+      filtered.forEach((entry) => {
+        deduped.set(String(entry.followingId || entry.followingUsername || "").toLowerCase(), entry);
+      });
+      return [...deduped.values()];
+    }
+
+    function getFollowerEntriesFor(targetKey) {
+      const lookup = String(targetKey || "").toLowerCase();
+      const matched = [...followEntries, ...cloudFollowEntries].filter((entry) => {
+        const followingId = String(entry.followingId || entry.followingUsername || "").toLowerCase();
+        return followingId === lookup;
+      });
+      const deduped = new Map();
+      matched.forEach((entry) => {
+        deduped.set(String(entry.followerId || "").toLowerCase(), entry);
+      });
+      return [...deduped.values()];
+    }
+
+    function getLikeEntriesForViewer() {
+      const viewerKey = getViewerKey();
+      const filtered = [...likeEntries, ...cloudLikeEntries].filter((entry) => String(entry.userId || "").toLowerCase() === String(viewerKey).toLowerCase());
+      const deduped = new Map();
+      filtered.forEach((entry) => deduped.set(String(entry.postId || "").toLowerCase(), entry));
+      return [...deduped.values()];
+    }
+
+    function getSeenPostIds() {
+      const viewerKey = getViewerKey();
+      return seenEntries
+        .filter((entry) => String(entry.userId || "").toLowerCase() === String(viewerKey).toLowerCase())
+        .map((entry) => entry.postId);
+    }
+
+    function markPostSeen(postId) {
+      if (!postId) return;
+      const viewerKey = getViewerKey();
+      if (seenEntries.some((entry) => entry.userId === viewerKey && entry.postId === postId)) return;
+      seenEntries.push({ userId: viewerKey, postId, seenAt: new Date().toISOString() });
+      persistSocialState();
+    }
+
+    function recordOrderHistory(product, size) {
+      const viewerKey = getViewerKey();
+      orderEntries.unshift({
+        id: "order-" + Date.now(),
+        userId: viewerKey,
+        productId: product.id,
+        productName: product.name,
+        size,
+        price: product.price,
+        createdAt: new Date().toISOString(),
+        message: buildWhatsAppUrl(product, size)
+      });
+      orderEntries = orderEntries.slice(0, 40);
+      persistSocialState();
+    }
+
+    function getOrderHistory() {
+      const viewerKey = getViewerKey();
+      return orderEntries.filter((entry) => entry.userId === viewerKey);
+    }
+
+    function upsertPost(post) {
+      const index = posts.findIndex((item) => item.id === post.id);
+      if (index >= 0) {
+        posts[index] = { ...posts[index], ...post };
+      } else {
+        posts.unshift(post);
       }
     }
 
@@ -2111,6 +2698,296 @@
       return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     }
 
+    function formatDisplayDate(value) {
+      return new Date(toIsoDate(value)).toLocaleDateString("en-BW", { month: "short", day: "numeric", year: "numeric" });
+    }
+
+    function getRelativeHours(value) {
+      return (Date.now() - new Date(toIsoDate(value)).getTime()) / 36e5;
+    }
+
+    function getLikedPostIds() {
+      return new Set(getLikeEntriesForViewer().map((entry) => entry.postId));
+    }
+
+    function getSavedPostIds() {
+      const viewerKey = getViewerKey();
+      return new Set(savedEntries.filter((entry) => entry.userId === viewerKey).map((entry) => entry.postId));
+    }
+
+    function getRepostedPostIds() {
+      const viewerKey = getViewerKey();
+      return new Set(repostEntries.filter((entry) => entry.userId === viewerKey).map((entry) => entry.postId));
+    }
+
+    function getKnownProfiles() {
+      const map = new Map();
+
+      Object.values(profileCache).forEach((profile) => {
+        const normalized = normalizeUser(profile);
+        map.set(profileKey(normalized), normalized);
+      });
+
+      cloudUserProfiles.forEach((profile) => {
+        const normalized = normalizeUser(profile);
+        map.set(profileKey(normalized), normalized);
+      });
+
+      posts.forEach((post) => {
+        const profile = normalizeUser({
+          uid: post.uid || null,
+          username: post.user,
+          displayName: String(post.user || "@urbanthreads").replace(/^@/, ""),
+          bio: post.isOfficial ? "Official Urban Threads post." : "Urban Threads community member.",
+          joinedAt: post.createdAt,
+          photoURL: post.photoURL || ""
+        });
+        map.set(profileKey(profile), { ...(map.get(profileKey(profile)) || {}), ...profile });
+      });
+
+      if (currentUser) {
+        map.set(profileKey(currentUser), normalizeUser(currentUser));
+      }
+
+      return [...map.values()].filter((profile) => profile && profile.username);
+    }
+
+    function getProfileByPost(post) {
+      return getKnownProfiles().find((profile) => {
+        if (post.uid && profile.uid) return String(profile.uid) === String(post.uid);
+        return profile.username === post.user;
+      }) || normalizeUser({
+        uid: post.uid || null,
+        username: post.user,
+        displayName: String(post.user || "@urbanthreads").replace(/^@/, ""),
+        joinedAt: post.createdAt,
+        photoURL: post.photoURL || "",
+        bio: post.isOfficial ? "Official Urban Threads account." : "Urban Threads community member."
+      });
+    }
+
+    function getProfileByKey(key) {
+      const lookup = String(key || "").toLowerCase();
+      const found = getKnownProfiles().find((profile) => {
+        return String(profile.uid || "").toLowerCase() === lookup || String(profile.username || "").toLowerCase() === lookup;
+      });
+      if (found) return found;
+      if (lookup.startsWith("@")) {
+        return normalizeUser({ username: lookup, displayName: lookup.replace(/^@/, ""), joinedAt: new Date().toISOString() });
+      }
+      return null;
+    }
+
+    function isFollowingProfile(profile) {
+      if (!currentUser || !profile) return false;
+      const target = String(profile.uid || profile.username || "").toLowerCase();
+      return getFollowingEntries().some((entry) => {
+        const entryTarget = String(entry.followingId || entry.followingUsername || "").toLowerCase();
+        return entryTarget === target;
+      });
+    }
+
+    function getPreferredCategory() {
+      const counts = {};
+      getLikeEntriesForViewer().forEach((entry) => {
+        if (!entry.category) return;
+        counts[entry.category] = (counts[entry.category] || 0) + 1;
+      });
+      return Object.entries(counts).sort((a, b) => b[1] - a[1])[0]?.[0] || null;
+    }
+
+    function getFeedScore(post) {
+      const preferredCategory = getPreferredCategory();
+      const followingSet = new Set(getFollowingEntries().map((entry) => String(entry.followingId || entry.followingUsername || "").toLowerCase()));
+      const seenSet = new Set(getSeenPostIds());
+      let score = (Number(post.likes) || 0) * 3;
+      score += (Number(post.comments) || 0) * 5;
+      score += (Number(post.reposts) || 0) * 4;
+      score += (Number(post.shares) || 0) * 2;
+
+      const ageHours = getRelativeHours(post.createdAt);
+      if (ageHours < 6) {
+        score += 100;
+      } else if (ageHours < 24) {
+        score += 50;
+      }
+
+      if (followingSet.has(getPostOwnerKey(post))) {
+        score += 80;
+      }
+
+      if (preferredCategory && Array.isArray(post.categories) && post.categories.includes(preferredCategory)) {
+        score += 40;
+      }
+
+      if (seenSet.has(post.id)) {
+        score -= 60;
+      }
+
+      return score;
+    }
+
+    function rankPostsByFeedScore(sourcePosts) {
+      const seenSet = new Set(getSeenPostIds());
+      const followingSet = new Set(getFollowingEntries().map((entry) => String(entry.followingId || entry.followingUsername || "").toLowerCase()));
+      const scored = sourcePosts.map((post) => {
+        const score = getFeedScore(post);
+        const followed = followingSet.has(getPostOwnerKey(post));
+        const seen = seenSet.has(post.id);
+        return { ...post, _score: score, _followed: followed, _seen: seen };
+      });
+
+      const rank = (items) => items.sort((a, b) => {
+        if (b._score !== a._score) return b._score - a._score;
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+
+      const tier1 = rank(scored.filter((post) => post._followed && !post._seen));
+      const tier2 = rank(scored.filter((post) => !post._followed && !post._seen));
+      const tier3 = rank(scored.filter((post) => post._seen && post._score > 300));
+
+      return [...tier1, ...tier2, ...tier3];
+    }
+
+    function observeFeedDeck(deckEl, marker) {
+      if (!deckEl) return;
+      const observerName = marker === "community" ? "communityFeedObserver" : "feedObserver";
+      if (window[observerName]) {
+        window[observerName].disconnect();
+      }
+
+      const visibility = new Map();
+      const rootObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          visibility.set(entry.target.dataset.postId, entry.intersectionRatio);
+        });
+
+        const topVisible = [...visibility.entries()].sort((a, b) => b[1] - a[1])[0];
+        if (!topVisible || topVisible[1] < 0.6) return;
+
+        if (marker === "community") {
+          if (currentVisibleCommunityPostId && currentVisibleCommunityPostId !== topVisible[0]) {
+            markPostSeen(currentVisibleCommunityPostId);
+          }
+          currentVisibleCommunityPostId = topVisible[0];
+        } else {
+          if (currentVisibleFeedPostId && currentVisibleFeedPostId !== topVisible[0]) {
+            markPostSeen(currentVisibleFeedPostId);
+          }
+          currentVisibleFeedPostId = topVisible[0];
+        }
+      }, { root: deckEl, threshold: [0.35, 0.6, 0.9] });
+
+      deckEl.querySelectorAll(".feed-post").forEach((post) => rootObserver.observe(post));
+      window[observerName] = rootObserver;
+    }
+
+    async function syncCurrentUserProfile() {
+      if (!currentUser) return;
+      upsertProfileCache(currentUser);
+
+      if (!window._fb || !currentUser.uid) return;
+      try {
+        const { fbDb, doc, setDoc, serverTimestamp } = window._fb;
+        await setDoc(doc(fbDb, "users", currentUser.uid), {
+          uid: currentUser.uid,
+          username: currentUser.username,
+          displayName: currentUser.displayName,
+          bio: currentUser.bio,
+          location: currentUser.location,
+          photoURL: currentUser.photoURL,
+          contact: currentUser.contact,
+          provider: currentUser.provider,
+          defaultSize: currentUser.defaultSize,
+          isAdmin: currentUser.isAdmin,
+          createdAt: currentUser.joinedAt,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+      } catch (error) {
+        console.warn("Profile sync skipped:", error);
+      }
+    }
+
+    async function loadCloudProfiles() {
+      if (!window._fb) return;
+      try {
+        const { fbDb, collection, getDocs, query, orderBy, limit } = window._fb;
+        const snapshot = await getDocs(query(collection(fbDb, "users"), orderBy("createdAt", "desc"), limit(60)));
+        cloudUserProfiles = snapshot.docs.map((snap) => normalizeUser(snap.data()));
+        cloudUserProfiles.forEach((profile) => upsertProfileCache(profile));
+      } catch (error) {
+        console.warn("Cloud users unavailable:", error);
+      }
+    }
+
+    async function loadCloudFollows() {
+      if (!window._fb || !currentUser || !currentUser.uid) return;
+      try {
+        const { fbDb, collection, getDocs, query, where } = window._fb;
+        const snapshot = await getDocs(query(collection(fbDb, "follows"), where("followerId", "==", currentUser.uid)));
+        cloudFollowEntries = snapshot.docs.map((snap) => ({ id: snap.id, ...snap.data() }));
+      } catch (error) {
+        console.warn("Cloud follows unavailable:", error);
+      }
+    }
+
+    async function loadCloudLikes() {
+      if (!window._fb || !currentUser || !currentUser.uid) return;
+      try {
+        const { fbDb, collection, getDocs, query, where } = window._fb;
+        const snapshot = await getDocs(query(collection(fbDb, "likes"), where("userId", "==", currentUser.uid)));
+        cloudLikeEntries = snapshot.docs.map((snap) => ({ id: snap.id, ...snap.data() }));
+      } catch (error) {
+        console.warn("Cloud likes unavailable:", error);
+      }
+    }
+
+    async function loadCloudPosts() {
+      if (!window._fb) return;
+      try {
+        const { fbDb, collection, getDocs, query, orderBy, limit } = window._fb;
+        const snapshot = await getDocs(query(collection(fbDb, "posts"), orderBy("createdAt", "desc"), limit(40)));
+        snapshot.docs.forEach((snap) => {
+          const data = snap.data();
+          const product = productById(data.productId);
+          if (!product) return;
+          upsertPost({
+            id: data.id || snap.id,
+            feed: data.feed || "For You",
+            type: data.type || "fitpic",
+            user: data.user || data.username || "@urbanthreads",
+            avatar: data.avatar || getInitials(data.user || data.username || "UT"),
+            caption: data.caption || "",
+            productId: data.productId,
+            categories: Array.isArray(data.categories) && data.categories.length ? data.categories : ["All", product.category],
+            likes: Number(data.likes) || 0,
+            comments: Number(data.comments) || 0,
+            reposts: Number(data.reposts) || 0,
+            shares: Number(data.shares) || 0,
+            createdAt: toIsoDate(data.createdAt),
+            hidden: Boolean(data.hidden),
+            isOfficial: Boolean(data.isOfficial),
+            commentsList: Array.isArray(data.commentsList) ? data.commentsList : [],
+            media: data.media || (data.mediaUrl ? { type: data.type === "video" ? "video" : "image", src: data.mediaUrl } : createFeedMedia(product, data)),
+            bg: product.bg,
+            uid: data.uid || data.ownerUid || null,
+            photoURL: data.photoURL || ""
+          });
+        });
+      } catch (error) {
+        console.warn("Cloud posts unavailable:", error);
+      }
+    }
+
+    async function refreshCloudData() {
+      await loadCloudProfiles();
+      await loadCloudPosts();
+      if (currentUser) {
+        await loadCloudFollows();
+        await loadCloudLikes();
+      }
+    }
+
     function setScreen(screenKey) {
       if (screenKey === "admin" && (!currentUser || !currentUser.isAdmin)) {
         showToast("Admin preview is locked.");
@@ -2150,7 +3027,7 @@
     }
 
     function getFeedPosts() {
-      const visiblePosts = getVisiblePosts();
+      const visiblePosts = rankPostsByFeedScore(getVisiblePosts());
       const tabFiltered = visiblePosts.filter((post) => {
         if (activeFeedTab === "For You") return true;
         return post.feed === activeFeedTab;
@@ -2158,16 +3035,14 @@
       const categoryFiltered = tabFiltered.filter((post) => {
         return activeCategory === "All" || post.categories.includes(activeCategory);
       });
+      return [...categoryFiltered];
+    }
 
-      if (activeFeedTab === "For You") {
-        return [...categoryFiltered].sort((a, b) => {
-          const aScore = a.likes + a.comments * 2 + a.reposts;
-          const bScore = b.likes + b.comments * 2 + b.reposts;
-          return bScore - aScore;
-        });
-      }
-
-      return [...categoryFiltered].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    function getFollowingFeedPosts() {
+      const followingSet = new Set(getFollowingEntries().map((entry) => String(entry.followingId || entry.followingUsername || "").toLowerCase()));
+      return rankPostsByFeedScore(
+        getVisiblePosts().filter((post) => followingSet.has(getPostOwnerKey(post)))
+      );
     }
 
     function getFitsPosts() {
@@ -2246,16 +3121,18 @@
       });
     }
 
-    function renderFeed() {
-      const filteredPosts = getFeedPosts();
-      feedDeckEl.innerHTML = "";
+    function renderFeedDeck(targetEl, filteredPosts, options = {}) {
+      const emptyTitle = options.emptyTitle || "No posts match this filter yet.";
+      const emptyCopy = options.emptyCopy || "Try another category or switch tabs to keep browsing the drop.";
+      const marker = options.marker || "main";
+      targetEl.innerHTML = "";
 
       if (!filteredPosts.length) {
-        feedDeckEl.innerHTML = `
+        targetEl.innerHTML = `
           <div class="feed-empty">
             <div class="empty-state">
-              <p class="empty-title">No posts match this filter yet.</p>
-              <div class="muted">Try another category or switch tabs to keep browsing the drop.</div>
+              <p class="empty-title">${escapeHtml(emptyTitle)}</p>
+              <div class="muted">${escapeHtml(emptyCopy)}</div>
             </div>
           </div>
         `;
@@ -2264,6 +3141,7 @@
 
       filteredPosts.forEach((post) => {
         const product = productById(post.productId);
+        const profile = getProfileByPost(post);
         const article = document.createElement("article");
         article.className = "feed-post";
         article.dataset.postId = post.id;
@@ -2275,6 +3153,10 @@
             ? "Video preview"
             : "Community post";
 
+        const avatarMarkup = profile.photoURL
+          ? `<div class="avatar"><img src="${escapeHtml(profile.photoURL)}" alt="${escapeHtml(profile.username)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>`
+          : `<div class="avatar">${escapeHtml(post.avatar)}</div>`;
+
         article.innerHTML = `
           ${getPostMediaMarkup(post)}
           <div class="post-badges">
@@ -2284,9 +3166,9 @@
           <div class="feed-content">
             <div class="post-copy">
               <div class="post-user">
-                <div class="avatar">${escapeHtml(post.avatar)}</div>
+                <button class="icon-button" type="button" data-view-user="${escapeHtml(profile.uid || profile.username)}" style="padding:0;min-width:auto;min-height:auto;background:transparent;border:0;">${avatarMarkup}</button>
                 <div>
-                  <strong>${escapeHtml(post.user)}</strong>
+                  <strong><button type="button" data-view-user="${escapeHtml(profile.uid || profile.username)}" style="padding:0;background:transparent;border:0;color:inherit;font:inherit;font-weight:700;">${escapeHtml(post.user)}</button></strong>
                   <span>${escapeHtml(mediaMeta)} - ${escapeHtml(product.category)}</span>
                 </div>
               </div>
@@ -2335,6 +3217,7 @@
             activeCategory = category;
             persistPrefs();
             renderFeed();
+            renderCommunity();
           });
           categoryContainer.appendChild(button);
         });
@@ -2346,6 +3229,10 @@
           });
         });
 
+        article.querySelectorAll("[data-view-user]").forEach((button) => {
+          button.addEventListener("click", () => openUserProfile(button.dataset.viewUser));
+        });
+
         article.querySelectorAll("[data-action]").forEach((button) => {
           button.addEventListener("click", () => {
             handlePostAction(button.dataset.action, post.id, button);
@@ -2353,7 +3240,17 @@
         });
 
         article.querySelector("[data-buy]").addEventListener("click", () => openProduct(product.id));
-        feedDeckEl.appendChild(article);
+        targetEl.appendChild(article);
+      });
+
+      observeFeedDeck(targetEl, marker);
+    }
+
+    function renderFeed() {
+      renderFeedDeck(feedDeckEl, getFeedPosts(), {
+        emptyTitle: "No posts match this filter yet.",
+        emptyCopy: "Try another category or switch tabs to keep browsing the drop.",
+        marker: "main"
       });
     }
 
@@ -2390,6 +3287,7 @@
 
       fitPosts.forEach((post) => {
         const product = productById(post.productId);
+        const profile = getProfileByPost(post);
         const article = document.createElement("article");
         article.className = "fit-card";
         article.innerHTML = `
@@ -2399,14 +3297,185 @@
             : `<div class="preview-media-layer"><img class="fit-media" src="${escapeHtml(post.media.src)}" alt="${escapeHtml(post.caption)}"></div>`}
           <div class="fit-card-content">
             <span class="badge">${escapeHtml(post.feed)}</span>
-            <h3>${escapeHtml(post.user)}</h3>
+            <h3><button type="button" data-view-user="${escapeHtml(profile.uid || profile.username)}" style="padding:0;background:transparent;border:0;color:inherit;font:inherit;font-weight:700;">${escapeHtml(post.user)}</button></h3>
             <p>${escapeHtml(post.caption)}</p>
-            <button class="product-pill" type="button">${escapeHtml(product.name)}</button>
+            <button class="product-pill" type="button" data-open-product="${escapeHtml(product.id)}">${escapeHtml(product.name)}</button>
           </div>
         `;
-        article.querySelector("button").addEventListener("click", () => openProduct(product.id));
+        article.querySelector("[data-open-product]").addEventListener("click", () => openProduct(product.id));
+        const userButton = article.querySelector("[data-view-user]");
+        if (userButton) {
+          userButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+            openUserProfile(userButton.dataset.viewUser);
+          });
+        }
         fitsGridEl.appendChild(article);
       });
+    }
+
+    function renderCommunityTabs() {
+      const tabs = ["Discover", "Following", "Followers", "Feed", "Fits", "Leaderboard"];
+      communityTabsEl.innerHTML = "";
+      tabs.forEach((tab) => {
+        const button = document.createElement("button");
+        button.className = "section-tab" + (tab === activeCommunityTab ? " active" : "");
+        button.type = "button";
+        button.textContent = tab;
+        button.addEventListener("click", () => {
+          activeCommunityTab = tab;
+          persistPrefs();
+          renderCommunity();
+        });
+        communityTabsEl.appendChild(button);
+      });
+    }
+
+    function buildUserRow(profile, actionLabel, actionKind) {
+      const isSelf = currentUser && ((profile.uid && profile.uid === currentUser.uid) || profile.username === currentUser.username);
+      const avatar = profile.photoURL
+        ? `<div class="user-avatar"><img src="${escapeHtml(profile.photoURL)}" alt="${escapeHtml(profile.username)}"></div>`
+        : `<div class="user-avatar">${escapeHtml(getInitials(profile.username))}</div>`;
+
+      return `
+        <article class="user-row">
+          <div class="user-row-head">
+            <button class="user-identity" type="button" data-view-user="${escapeHtml(profile.uid || profile.username)}" style="padding:0;background:transparent;border:0;color:inherit;text-align:left;">
+              ${avatar}
+              <div class="user-meta">
+                <strong>${escapeHtml(profile.username)}</strong>
+                <span class="muted">${escapeHtml(profile.bio || "Urban Threads member.")}</span>
+              </div>
+            </button>
+            ${isSelf ? '<span class="signal-pill">You</span>' : `<button class="${actionKind === "unfollow" ? "danger-ghost" : "secondary-cta"}" type="button" data-user-action="${escapeHtml(actionKind)}" data-user-key="${escapeHtml(profile.uid || profile.username)}">${escapeHtml(actionLabel)}</button>`}
+          </div>
+        </article>
+      `;
+    }
+
+    function getSuggestedProfiles() {
+      const followingKeys = new Set(getFollowingEntries().map((entry) => String(entry.followingId || entry.followingUsername || "").toLowerCase()));
+      const currentKey = String(getViewerKey()).toLowerCase();
+      return getKnownProfiles()
+        .filter((profile) => String(profile.uid || profile.username).toLowerCase() !== currentKey)
+        .filter((profile) => !followingKeys.has(String(profile.uid || profile.username).toLowerCase()))
+        .sort((a, b) => {
+          const aFollowers = getFollowerEntriesFor(a.uid || a.username).length;
+          const bFollowers = getFollowerEntriesFor(b.uid || b.username).length;
+          if (bFollowers !== aFollowers) return bFollowers - aFollowers;
+          return new Date(b.joinedAt) - new Date(a.joinedAt);
+        })
+        .slice(0, 8);
+    }
+
+    function renderCommunityList(containerId, profiles, emptyMessage, mode) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      if (!profiles.length) {
+        container.innerHTML = `<div class="community-empty"><p class="empty-title">${escapeHtml(emptyMessage)}</p></div>`;
+        return;
+      }
+      container.innerHTML = profiles.map((profile) => {
+        const following = isFollowingProfile(profile);
+        const actionLabel = mode === "followers" ? (following ? "Following" : "Follow Back") : (following ? "Unfollow" : "Follow");
+        const actionKind = following ? "unfollow" : "follow";
+        return buildUserRow(profile, actionLabel, actionKind);
+      }).join("");
+
+      container.querySelectorAll("[data-view-user]").forEach((button) => {
+        button.addEventListener("click", () => openUserProfile(button.dataset.viewUser));
+      });
+      container.querySelectorAll("[data-user-action]").forEach((button) => {
+        button.addEventListener("click", () => toggleFollow(button.dataset.userKey));
+      });
+    }
+
+    function renderCommunityLeaderboard() {
+      const container = document.getElementById("community-leaderboard");
+      if (!container) return;
+      const recentPosts = getVisiblePosts().filter((post) => getRelativeHours(post.createdAt) <= 168);
+      const scoreMap = new Map();
+      recentPosts.forEach((post) => {
+        const key = getPostOwnerKey(post);
+        const profile = getProfileByPost(post);
+        if (!scoreMap.has(key)) {
+          scoreMap.set(key, { profile, likes: 0, posts: 0, reposts: 0 });
+        }
+        const entry = scoreMap.get(key);
+        entry.likes += Number(post.likes) || 0;
+        entry.posts += 1;
+        entry.reposts += Number(post.reposts) || 0;
+      });
+
+      const entries = [...scoreMap.values()].sort((a, b) => {
+        const aScore = a.likes + a.posts * 4 + a.reposts * 2;
+        const bScore = b.likes + b.posts * 4 + b.reposts * 2;
+        return bScore - aScore;
+      }).slice(0, 6);
+
+      if (!entries.length) {
+        container.innerHTML = `<div class="community-empty"><p class="empty-title">No leaderboard activity yet.</p></div>`;
+        return;
+      }
+
+      container.innerHTML = entries.map((entry, index) => `
+        <article class="leaderboard-card">
+          <div class="user-row-head">
+            <button class="user-identity" type="button" data-view-user="${escapeHtml(entry.profile.uid || entry.profile.username)}" style="padding:0;background:transparent;border:0;color:inherit;text-align:left;">
+              ${entry.profile.photoURL ? `<div class="user-avatar"><img src="${escapeHtml(entry.profile.photoURL)}" alt="${escapeHtml(entry.profile.username)}"></div>` : `<div class="user-avatar">${escapeHtml(getInitials(entry.profile.username))}</div>`}
+              <div class="user-meta">
+                <strong>#${index + 1} ${escapeHtml(entry.profile.username)}</strong>
+                <span class="muted">${entry.likes} likes • ${entry.posts} posts • ${entry.reposts} reposts</span>
+              </div>
+            </button>
+            ${currentUser && entry.profile.username !== currentUser.username ? `<button class="secondary-cta" type="button" data-user-action="${isFollowingProfile(entry.profile) ? "unfollow" : "follow"}" data-user-key="${escapeHtml(entry.profile.uid || entry.profile.username)}">${isFollowingProfile(entry.profile) ? "Unfollow" : "Follow"}</button>` : ""}
+          </div>
+        </article>
+      `).join("");
+
+      container.querySelectorAll("[data-view-user]").forEach((button) => button.addEventListener("click", () => openUserProfile(button.dataset.viewUser)));
+      container.querySelectorAll("[data-user-action]").forEach((button) => button.addEventListener("click", () => toggleFollow(button.dataset.userKey)));
+    }
+
+    function renderCommunity() {
+      renderCommunityTabs();
+
+      const panels = {
+        Discover: document.getElementById("community-discover-panel"),
+        Following: document.getElementById("community-following-panel"),
+        Followers: document.getElementById("community-followers-panel"),
+        Feed: document.getElementById("community-feed-panel"),
+        Fits: document.getElementById("community-fits-panel"),
+        Leaderboard: document.getElementById("community-leaderboard-panel")
+      };
+
+      Object.entries(panels).forEach(([name, panel]) => {
+        if (panel) panel.classList.toggle("hidden", name !== activeCommunityTab);
+      });
+
+      const searchText = String(communitySearchTerm || "").trim().toLowerCase();
+      const searchMatches = searchText
+        ? getKnownProfiles().filter((profile) => String(profile.username).toLowerCase().includes(searchText))
+        : [];
+      renderCommunityList("community-search-results", searchMatches, searchText ? "No matching usernames yet." : "Start typing an @username to search the community.", "discover");
+      renderCommunityList("community-suggested-list", getSuggestedProfiles(), "No suggestions yet.", "discover");
+      renderCommunityList("community-new-members", getKnownProfiles().sort((a, b) => new Date(b.joinedAt) - new Date(a.joinedAt)).slice(0, 8), "No new members yet.", "discover");
+
+      const followingProfiles = getFollowingEntries().map((entry) => getProfileByKey(entry.followingId || entry.followingUsername)).filter(Boolean);
+      renderCommunityList("community-following-list", followingProfiles, "You are not following anyone yet.", "following");
+
+      const followerProfiles = getFollowerEntriesFor(getViewerKey()).map((entry) => getProfileByKey(entry.followerId)).filter(Boolean);
+      renderCommunityList("community-followers-list", followerProfiles, "No followers yet.", "followers");
+
+      renderFeedDeck(communityFeedDeckEl, getFollowingFeedPosts(), {
+        emptyTitle: "No followed posts yet.",
+        emptyCopy: "Follow a few members and their posts will land here.",
+        marker: "community"
+      });
+
+      renderFitsFilters();
+      renderFitsGrid();
+      renderCommunityLeaderboard();
     }
 
     function renderPostTypes() {
@@ -2514,22 +3583,315 @@
       });
     }
 
+    function getPostsForProfile(profile) {
+      if (!profile) return [];
+      return getVisiblePosts().filter((post) => {
+        if (profile.uid && post.uid) return String(post.uid) === String(profile.uid);
+        return post.user === profile.username;
+      });
+    }
+
+    function getProfileStatsFor(profile) {
+      if (!profile) {
+        return { posts: 0, followers: 0, following: 0, likesReceived: 0 };
+      }
+      const profilePosts = getPostsForProfile(profile);
+      return {
+        posts: profilePosts.length,
+        followers: getFollowerEntriesFor(profile.uid || profile.username).length,
+        following: [...followEntries, ...cloudFollowEntries].filter((entry) => {
+          return String(entry.followerId || "").toLowerCase() === String(profile.uid || profile.username).toLowerCase();
+        }).length,
+        likesReceived: profilePosts.reduce((total, post) => total + (Number(post.likes) || 0), 0)
+      };
+    }
+
+    function getProfileTabPosts(profile) {
+      if (!profile) return [];
+      const ownPosts = getPostsForProfile(profile);
+      const likedIds = getLikedPostIds();
+      const repostedIds = getRepostedPostIds();
+      const savedIds = getSavedPostIds();
+
+      if (activeProfileTab === "Liked") {
+        return getVisiblePosts().filter((post) => likedIds.has(post.id));
+      }
+
+      if (activeProfileTab === "Reposts") {
+        return getVisiblePosts().filter((post) => repostedIds.has(post.id));
+      }
+
+      if (activeProfileTab === "Saved") {
+        const savedPosts = getVisiblePosts().filter((post) => savedIds.has(post.id));
+        if (savedPosts.length) return savedPosts;
+        return getVisiblePosts().filter((post) => post.feed === "Inspo" && likedIds.has(post.id));
+      }
+
+      return ownPosts;
+    }
+
+    function profilePostCardMarkup(post) {
+      const product = productById(post.productId);
+      const mediaMarkup = post.media && post.media.type === "video"
+        ? `<video class="fit-media" src="${escapeHtml(post.media.src)}" autoplay muted loop playsinline preload="metadata"></video>`
+        : `<img class="fit-media" src="${escapeHtml(post.media.src)}" alt="${escapeHtml(post.caption)}">`;
+      return `
+        <article class="fit-card profile-post-card">
+          <div class="preview-media-layer">${mediaMarkup}</div>
+          <div class="fit-card-content profile-post-copy">
+            <span class="badge">${escapeHtml(post.feed)}</span>
+            <h3>${escapeHtml(post.caption.slice(0, 54))}</h3>
+            <p>${escapeHtml(product ? product.name : "Urban Threads")}</p>
+            <button class="product-pill" type="button" data-open-post-product="${escapeHtml(post.productId)}">${escapeHtml(product ? product.name : "View Product")}</button>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderProfileScreen() {
+      if (!profileScreenShellEl) return;
+
+      if (!currentUser) {
+        profileScreenShellEl.innerHTML = `
+          <div class="profile-panel">
+            <div class="profile-hero-card">
+              <p class="brand-kicker">Guest Session</p>
+              <h3>Sign in to unlock your profile, follows, and order history.</h3>
+              <p class="muted">Email, Google, and phone auth all route through the connected Firebase account flow.</p>
+              <div class="profile-utility-grid" style="margin-top:14px;">
+                <button class="cta" type="button" id="profile-open-auth">Sign In / Create Account</button>
+                <button class="secondary-cta" type="button" id="profile-open-alerts">Open Alerts</button>
+              </div>
+            </div>
+          </div>
+        `;
+        document.getElementById("profile-open-auth").addEventListener("click", () => openModal("profile-drawer"));
+        document.getElementById("profile-open-alerts").addEventListener("click", () => setScreen("alerts"));
+        return;
+      }
+
+      const stats = getProfileStatsFor(currentUser);
+      const profilePosts = getProfileTabPosts(currentUser);
+      const tabLabels = ["My Posts", "Liked", "Reposts", "Saved"];
+      const avatarMarkup = currentUser.photoURL
+        ? `<div class="profile-avatar-lg"><img src="${escapeHtml(currentUser.photoURL)}" alt="${escapeHtml(currentUser.username)}"></div>`
+        : `<div class="profile-avatar-lg">${escapeHtml(getInitials(currentUser.username))}</div>`;
+
+      profileScreenShellEl.innerHTML = `
+        <div class="profile-panel">
+          <div class="profile-hero-card">
+            <div class="profile-hero-head">
+              <div class="profile-identity">
+                <div class="profile-avatar-stack">
+                  ${avatarMarkup}
+                  <button class="avatar-upload-trigger" type="button" id="profile-photo-trigger">+</button>
+                  <input id="profile-photo-input" type="file" accept="image/*" class="hidden">
+                </div>
+                <div class="profile-meta">
+                  <strong>${escapeHtml(currentUser.displayName || currentUser.username.replace(/^@/, ""))}</strong>
+                  <span class="muted">${escapeHtml(currentUser.username)}</span>
+                  <span class="muted">${escapeHtml(currentUser.location || "Gaborone, Botswana")} • Joined ${escapeHtml(formatDisplayDate(currentUser.joinedAt))}</span>
+                </div>
+              </div>
+              <span class="signal-pill">${escapeHtml(currentUser.provider || "Local")}</span>
+            </div>
+
+            <div class="profile-stats-row" style="margin-top:14px;">
+              <div class="profile-stat"><strong class="stats-value">${stats.posts}</strong><span class="muted">Posts</span></div>
+              <div class="profile-stat"><strong class="stats-value">${stats.followers}</strong><span class="muted">Followers</span></div>
+              <div class="profile-stat"><strong class="stats-value">${stats.following}</strong><span class="muted">Following</span></div>
+              <div class="profile-stat"><strong class="stats-value">${stats.likesReceived}</strong><span class="muted">Likes</span></div>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <p class="brand-kicker">Identity</p>
+            <div class="profile-edit-grid">
+              <div class="field-group"><label class="field-label" for="profile-display-name">Display name</label><input class="field" id="profile-display-name" type="text" value="${escapeHtml(currentUser.displayName || "")}"></div>
+              <div class="field-group"><label class="field-label" for="profile-username">Username</label><input class="field" id="profile-username" type="text" value="${escapeHtml(currentUser.username)}"></div>
+              <div class="field-group"><label class="field-label" for="profile-bio">Bio</label><textarea id="profile-bio">${escapeHtml(currentUser.bio || "")}</textarea></div>
+              <div class="field-group"><label class="field-label" for="profile-location">Location</label><input class="field" id="profile-location" type="text" value="${escapeHtml(currentUser.location || "")}" placeholder="Gaborone, Botswana"></div>
+              <div class="field-group"><label class="field-label" for="profile-default-size">Default size</label><input class="field" id="profile-default-size" type="text" value="${escapeHtml(currentUser.defaultSize || "M")}" placeholder="M"></div>
+              <div class="field-group"><label class="field-label">Linked sign-in</label><div class="inline-field-note">${escapeHtml(currentUser.provider || "Local")} • ${escapeHtml(currentUser.contact || "No contact available")}</div></div>
+            </div>
+            <div class="modal-actions" style="margin-top:14px;">
+              <button class="cta" type="button" id="profile-save-button">Save Profile</button>
+              <button class="secondary-cta" type="button" id="profile-open-auth-drawer">Account Access</button>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <p class="brand-kicker">Content</p>
+            <div class="profile-content-tabs" id="profile-content-tabs">
+              ${tabLabels.map((label) => `<button class="section-tab${label === activeProfileTab ? " active" : ""}" type="button" data-profile-tab="${escapeHtml(label)}">${escapeHtml(label)}</button>`).join("")}
+            </div>
+            <div class="profile-post-grid" id="profile-post-grid">
+              ${profilePosts.length ? profilePosts.map(profilePostCardMarkup).join("") : `<div class="profile-empty"><p class="empty-title">No posts in this tab yet.</p><div class="muted">Your ${escapeHtml(activeProfileTab.toLowerCase())} activity will show here.</div></div>`}
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <p class="brand-kicker">Orders</p>
+            <div class="orders-list" id="profile-order-list">
+              ${getOrderHistory().length ? getOrderHistory().map((entry) => `
+                <article class="order-card">
+                  <div class="order-card-head">
+                    <div>
+                      <strong>${escapeHtml(entry.productName)}</strong>
+                      <div class="muted">Size ${escapeHtml(entry.size)} • ${formatPrice(entry.price)} • ${escapeHtml(formatDisplayDate(entry.createdAt))}</div>
+                    </div>
+                    <button class="secondary-cta order-replay" type="button" data-reorder="${escapeHtml(entry.id)}">Reorder</button>
+                  </div>
+                </article>
+              `).join("") : `<div class="profile-empty"><p class="empty-title">No WhatsApp orders logged yet.</p><div class="muted">Orders placed from this device will appear here for quick reorders.</div></div>`}
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <p class="brand-kicker">Utilities</p>
+            <div class="profile-utility-grid">
+              <button class="cta" type="button" id="profile-screen-install">Install App</button>
+              <button class="secondary-cta" type="button" id="profile-screen-alerts">Open Alerts</button>
+              <button class="secondary-cta" type="button" id="profile-screen-notify">Enable Alerts</button>
+              <button class="secondary-cta" type="button" id="profile-share-link">Share Profile</button>
+              ${currentUser.isAdmin ? '<button class="cta" type="button" id="profile-admin-shortcut">Open Admin</button>' : ""}
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <p class="brand-kicker">Account Settings</p>
+            ${currentUser.provider === "Email" ? `
+              <div class="field-group">
+                <label class="field-label" for="profile-new-password">Change password</label>
+                <input class="field" id="profile-new-password" type="password" placeholder="Enter a new password">
+              </div>
+              <button class="secondary-cta" type="button" id="profile-password-button" style="margin-top:14px;">Update Password</button>
+            ` : `<div class="inline-field-note">Password changes are only available for email/password accounts.</div>`}
+          </div>
+
+          <div class="settings-card">
+            <p class="brand-kicker">Danger Zone</p>
+            <div class="profile-utility-grid">
+              <button class="danger-ghost" type="button" id="profile-signout-button">Sign Out</button>
+              <button class="danger-ghost" type="button" id="profile-delete-button">Delete Account</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("profile-photo-trigger").addEventListener("click", () => document.getElementById("profile-photo-input").click());
+      document.getElementById("profile-photo-input").addEventListener("change", handleProfilePhotoChange);
+      document.getElementById("profile-save-button").addEventListener("click", saveProfileSettings);
+      document.getElementById("profile-open-auth-drawer").addEventListener("click", () => openModal("profile-drawer"));
+      document.getElementById("profile-screen-install").addEventListener("click", promptInstall);
+      document.getElementById("profile-screen-alerts").addEventListener("click", () => setScreen("alerts"));
+      document.getElementById("profile-screen-notify").addEventListener("click", requestNotifications);
+      document.getElementById("profile-share-link").addEventListener("click", shareCurrentProfile);
+      if (document.getElementById("profile-admin-shortcut")) {
+        document.getElementById("profile-admin-shortcut").addEventListener("click", () => setScreen("admin"));
+      }
+      if (document.getElementById("profile-password-button")) {
+        document.getElementById("profile-password-button").addEventListener("click", changeProfilePassword);
+      }
+      document.getElementById("profile-signout-button").addEventListener("click", async () => {
+        if (fbAuthAvailable() && window._fb.fbAuth.currentUser) {
+          try { await window._fb.signOut(window._fb.fbAuth); } catch (error) {}
+        }
+        currentUser = null;
+        persistUser();
+        renderProfileSummary();
+        renderProfileScreen();
+        renderCommunity();
+        renderAdmin();
+        showToast("Signed out.");
+      });
+      document.getElementById("profile-delete-button").addEventListener("click", deleteCurrentAccount);
+      document.querySelectorAll("[data-profile-tab]").forEach((button) => {
+        button.addEventListener("click", () => {
+          activeProfileTab = button.dataset.profileTab;
+          persistPrefs();
+          renderProfileScreen();
+        });
+      });
+      document.querySelectorAll("[data-open-post-product]").forEach((button) => {
+        button.addEventListener("click", () => openProduct(button.dataset.openPostProduct));
+      });
+      document.querySelectorAll("[data-reorder]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const entry = getOrderHistory().find((order) => order.id === button.dataset.reorder);
+          if (!entry) return;
+          window.open(entry.message, "_blank", "noopener");
+        });
+      });
+    }
+
+    function renderPublicProfile(profile) {
+      if (!publicProfileShellEl || !profile) return;
+      const stats = getProfileStatsFor(profile);
+      const profilePosts = getPostsForProfile(profile);
+      publicProfileShellEl.innerHTML = `
+        <div class="public-user-card">
+          <div class="public-user-head">
+            <div class="public-user-identity">
+              ${profile.photoURL ? `<div class="public-avatar"><img src="${escapeHtml(profile.photoURL)}" alt="${escapeHtml(profile.username)}"></div>` : `<div class="public-avatar">${escapeHtml(getInitials(profile.username))}</div>`}
+              <div class="user-meta">
+                <strong>${escapeHtml(profile.displayName || profile.username.replace(/^@/, ""))}</strong>
+                <span class="muted">${escapeHtml(profile.username)}</span>
+                <span class="muted">${escapeHtml(profile.location || "Botswana")} • Joined ${escapeHtml(formatDisplayDate(profile.joinedAt))}</span>
+              </div>
+            </div>
+            ${currentUser && profile.username !== currentUser.username ? `<button class="${isFollowingProfile(profile) ? "danger-ghost" : "cta"}" type="button" id="public-follow-toggle">${isFollowingProfile(profile) ? "Unfollow" : "Follow"}</button>` : ""}
+          </div>
+          <p class="muted" style="margin-top:12px;">${escapeHtml(profile.bio || "Urban Threads community member.")}</p>
+          ${(profile.contact && profile.contact.startsWith("+")) || profile.username === "@urbanthreads" ? `<div class="modal-actions" style="margin-top:14px;"><a class="secondary-cta" href="https://wa.me/${profile.username === "@urbanthreads" ? whatsappNumber : escapeHtml(profile.contact.replace(/[^0-9]/g, ""))}" target="_blank" rel="noreferrer">WhatsApp</a></div>` : ""}
+          <div class="public-stats-row" style="margin-top:14px;">
+            <div class="profile-stat"><strong class="stats-value">${stats.posts}</strong><span class="muted">Posts</span></div>
+            <div class="profile-stat"><strong class="stats-value">${stats.followers}</strong><span class="muted">Followers</span></div>
+            <div class="profile-stat"><strong class="stats-value">${stats.following}</strong><span class="muted">Following</span></div>
+            <div class="profile-stat"><strong class="stats-value">${stats.likesReceived}</strong><span class="muted">Likes</span></div>
+          </div>
+          <div class="profile-post-grid" style="margin-top:14px;">
+            ${profilePosts.length ? profilePosts.slice(0, 6).map(profilePostCardMarkup).join("") : `<div class="profile-empty"><p class="empty-title">No posts from this member yet.</p></div>`}
+          </div>
+        </div>
+      `;
+
+      const followToggle = document.getElementById("public-follow-toggle");
+      if (followToggle) {
+        followToggle.addEventListener("click", () => toggleFollow(profile.uid || profile.username));
+      }
+      publicProfileShellEl.querySelectorAll("[data-open-post-product]").forEach((button) => {
+        button.addEventListener("click", () => openProduct(button.dataset.openPostProduct));
+      });
+    }
+
+    function openUserProfile(userKey) {
+      viewedUserKey = userKey;
+      const profile = getProfileByKey(userKey);
+      if (!profile) {
+        showToast("User profile not available yet.");
+        return;
+      }
+      renderPublicProfile(profile);
+      openModal("user-drawer");
+    }
+
     function getUserStats() {
       if (!currentUser) {
         return [
           { label: "Posts", value: "0" },
-          { label: "Likes", value: "0" },
-          { label: "Comments", value: "0" },
-          { label: "Reposts", value: "0" }
+          { label: "Followers", value: "0" },
+          { label: "Following", value: "0" },
+          { label: "Likes", value: "0" }
         ];
       }
 
-      const userPosts = getVisiblePosts().filter((post) => post.user === currentUser.username).length;
+      const stats = getProfileStatsFor(currentUser);
       return [
-        { label: "Posts", value: String(userPosts) },
-        { label: "Likes", value: String(currentUser.activity.likes) },
-        { label: "Comments", value: String(currentUser.activity.comments) },
-        { label: "Reposts", value: String(currentUser.activity.reposts) }
+        { label: "Posts", value: String(stats.posts) },
+        { label: "Followers", value: String(stats.followers) },
+        { label: "Following", value: String(stats.following) },
+        { label: "Likes", value: String(stats.likesReceived) }
       ];
     }
 
@@ -2554,7 +3916,7 @@
         profileSummaryEl.innerHTML = `
           <div class="profile-row">
             <div style="display:flex; gap:12px; align-items:center;">
-              <div class="profile-avatar">${escapeHtml(getInitials(currentUser.username))}</div>
+              <div class="profile-avatar">${currentUser.photoURL ? `<img src="${escapeHtml(currentUser.photoURL)}" alt="${escapeHtml(currentUser.username)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">` : escapeHtml(getInitials(currentUser.username))}</div>
               <div>
                 <strong class="profile-name">${escapeHtml(currentUser.username)}</strong>
                 <div class="muted">${escapeHtml(currentUser.bio || "Urban Threads community member.")}</div>
@@ -2590,7 +3952,7 @@
         });
       }
 
-      document.getElementById("auth-name").value = currentUser ? currentUser.username : "";
+      document.getElementById("auth-name").value = currentUser ? (currentUser.displayName || currentUser.username) : "";
       const emailEl = document.getElementById("auth-email");
       if (emailEl) emailEl.value = currentUser ? (currentUser.contact || "") : "";
       const bioEl = document.getElementById("auth-bio");
@@ -2602,6 +3964,224 @@
       const signedInEl = document.getElementById("auth-signed-in");
       if (signedInEl) signedInEl.classList.toggle("hidden", !currentUser);
       renderProfileUtilityState();
+    }
+
+    async function handleProfilePhotoChange(event) {
+      if (!currentUser) return;
+      const file = event.target.files[0];
+      const draft = await prepareMediaDraft(file, "image");
+      if (!draft) return;
+
+      currentUser.photoURL = draft.src;
+
+      if (window._fb && window._fb.fbStorage && currentUser.uid && draft.file) {
+        try {
+          const { fbStorage, ref, uploadBytes, getDownloadURL } = window._fb;
+          const photoRef = ref(fbStorage, "avatars/" + currentUser.uid + "_" + Date.now() + "_" + draft.name);
+          const snapshot = await uploadBytes(photoRef, draft.file);
+          currentUser.photoURL = await getDownloadURL(snapshot.ref);
+        } catch (error) {
+          showToast("Using local profile photo preview.");
+        }
+      }
+
+      persistUser();
+      upsertProfileCache(currentUser);
+      await syncCurrentUserProfile();
+      renderProfileSummary();
+      renderProfileScreen();
+      renderCommunity();
+    }
+
+    async function saveProfileSettings() {
+      if (!currentUser) return;
+      const nextDisplayName = document.getElementById("profile-display-name").value.trim();
+      const nextUsernameRaw = document.getElementById("profile-username").value.trim();
+      const nextBio = document.getElementById("profile-bio").value.trim();
+      const nextLocation = document.getElementById("profile-location").value.trim();
+      const nextDefaultSize = document.getElementById("profile-default-size").value.trim() || "M";
+
+      if (!nextDisplayName || !nextUsernameRaw) {
+        showToast("Display name and username are required.");
+        return;
+      }
+
+      const nextUsername = nextUsernameRaw.startsWith("@") ? nextUsernameRaw : "@" + nextUsernameRaw.replace(/\s+/g, "_");
+      const previousUsername = currentUser.username;
+      currentUser.displayName = nextDisplayName;
+      currentUser.username = nextUsername;
+      currentUser.bio = nextBio;
+      currentUser.location = nextLocation;
+      currentUser.defaultSize = nextDefaultSize.toUpperCase();
+
+      posts.forEach((post) => {
+        if (post.uid && currentUser.uid && String(post.uid) === String(currentUser.uid)) {
+          post.user = currentUser.username;
+          post.avatar = getInitials(currentUser.username);
+          post.photoURL = currentUser.photoURL || "";
+        } else if (!post.uid && post.user === previousUsername) {
+          post.user = currentUser.username;
+          post.avatar = getInitials(currentUser.username);
+          post.photoURL = currentUser.photoURL || "";
+        }
+      });
+
+      if (fbAuthAvailable() && window._fb.fbAuth.currentUser) {
+        try {
+          await window._fb.updateProfile(window._fb.fbAuth.currentUser, {
+            displayName: nextDisplayName,
+            photoURL: currentUser.photoURL || null
+          });
+        } catch (error) {
+          console.warn("Firebase profile update skipped:", error);
+        }
+      }
+
+      persistUser();
+      upsertProfileCache(currentUser);
+      await syncCurrentUserProfile();
+      renderFeed();
+      renderCommunity();
+      renderProfileSummary();
+      renderProfileScreen();
+      showToast("Profile updated.");
+    }
+
+    async function changeProfilePassword() {
+      if (!currentUser || currentUser.provider !== "Email" || !window._fb || !window._fb.fbAuth.currentUser) {
+        showToast("Password changes are only available for email accounts.");
+        return;
+      }
+      const nextPassword = document.getElementById("profile-new-password").value;
+      if (!nextPassword || nextPassword.length < 6) {
+        showToast("Enter a password with at least 6 characters.");
+        return;
+      }
+      try {
+        await window._fb.updatePassword(window._fb.fbAuth.currentUser, nextPassword);
+        document.getElementById("profile-new-password").value = "";
+        showToast("Password updated.");
+      } catch (error) {
+        showToast("Password update requires a fresh sign in.");
+      }
+    }
+
+    async function deleteCurrentAccount() {
+      if (!currentUser) return;
+      const confirmed = window.confirm("Delete this account and its saved profile data from this device?");
+      if (!confirmed) return;
+
+      try {
+        if (window._fb && currentUser.uid) {
+          const { fbDb, doc, deleteDoc, fbAuth, deleteUser } = window._fb;
+          try { await deleteDoc(doc(fbDb, "users", currentUser.uid)); } catch (error) {}
+          if (fbAuth.currentUser) {
+            await deleteUser(fbAuth.currentUser);
+          }
+        }
+      } catch (error) {
+        showToast("Could not delete the auth account. Sign in again and retry.");
+        return;
+      }
+
+      const viewerKey = getViewerKey(currentUser);
+      followEntries = followEntries.filter((entry) => String(entry.followerId) !== String(viewerKey) && String(entry.followingId || entry.followingUsername) !== String(viewerKey));
+      likeEntries = likeEntries.filter((entry) => String(entry.userId) !== String(viewerKey));
+      savedEntries = savedEntries.filter((entry) => String(entry.userId) !== String(viewerKey));
+      repostEntries = repostEntries.filter((entry) => String(entry.userId) !== String(viewerKey));
+      orderEntries = orderEntries.filter((entry) => String(entry.userId) !== String(viewerKey));
+      delete profileCache[String(viewerKey).toLowerCase()];
+      currentUser = null;
+      persistUser();
+      persistSocialState();
+      renderProfileSummary();
+      renderProfileScreen();
+      renderCommunity();
+      renderFeed();
+      showToast("Account deleted from the prototype.");
+    }
+
+    async function toggleFollow(userKey) {
+      if (!ensureAuthenticated("Sign in to follow community members.")) return;
+      const profile = getProfileByKey(userKey);
+      if (!profile) return;
+      if (currentUser.uid && profile.uid && String(currentUser.uid) === String(profile.uid)) return;
+      if (!currentUser.uid && profile.username === currentUser.username) return;
+
+      const viewerKey = getViewerKey();
+      const targetKey = profile.uid || profile.username;
+      const localIndex = followEntries.findIndex((entry) => {
+        return String(entry.followerId) === String(viewerKey) && String(entry.followingId || entry.followingUsername) === String(targetKey);
+      });
+      const cloudIndex = cloudFollowEntries.findIndex((entry) => {
+        return String(entry.followerId) === String(viewerKey) && String(entry.followingId || entry.followingUsername) === String(targetKey);
+      });
+
+      if (localIndex >= 0 || cloudIndex >= 0) {
+        const removed = localIndex >= 0 ? followEntries.splice(localIndex, 1)[0] : cloudFollowEntries.splice(cloudIndex, 1)[0];
+        if ((removed.cloudId || removed.id) && window._fb) {
+          try {
+            await window._fb.deleteDoc(window._fb.doc(window._fb.fbDb, "follows", removed.cloudId || removed.id));
+          } catch (error) {}
+        }
+        persistSocialState();
+        renderProfileSummary();
+        renderCommunity();
+        renderProfileScreen();
+        if (viewedUserKey) renderPublicProfile(getProfileByKey(viewedUserKey));
+        renderFeed();
+        showToast("Unfollowed " + profile.username);
+        return;
+      }
+
+      const entry = {
+        id: "follow-" + Date.now(),
+        followerId: viewerKey,
+        followingId: targetKey,
+        followingUsername: profile.username,
+        createdAt: new Date().toISOString()
+      };
+      followEntries.unshift(entry);
+
+      if (window._fb && currentUser.uid) {
+        try {
+          const snapshot = await window._fb.addDoc(window._fb.collection(window._fb.fbDb, "follows"), {
+            followerId: currentUser.uid,
+            followingId: targetKey,
+            followingUsername: profile.username,
+            createdAt: window._fb.serverTimestamp()
+          });
+          entry.cloudId = snapshot.id;
+          persistSocialState();
+        } catch (error) {
+          console.warn("Cloud follow save skipped:", error);
+        }
+      }
+
+      persistSocialState();
+      renderProfileSummary();
+      renderCommunity();
+      renderProfileScreen();
+      if (viewedUserKey) renderPublicProfile(getProfileByKey(viewedUserKey));
+      renderFeed();
+      showToast("Following " + profile.username);
+    }
+
+    async function shareCurrentProfile() {
+      if (!currentUser) return;
+      const profileUrl = `https://thapeloo.github.io/urban-studios?user=${encodeURIComponent(currentUser.username)}`;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: "Urban Threads Profile", text: currentUser.username, url: profileUrl });
+          return;
+        } catch (error) {}
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(profileUrl);
+        showToast("Profile link copied.");
+        return;
+      }
+      showToast(profileUrl);
     }
 
     function renderPostAccessState() {
@@ -3129,7 +4709,9 @@
     function openProduct(productId) {
       currentProduct = productById(productId);
       if (!currentProduct) return;
-      currentSize = currentProduct.sizes[0];
+      currentSize = currentUser && currentUser.defaultSize && currentProduct.sizes.includes(currentUser.defaultSize)
+        ? currentUser.defaultSize
+        : currentProduct.sizes[0];
 
       const detailVisual = document.getElementById("detail-visual");
       detailVisual.innerHTML = getVisualMarkup(currentProduct, "detail");
@@ -3179,9 +4761,13 @@
           const item = document.createElement("article");
           item.className = "comment-card";
           item.innerHTML = `
-            <strong class="comment-name">${escapeHtml(comment.name)}</strong>
+            <strong class="comment-name"><button type="button" data-view-user="${escapeHtml(comment.uid || comment.name)}" style="padding:0;background:transparent;border:0;color:inherit;font:inherit;font-weight:700;">${escapeHtml(comment.name)}</button></strong>
             <p class="comment-copy">${escapeHtml(comment.text)}</p>
           `;
+          const userButton = item.querySelector("[data-view-user]");
+          if (userButton) {
+            userButton.addEventListener("click", () => openUserProfile(userButton.dataset.viewUser));
+          }
           commentListEl.appendChild(item);
         });
       }
@@ -3212,11 +4798,14 @@
 
       if (action === "share" && navigator.share) {
         try {
+          post.shares += 1;
           await navigator.share({
             title: "Urban Threads",
             text: post.caption,
             url: location.href
           });
+          renderFeed();
+          renderCommunity();
           showToast("Share sheet opened.");
         } catch (error) {
           showToast("Share cancelled.");
@@ -3226,7 +4815,10 @@
 
       if (action === "share") {
         try {
+          post.shares += 1;
           await navigator.clipboard.writeText(location.href);
+          renderFeed();
+          renderCommunity();
           showToast("Link copied.");
         } catch (error) {
           showToast("Share is not available in this browser.");
@@ -3241,9 +4833,23 @@
       if (action === "like") {
         post.likes += 1;
         currentUser.activity.likes += 1;
+        if (!likeEntries.some((entry) => entry.userId === getViewerKey() && entry.postId === post.id)) {
+          likeEntries.unshift({
+            id: "like-" + Date.now(),
+            userId: getViewerKey(),
+            postId: post.id,
+            category: product.category,
+            ownerId: post.uid || post.user,
+            createdAt: new Date().toISOString()
+          });
+          persistSocialState();
+        }
         persistUser();
         updateRenderedPostCount(post.id, "like", post.likes);
         renderProfileSummary();
+        renderProfileScreen();
+        renderCommunity();
+        renderFeed();
         showToast("Post liked.");
         return;
       }
@@ -3251,9 +4857,21 @@
       if (action === "repost") {
         post.reposts += 1;
         currentUser.activity.reposts += 1;
+        if (!repostEntries.some((entry) => entry.userId === getViewerKey() && entry.postId === post.id)) {
+          repostEntries.unshift({
+            id: "repost-" + Date.now(),
+            userId: getViewerKey(),
+            postId: post.id,
+            createdAt: new Date().toISOString()
+          });
+          persistSocialState();
+        }
         persistUser();
         updateRenderedPostCount(post.id, "repost", post.reposts);
         renderProfileSummary();
+        renderProfileScreen();
+        renderCommunity();
+        renderFeed();
         showToast("Reposted to your followers.");
       }
     }
@@ -3367,6 +4985,8 @@
         type: payload.type.toLowerCase(),
         user: currentUser.username,
         avatar: getInitials(currentUser.username),
+        uid: currentUser.uid || null,
+        photoURL: currentUser.photoURL || "",
         caption: payload.caption,
         productId: payload.productId,
         categories: ["All", product.category],
@@ -3395,6 +5015,8 @@
     });
 
     document.getElementById("detail-order").addEventListener("click", () => {
+      recordOrderHistory(currentProduct, currentSize);
+      renderProfileScreen();
       window.open(buildWhatsAppUrl(currentProduct, currentSize), "_blank", "noopener");
     });
 
@@ -3403,8 +5025,16 @@
         return;
       }
       currentUser.activity.reposts += 1;
+      repostEntries.unshift({
+        id: "repost-" + Date.now(),
+        userId: getViewerKey(),
+        postId: "product-" + currentProduct.id,
+        createdAt: new Date().toISOString()
+      });
+      persistSocialState();
       persistUser();
       renderProfileSummary();
+      renderProfileScreen();
       showToast(currentProduct.name + " reposted.");
     });
 
@@ -3420,13 +5050,15 @@
         return;
       }
 
-      currentCommentsPost.commentsList.unshift({ name: currentUser.username, text: value });
+      currentCommentsPost.commentsList.unshift({ name: currentUser.username, text: value, uid: currentUser.uid || currentUser.username });
       currentCommentsPost.comments += 1;
       currentUser.activity.comments += 1;
       persistUser();
       input.value = "";
       updateRenderedPostCount(currentCommentsPost.id, "comment", currentCommentsPost.comments);
       renderProfileSummary();
+      renderProfileScreen();
+      renderCommunity();
       openComments(currentCommentsPost.id);
       showToast("Comment posted.");
     });
@@ -3444,19 +5076,36 @@
       if (!fbUser) return;
       const displayName = (fbUser.displayName || extraData.username || fbUser.email || fbUser.phoneNumber || "urban_fan").replace(/\s+/g, "_");
       const username = displayName.startsWith("@") ? displayName : "@" + displayName;
+      const providerId = fbUser.providerData && fbUser.providerData[0] ? fbUser.providerData[0].providerId : "";
+      const provider = providerId === "google.com" ? "Google" : providerId === "password" ? "Email" : providerId === "phone" ? "Phone" : "Local";
       currentUser = normalizeUser({
         username,
+        displayName: fbUser.displayName || displayName.replace(/^@/, ""),
         contact: fbUser.email || fbUser.phoneNumber || "",
         bio: extraData.bio || "",
+        location: extraData.location || (currentUser && currentUser.location) || "",
+        photoURL: fbUser.photoURL || (currentUser && currentUser.photoURL) || "",
+        defaultSize: (currentUser && currentUser.defaultSize) || "M",
+        provider,
         isAdmin: (extraData.passcode || "") === ADMIN_PASSCODE,
         joinedAt: currentUser && currentUser.joinedAt ? currentUser.joinedAt : new Date().toISOString(),
         activity: currentUser && currentUser.activity ? currentUser.activity : { likes: 0, reposts: 0, comments: 0 },
         uid: fbUser.uid
       });
       persistUser();
+      upsertProfileCache(currentUser);
       renderProfileSummary();
+      renderProfileScreen();
+      renderCommunity();
       renderPostAccessState();
       renderAdmin();
+      syncCurrentUserProfile();
+      refreshCloudData().then(() => {
+        renderFeed();
+        renderCommunity();
+        renderProfileSummary();
+        renderProfileScreen();
+      });
       closeModal("profile-drawer");
       showToast("Signed in as " + username);
     }
@@ -3469,6 +5118,9 @@
         currentUser = null;
         persistUser();
         renderProfileSummary();
+        renderProfileScreen();
+        renderCommunity();
+        renderFeed();
         renderPostAccessState();
         renderAdmin();
         showToast("Signed out.");
@@ -3576,6 +5228,9 @@
       currentUser = null;
       persistUser();
       renderProfileSummary();
+      renderProfileScreen();
+      renderCommunity();
+      renderFeed();
       renderPostAccessState();
       renderAdmin();
       if (screenMap.admin.classList.contains("active")) {
@@ -3587,6 +5242,10 @@
     profileInstallButtonEl.addEventListener("click", promptInstall);
     profileNotifyButtonEl.addEventListener("click", requestNotifications);
     document.getElementById("admin-back").addEventListener("click", () => setScreen(previousScreen));
+    communitySearchEl.addEventListener("input", (event) => {
+      communitySearchTerm = event.target.value;
+      renderCommunity();
+    });
 
     postMediaInputEl.addEventListener("change", handlePostMediaChange);
 
@@ -3652,6 +5311,8 @@
       renderFeed();
       renderFitsGrid();
       renderProfileSummary();
+      renderProfileScreen();
+      renderCommunity();
       setScreen("feed");
       showToast("Post shared to the community feed.");
     });
@@ -3683,6 +5344,7 @@
     renderFeed();
     renderFitsFilters();
     renderFitsGrid();
+    renderCommunity();
     renderPostTypes();
     renderPostProductOptions();
     renderPostPreview();
@@ -3691,10 +5353,18 @@
     renderShop();
     renderAlerts();
     renderProfileSummary();
+    renderProfileScreen();
     renderAdminStats();
     renderAdminTabs();
     renderAdmin();
     setViewportMetrics();
+    refreshCloudData().then(() => {
+      renderFeed();
+      renderCommunity();
+      renderProfileSummary();
+      renderProfileScreen();
+      renderAdmin();
+    });
   </script>
 </body>
 </html>

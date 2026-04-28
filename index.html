@@ -40,8 +40,8 @@
       --phone-width: min(100vw, 430px);
       --font-display: "Space Grotesk", sans-serif;
       --font-body: "Plus Jakarta Sans", sans-serif;
-      --hero-height: 36px;
-      --nav-height: 54px;
+      --hero-height: 44px;
+      --nav-height: 58px;
     }
 
     * {
@@ -130,10 +130,12 @@
       position: sticky;
       top: 0;
       z-index: 30;
-      min-height: calc(36px + env(safe-area-inset-top));
-      padding: env(safe-area-inset-top) 10px 0;
+      height: calc(44px + env(safe-area-inset-top));
+      padding: env(safe-area-inset-top) 10px 2px;
       background: linear-gradient(180deg, rgba(6, 6, 6, 0.72), rgba(6, 6, 6, 0.14), transparent);
       backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
     }
 
     .feed-topbar,
@@ -561,7 +563,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      min-height: 52px;
+      min-height: 38px;
       padding: 0 15px;
       background: linear-gradient(135deg, #f5c518, #ffdf73);
       color: #090909;
@@ -789,6 +791,44 @@
       gap: 14px;
     }
 
+    .light-screen .shop-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 4px;
+      margin-top: 10px;
+    }
+
+    .search-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0;
+      border: 0;
+      box-shadow: none;
+      padding: 0;
+      gap: 0;
+      cursor: pointer;
+      background: #ddd;
+    }
+
+    .search-tile-visual {
+      min-height: 132px;
+      border-radius: 0;
+    }
+
+    .search-tile-meta {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 6px 8px;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7));
+      color: #fff;
+      font-size: 10px;
+      z-index: 2;
+    }
+
     .product-visual,
     .detail-visual,
     .mini-visual,
@@ -927,9 +967,12 @@
       transform: translateX(-50%);
       z-index: 40;
       width: var(--phone-width);
-      padding: 3px 8px calc(3px + env(safe-area-inset-bottom));
+      padding: 4px 8px calc(4px + env(safe-area-inset-bottom));
       background: linear-gradient(180deg, transparent, rgba(6, 6, 6, 0.94) 26%);
       backdrop-filter: blur(18px);
+      height: 58px;
+      display: flex;
+      align-items: flex-start;
     }
 
     .nav-shell {
@@ -937,19 +980,23 @@
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 1px;
       padding: 2px;
-      border-radius: 16px;
+      border-radius: 14px;
       background: rgba(18, 18, 18, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      width: 100%;
+      height: 50px;
     }
 
     .nav-button {
-      min-height: 38px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      gap: 2px;
-      padding: 2px 2px 3px;
-      font-size: 10px;
+      min-height: 46px;
+      border-radius: 9px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      padding: 2px;
+      font-size: 9px;
       font-weight: 700;
       line-height: 1;
       letter-spacing: 0.04em;
@@ -958,7 +1005,7 @@
     }
 
     .nav-button.post {
-      min-height: 44px;
+      min-height: 46px;
       background: linear-gradient(135deg, #f5c518, #ffdc62);
       color: #090909;
       border-color: rgba(245, 197, 24, 0.82);
@@ -1185,10 +1232,132 @@
       color: var(--text);
     }
 
+    .light-screen {
+      background: #efefef;
+      color: #1f1f1f;
+      padding-top: max(18px, env(safe-area-inset-top));
+    }
+
+    .mobile-header {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mobile-brand {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #202020;
+    }
+
+    .mobile-search-wrap {
+      position: relative;
+    }
+
+    .light-search {
+      border: 0;
+      border-radius: 0;
+      min-height: 52px;
+      padding: 0 46px 0 6px;
+      background: transparent;
+      color: #2f2f2f;
+      font-size: 2rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .light-search::placeholder {
+      color: #8f8f8f;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: #b5b5b5;
+      pointer-events: none;
+    }
+
+    .quick-categories {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+
+    .quick-categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .quick-cat {
+      border: 0;
+      width: 68px;
+      height: 68px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      background: #d7d7d7;
+      color: #454545;
+    }
+
+    .quick-cat.active {
+      background: #1157d4;
+      color: #fff;
+    }
+
     .community-panel,
     .profile-panel {
       display: grid;
       gap: 14px;
+    }
+
+    .light-screen .section-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+
+    .light-screen .section-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .light-screen .section-tab {
+      min-height: 32px;
+      padding: 0 12px;
+      font-size: 0.7rem;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: #3a3a3a;
+      background: #fff;
+      letter-spacing: 0.03em;
+      text-transform: none;
+    }
+
+    .light-screen .section-tab.active {
+      color: #1157d4;
+      border-color: rgba(17, 87, 212, 0.32);
+      background: rgba(17, 87, 212, 0.08);
+    }
+
+    .light-screen .screen-card,
+    .light-screen .user-row,
+    .light-screen .leaderboard-card,
+    .light-screen .order-card,
+    .light-screen .settings-card,
+    .light-screen .profile-hero-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .light-screen .muted {
+      color: #6f6f6f;
     }
 
     .community-feed-deck {
@@ -1310,6 +1479,53 @@
     .user-meta .muted {
       display: block;
       margin-top: 2px;
+    }
+
+    .modern-profile-hero {
+      position: relative;
+      overflow: hidden;
+      padding-top: 28px;
+      background: linear-gradient(180deg, #f4f8ff 0%, #ffffff 68%);
+    }
+
+    .profile-cover-gradient {
+      position: absolute;
+      inset: 0 0 auto;
+      height: 120px;
+      background: linear-gradient(135deg, rgba(63, 122, 255, 0.32), rgba(57, 203, 255, 0.24));
+      pointer-events: none;
+    }
+
+    .modern-profile .profile-hero-head,
+    .modern-profile .profile-stats-row {
+      position: relative;
+      z-index: 2;
+    }
+
+    .modern-profile .profile-avatar-lg {
+      width: 86px;
+      height: 86px;
+      border-color: rgba(0, 0, 0, 0.08);
+      background: #fff;
+      color: #1f1f1f;
+    }
+
+    .modern-profile .profile-meta strong {
+      color: #202020;
+      font-size: 1.35rem;
+    }
+
+    .modern-profile .profile-stat {
+      min-width: 0;
+      border: 0;
+      box-shadow: none;
+      background: rgba(33, 33, 33, 0.04);
+      text-align: center;
+    }
+
+    .modern-profile .profile-stat .muted,
+    .modern-profile .profile-meta .muted {
+      color: #6a6a6a;
     }
 
     .profile-edit-grid,
@@ -1487,16 +1703,22 @@
         <div class="feed-deck" id="feed-deck"></div>
       </section>
 
-      <section class="screen" id="screen-community">
-        <div class="section-row">
-          <div>
-            <p class="brand-kicker">Friends and Community</p>
-            <h2 class="section-title">Find people, follow their looks, and keep your circle close.</h2>
+      <section class="screen light-screen" id="screen-community">
+        <div class="mobile-header">
+          <strong class="mobile-brand">Urban Threads</strong>
+          <div class="mobile-search-wrap">
+            <input class="search-field light-search" id="community-search" type="search" placeholder="Explore now">
+            <span class="search-icon">⌕</span>
           </div>
         </div>
-        <p class="muted">Discover new members, manage your following list, watch a followed-only feed, and still browse the fits grid.</p>
+        <div class="quick-categories">
+          <button class="quick-cat active" type="button">Shirt</button>
+          <button class="quick-cat" type="button">Jorts</button>
+          <button class="quick-cat" type="button">Jeans</button>
+          <button class="quick-cat" type="button">Caps</button>
+          <button class="quick-cat" type="button">Hoodies</button>
+        </div>
         <div class="community-shell">
-          <input class="search-field" id="community-search" type="search" placeholder="Search by @username">
           <div class="section-tabs" id="community-tabs"></div>
 
           <div class="community-panel" id="community-discover-panel">
@@ -1588,14 +1810,14 @@
         </div>
       </section>
 
-      <section class="screen" id="screen-shop">
-        <div class="section-row">
-          <div>
-            <p class="brand-kicker">Shop Catalogue</p>
-            <h2 class="section-title">Everything routes through WhatsApp after size selection.</h2>
+      <section class="screen light-screen" id="screen-shop">
+        <div class="mobile-header">
+          <strong class="mobile-brand">Urban Threads</strong>
+          <div class="mobile-search-wrap">
+            <input class="search-field light-search" type="search" placeholder="Explore now">
+            <span class="search-icon">⌕</span>
           </div>
         </div>
-        <p class="muted">Every order action now opens product detail first so the customer chooses the correct size before WhatsApp launches.</p>
         <div class="shop-categories" id="shop-categories"></div>
         <div class="shop-grid" id="shop-grid"></div>
       </section>
@@ -1615,12 +1837,9 @@
         </div>
       </section>
 
-      <section class="screen" id="screen-profile">
-        <div class="section-row">
-          <div>
-            <p class="brand-kicker">Profile</p>
-            <h2 class="section-title">Your Urban Threads identity, activity, settings, and order history.</h2>
-          </div>
+      <section class="screen light-screen" id="screen-profile">
+        <div class="mobile-header">
+          <strong class="mobile-brand">Urban Threads</strong>
         </div>
         <div class="profile-screen-shell" id="profile-screen-shell"></div>
       </section>
@@ -1651,7 +1870,7 @@
             <path d="M4 6h16"></path>
             <path d="M4 16h10"></path>
           </svg>
-          <span>Feed</span>
+          <span>Home</span>
         </button>
         <button class="nav-button" type="button" data-screen="community">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1675,7 +1894,7 @@
             <circle cx="18" cy="20" r="1.2"></circle>
             <path d="M3 4h2l2.2 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H7.2"></path>
           </svg>
-          <span>Shop</span>
+          <span>Search</span>
         </button>
         <button class="nav-button" type="button" data-screen="profile">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1869,6 +2088,63 @@
     </div>
   </section>
 
+  <section class="drawer" id="orders-drawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close="orders-drawer"></div>
+    <div class="drawer-panel">
+      <div class="section-row">
+        <div>
+          <p class="brand-kicker">Order History</p>
+          <h3 class="modal-title">Quick reorder from WhatsApp</h3>
+        </div>
+        <button class="icon-button" type="button" data-close="orders-drawer" aria-label="Close orders">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="orders-list" id="drawer-orders-list"></div>
+    </div>
+  </section>
+
+  <section class="drawer" id="followers-drawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close="followers-drawer"></div>
+    <div class="drawer-panel">
+      <div class="section-row">
+        <div>
+          <p class="brand-kicker">Followers</p>
+          <h3 class="modal-title">People following you</h3>
+        </div>
+        <button class="icon-button" type="button" data-close="followers-drawer" aria-label="Close followers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="user-list" id="drawer-followers-list"></div>
+    </div>
+  </section>
+
+  <section class="drawer" id="following-drawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close="following-drawer"></div>
+    <div class="drawer-panel">
+      <div class="section-row">
+        <div>
+          <p class="brand-kicker">Following</p>
+          <h3 class="modal-title">People you follow</h3>
+        </div>
+        <button class="icon-button" type="button" data-close="following-drawer" aria-label="Close following">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="user-list" id="drawer-following-list"></div>
+    </div>
+  </section>
+
   <div class="toast-shell" id="toast-shell" aria-live="polite">
     <div class="toast" id="toast"></div>
   </div>
@@ -1876,7 +2152,7 @@
   <!-- Firebase SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, RecaptchaVerifier, signInWithPhoneNumber, signOut, onAuthStateChanged, updateProfile, deleteUser, updatePassword } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, RecaptchaVerifier, signInWithPhoneNumber, signOut, onAuthStateChanged, updateProfile, deleteUser, updatePassword } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
     import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp, doc, updateDoc, increment, where, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-storage.js";
 
@@ -1895,10 +2171,19 @@
     const fbStorage = getStorage(fbApp);
     const googleProvider = new GoogleAuthProvider();
 
-    window._fb = { fbAuth, fbDb, fbStorage, googleProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged, updateProfile, deleteUser, updatePassword, RecaptchaVerifier, signInWithPhoneNumber, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp, doc, updateDoc, increment, where, deleteDoc, setDoc, ref, uploadBytes, getDownloadURL };
+    window._fb = { fbAuth, fbDb, fbStorage, googleProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged, updateProfile, deleteUser, updatePassword, RecaptchaVerifier, signInWithPhoneNumber, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp, doc, updateDoc, increment, where, deleteDoc, setDoc, ref, uploadBytes, getDownloadURL };
 
     onAuthStateChanged(fbAuth, (user) => {
       if (window._onFbAuthChange) window._onFbAuthChange(user);
+    });
+
+    // Handle Google redirect result (Safari fallback)
+    getRedirectResult(fbAuth).then((result) => {
+      if (result && result.user) {
+        if (window._onFbAuthChange) window._onFbAuthChange(result.user);
+      }
+    }).catch((error) => {
+      console.warn('Redirect result error:', error);
     });
 
     // Signal that Firebase is fully ready
@@ -3534,27 +3819,17 @@
         .filter((product) => activeShopCategory === "All" || product.category === activeShopCategory)
         .forEach((product) => {
           const card = document.createElement("article");
-          card.className = "shop-card";
+          card.className = "shop-card search-tile";
           card.innerHTML = `
-            <div class="product-visual">
+            <div class="product-visual search-tile-visual">
               ${getVisualMarkup(product, "shop")}
             </div>
-            <div>
-              <span class="brand-kicker">${escapeHtml(product.category)}</span>
-              <h3>${escapeHtml(product.name)}</h3>
-              <p>${escapeHtml(product.description)}</p>
-            </div>
-            <div class="section-row">
-              <span class="product-price">${formatPrice(product.price)}</span>
-              <span class="stock-pill ${escapeHtml(product.stockTone)}">${escapeHtml(product.stockNote)}</span>
-            </div>
-            <div class="card-actions">
-              <button class="cta" type="button" data-open="${escapeHtml(product.id)}">View Product</button>
-              <button class="secondary-cta" type="button" data-order="${escapeHtml(product.id)}">Order</button>
+            <div class="search-tile-meta">
+              <strong>${escapeHtml(product.name)}</strong>
+              <span>${formatPrice(product.price)}</span>
             </div>
           `;
-          card.querySelector("[data-open]").addEventListener("click", () => openProduct(product.id));
-          card.querySelector("[data-order]").addEventListener("click", () => openProduct(product.id));
+          card.addEventListener("click", () => openProduct(product.id));
           shopGridEl.appendChild(card);
         });
     }
@@ -3682,8 +3957,9 @@
         : `<div class="profile-avatar-lg">${escapeHtml(getInitials(currentUser.username))}</div>`;
 
       profileScreenShellEl.innerHTML = `
-        <div class="profile-panel">
-          <div class="profile-hero-card">
+        <div class="profile-panel modern-profile">
+          <div class="profile-hero-card modern-profile-hero">
+            <div class="profile-cover-gradient"></div>
             <div class="profile-hero-head">
               <div class="profile-identity">
                 <div class="profile-avatar-stack">
@@ -3693,34 +3969,18 @@
                 </div>
                 <div class="profile-meta">
                   <strong>${escapeHtml(currentUser.displayName || currentUser.username.replace(/^@/, ""))}</strong>
-                  <span class="muted">${escapeHtml(currentUser.username)}</span>
-                  <span class="muted">${escapeHtml(currentUser.location || "Gaborone, Botswana")} • Joined ${escapeHtml(formatDisplayDate(currentUser.joinedAt))}</span>
+                  <span class="muted">${escapeHtml(currentUser.username)} • ${escapeHtml(currentUser.location || "Gaborone")}</span>
+                  <span class="muted">${escapeHtml(currentUser.bio || "Urban Threads member.")}</span>
                 </div>
               </div>
-              <span class="signal-pill">${escapeHtml(currentUser.provider || "Local")}</span>
+              <button class="icon-button" type="button" id="profile-open-auth-drawer" aria-label="Open account settings">⚙</button>
             </div>
 
             <div class="profile-stats-row" style="margin-top:14px;">
-              <div class="profile-stat"><strong class="stats-value">${stats.posts}</strong><span class="muted">Posts</span></div>
-              <div class="profile-stat"><strong class="stats-value">${stats.followers}</strong><span class="muted">Followers</span></div>
-              <div class="profile-stat"><strong class="stats-value">${stats.following}</strong><span class="muted">Following</span></div>
-              <div class="profile-stat"><strong class="stats-value">${stats.likesReceived}</strong><span class="muted">Likes</span></div>
-            </div>
-          </div>
-
-          <div class="settings-card">
-            <p class="brand-kicker">Identity</p>
-            <div class="profile-edit-grid">
-              <div class="field-group"><label class="field-label" for="profile-display-name">Display name</label><input class="field" id="profile-display-name" type="text" value="${escapeHtml(currentUser.displayName || "")}"></div>
-              <div class="field-group"><label class="field-label" for="profile-username">Username</label><input class="field" id="profile-username" type="text" value="${escapeHtml(currentUser.username)}"></div>
-              <div class="field-group"><label class="field-label" for="profile-bio">Bio</label><textarea id="profile-bio">${escapeHtml(currentUser.bio || "")}</textarea></div>
-              <div class="field-group"><label class="field-label" for="profile-location">Location</label><input class="field" id="profile-location" type="text" value="${escapeHtml(currentUser.location || "")}" placeholder="Gaborone, Botswana"></div>
-              <div class="field-group"><label class="field-label" for="profile-default-size">Default size</label><input class="field" id="profile-default-size" type="text" value="${escapeHtml(currentUser.defaultSize || "M")}" placeholder="M"></div>
-              <div class="field-group"><label class="field-label">Linked sign-in</label><div class="inline-field-note">${escapeHtml(currentUser.provider || "Local")} • ${escapeHtml(currentUser.contact || "No contact available")}</div></div>
-            </div>
-            <div class="modal-actions" style="margin-top:14px;">
-              <button class="cta" type="button" id="profile-save-button">Save Profile</button>
-              <button class="secondary-cta" type="button" id="profile-open-auth-drawer">Account Access</button>
+              <button class="profile-stat" type="button" id="profile-stat-posts"><strong class="stats-value">${stats.posts}</strong><span class="muted">Posts</span></button>
+              <button class="profile-stat" type="button" id="profile-stat-followers"><strong class="stats-value">${stats.followers}</strong><span class="muted">Followers</span></button>
+              <button class="profile-stat" type="button" id="profile-stat-following"><strong class="stats-value">${stats.following}</strong><span class="muted">Following</span></button>
+              <button class="profile-stat" type="button" id="profile-stat-likes"><strong class="stats-value">${stats.likesReceived}</strong><span class="muted">Likes</span></button>
             </div>
           </div>
 
@@ -3735,8 +3995,11 @@
           </div>
 
           <div class="settings-card">
-            <p class="brand-kicker">Orders</p>
-            <div class="orders-list" id="profile-order-list">
+            <div class="section-row">
+              <p class="brand-kicker">Orders</p>
+              <button class="secondary-cta" type="button" id="profile-orders-open">Open Orders</button>
+            </div>
+            <div class="orders-list hidden" id="profile-order-list">
               ${getOrderHistory().length ? getOrderHistory().map((entry) => `
                 <article class="order-card">
                   <div class="order-card-head">
@@ -3752,64 +4015,45 @@
           </div>
 
           <div class="settings-card">
-            <p class="brand-kicker">Utilities</p>
             <div class="profile-utility-grid">
               <button class="cta" type="button" id="profile-screen-install">Install App</button>
-              <button class="secondary-cta" type="button" id="profile-screen-alerts">Open Alerts</button>
-              <button class="secondary-cta" type="button" id="profile-screen-notify">Enable Alerts</button>
+              <button class="secondary-cta" type="button" id="profile-screen-alerts">Alerts</button>
               <button class="secondary-cta" type="button" id="profile-share-link">Share Profile</button>
               ${currentUser.isAdmin ? '<button class="cta" type="button" id="profile-admin-shortcut">Open Admin</button>' : ""}
-            </div>
-          </div>
-
-          <div class="settings-card">
-            <p class="brand-kicker">Account Settings</p>
-            ${currentUser.provider === "Email" ? `
-              <div class="field-group">
-                <label class="field-label" for="profile-new-password">Change password</label>
-                <input class="field" id="profile-new-password" type="password" placeholder="Enter a new password">
-              </div>
-              <button class="secondary-cta" type="button" id="profile-password-button" style="margin-top:14px;">Update Password</button>
-            ` : `<div class="inline-field-note">Password changes are only available for email/password accounts.</div>`}
-          </div>
-
-          <div class="settings-card">
-            <p class="brand-kicker">Danger Zone</p>
-            <div class="profile-utility-grid">
-              <button class="danger-ghost" type="button" id="profile-signout-button">Sign Out</button>
-              <button class="danger-ghost" type="button" id="profile-delete-button">Delete Account</button>
             </div>
           </div>
         </div>
       `;
 
-      document.getElementById("profile-photo-trigger").addEventListener("click", () => document.getElementById("profile-photo-input").click());
-      document.getElementById("profile-photo-input").addEventListener("change", handleProfilePhotoChange);
-      document.getElementById("profile-save-button").addEventListener("click", saveProfileSettings);
-      document.getElementById("profile-open-auth-drawer").addEventListener("click", () => openModal("profile-drawer"));
-      document.getElementById("profile-screen-install").addEventListener("click", promptInstall);
-      document.getElementById("profile-screen-alerts").addEventListener("click", () => setScreen("alerts"));
-      document.getElementById("profile-screen-notify").addEventListener("click", requestNotifications);
-      document.getElementById("profile-share-link").addEventListener("click", shareCurrentProfile);
-      if (document.getElementById("profile-admin-shortcut")) {
-        document.getElementById("profile-admin-shortcut").addEventListener("click", () => setScreen("admin"));
-      }
-      if (document.getElementById("profile-password-button")) {
-        document.getElementById("profile-password-button").addEventListener("click", changeProfilePassword);
-      }
-      document.getElementById("profile-signout-button").addEventListener("click", async () => {
-        if (fbAuthAvailable() && window._fb.fbAuth.currentUser) {
-          try { await window._fb.signOut(window._fb.fbAuth); } catch (error) {}
-        }
-        currentUser = null;
-        persistUser();
-        renderProfileSummary();
-        renderProfileScreen();
-        renderCommunity();
-        renderAdmin();
-        showToast("Signed out.");
+      const bindClick = (id, handler) => {
+        const node = document.getElementById(id);
+        if (node) node.addEventListener("click", handler);
+      };
+
+      bindClick("profile-photo-trigger", () => document.getElementById("profile-photo-input").click());
+      const photoInput = document.getElementById("profile-photo-input");
+      if (photoInput) photoInput.addEventListener("change", handleProfilePhotoChange);
+      bindClick("profile-open-auth-drawer", () => openModal("profile-drawer"));
+      bindClick("profile-screen-install", promptInstall);
+      bindClick("profile-screen-alerts", () => setScreen("alerts"));
+      bindClick("profile-share-link", shareCurrentProfile);
+      bindClick("profile-admin-shortcut", () => setScreen("admin"));
+      bindClick("profile-orders-open", () => {
+        openModal("orders-drawer");
       });
-      document.getElementById("profile-delete-button").addEventListener("click", deleteCurrentAccount);
+      bindClick("profile-stat-posts", () => {
+        activeProfileTab = "My Posts";
+        persistPrefs();
+        renderProfileScreen();
+      });
+      bindClick("profile-stat-followers", () => openModal("followers-drawer"));
+      bindClick("profile-stat-following", () => openModal("following-drawer"));
+      bindClick("profile-stat-likes", () => {
+        activeProfileTab = "Liked";
+        persistPrefs();
+        renderProfileScreen();
+      });
+
       document.querySelectorAll("[data-profile-tab]").forEach((button) => {
         button.addEventListener("click", () => {
           activeProfileTab = button.dataset.profileTab;
@@ -4000,13 +4244,14 @@
     async function saveProfileSettings() {
       if (!currentUser) return;
       const nextDisplayName = document.getElementById("profile-display-name").value.trim();
-      const nextUsernameRaw = document.getElementById("profile-username").value.trim();
+      const nextUsernameElement = document.getElementById("profile-username");
+      const nextUsernameRaw = nextUsernameElement ? nextUsernameElement.value.trim() : currentUser.username;
       const nextBio = document.getElementById("profile-bio").value.trim();
       const nextLocation = document.getElementById("profile-location").value.trim();
       const nextDefaultSize = document.getElementById("profile-default-size").value.trim() || "M";
 
-      if (!nextDisplayName || !nextUsernameRaw) {
-        showToast("Display name and username are required.");
+      if (!nextDisplayName) {
+        showToast("Display name is required.");
         return;
       }
 
@@ -4699,9 +4944,47 @@
     }
 
     function openModal(id) {
+      if (id === "followers-drawer" || id === "following-drawer" || id === "orders-drawer") {
+        renderDrawerLists();
+      }
       const modal = document.getElementById(id);
       modal.classList.add("active");
       modal.setAttribute("aria-hidden", "false");
+    }
+
+    function renderDrawerLists() {
+      const followersList = document.getElementById("drawer-followers-list");
+      const followingList = document.getElementById("drawer-following-list");
+      const ordersList = document.getElementById("drawer-orders-list");
+      if (followersList) {
+        const followerProfiles = getFollowerEntriesFor(getViewerKey()).map((entry) => getProfileByKey(entry.followerId)).filter(Boolean);
+        renderCommunityList("drawer-followers-list", followerProfiles, "No followers yet.", "followers");
+      }
+      if (followingList) {
+        const followingProfiles = getFollowingEntries().map((entry) => getProfileByKey(entry.followingId || entry.followingUsername)).filter(Boolean);
+        renderCommunityList("drawer-following-list", followingProfiles, "You are not following anyone yet.", "following");
+      }
+      if (ordersList) {
+        const history = getOrderHistory();
+        ordersList.innerHTML = history.length ? history.map((entry) => `
+          <article class="order-card">
+            <div class="order-card-head">
+              <div>
+                <strong>${escapeHtml(entry.productName)}</strong>
+                <div class="muted">Size ${escapeHtml(entry.size)} • ${formatPrice(entry.price)} • ${escapeHtml(formatDisplayDate(entry.createdAt))}</div>
+              </div>
+              <button class="secondary-cta order-replay" type="button" data-reorder="${escapeHtml(entry.id)}">Reorder</button>
+            </div>
+          </article>
+        `).join("") : `<div class="profile-empty"><p class="empty-title">No orders yet.</p><div class="muted">Place an order from any product and it will appear here.</div></div>`;
+        ordersList.querySelectorAll("[data-reorder]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const entry = history.find((order) => order.id === button.dataset.reorder);
+            if (!entry) return;
+            window.open(entry.message, "_blank", "noopener");
+          });
+        });
+      }
     }
 
     function closeModal(id) {
@@ -5199,13 +5482,22 @@
     document.getElementById("auth-google-btn").addEventListener("click", async () => {
       const fb = await waitForFb();
       if (!fb) { showToast("Firebase unavailable. Check your connection."); return; }
-      const { fbAuth, signInWithPopup, googleProvider } = fb;
+      const { fbAuth, signInWithPopup, signInWithRedirect, googleProvider } = fb;
       const passcode = document.getElementById("auth-passcode") ? document.getElementById("auth-passcode").value.trim() : "";
       try {
         const cred = await signInWithPopup(fbAuth, googleProvider);
         applyFbUser(cred.user, { passcode });
       } catch (err) {
-        if (err.code !== "auth/popup-closed-by-user") showToast("Google sign in failed. Try again.");
+        if (err.code === 'auth/popup-blocked' || err.code === 'auth/cancelled-popup-request' || err.code === 'auth/popup-closed-by-user') {
+          // Safari blocks popups - use redirect fallback
+          try {
+            await signInWithRedirect(fbAuth, googleProvider);
+          } catch (redirectErr) {
+            showToast("Google sign in not available. Try email instead.");
+          }
+        } else if (err.code !== "auth/popup-closed-by-user") {
+          showToast("Google sign in failed. Try again.");
+        }
       }
     });
 
